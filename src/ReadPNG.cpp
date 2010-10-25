@@ -1,10 +1,11 @@
 // ReadPNG.cpp : Defines the entry point for the console application.
 #include <cstdio>
 #include <stdlib.h>
+#include <istream>
+#include "LoadPNG.h"
 
 using namespace std;
 using namespace LodePNG;
-
 
 //for txtFormat
 int init_file();
@@ -254,5 +255,5 @@ int pixelFiring(int x, int y)
 void waitEnd()
 {
 	printf("Press Enter to Close\n");
-	cin.get();
+	//cin.get();
 }
