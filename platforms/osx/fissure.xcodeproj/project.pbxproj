@@ -1,0 +1,282 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		280D0C731299A92000CBD7A3 /* libosgViewer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C721299A92000CBD7A3 /* libosgViewer.dylib */; };
+		280D0C751299A92000CBD7A3 /* libosgUtil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C741299A92000CBD7A3 /* libosgUtil.dylib */; };
+		280D0C771299A92000CBD7A3 /* libosgGA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C761299A92000CBD7A3 /* libosgGA.dylib */; };
+		280D0C791299A92000CBD7A3 /* libosgDB.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C781299A92000CBD7A3 /* libosgDB.dylib */; };
+		280D0C7B1299A92000CBD7A3 /* libosg.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C7A1299A92000CBD7A3 /* libosg.dylib */; };
+		280D0C7D1299A92000CBD7A3 /* libOpenThreads.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 280D0C7C1299A92000CBD7A3 /* libOpenThreads.dylib */; };
+		282048D01299266800ECAB89 /* InitViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282048C81299266800ECAB89 /* InitViewer.cpp */; };
+		282048D11299266800ECAB89 /* LoadPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282048CC1299266800ECAB89 /* LoadPNG.cpp */; };
+		282048D21299266800ECAB89 /* ReadPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282048CE1299266800ECAB89 /* ReadPNG.cpp */; };
+		282048DC1299281B00ECAB89 /* InitViewer.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048C91299266800ECAB89 /* InitViewer.h */; };
+		282048DD1299281B00ECAB89 /* InitViewerTypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CA1299266800ECAB89 /* InitViewerTypes.h */; };
+		282048DE1299281B00ECAB89 /* KeyboardEventHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CB1299266800ECAB89 /* KeyboardEventHandler.h */; };
+		282048DF1299281B00ECAB89 /* LoadPNG.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CD1299266800ECAB89 /* LoadPNG.h */; };
+		282048E01299281B00ECAB89 /* Vec4Colors.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CF1299266800ECAB89 /* Vec4Colors.h */; };
+		8DD76F6A0486A84900D96B5E /* fissure.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6859E8B029090EE04C91782 /* fissure.1 */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8DD76F690486A84900D96B5E /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 8;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				8DD76F6A0486A84900D96B5E /* fissure.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		280D0C721299A92000CBD7A3 /* libosgViewer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgViewer.dylib; path = /opt/local/lib/libosgViewer.dylib; sourceTree = "<absolute>"; };
+		280D0C741299A92000CBD7A3 /* libosgUtil.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgUtil.dylib; path = /opt/local/lib/libosgUtil.dylib; sourceTree = "<absolute>"; };
+		280D0C761299A92000CBD7A3 /* libosgGA.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgGA.dylib; path = /opt/local/lib/libosgGA.dylib; sourceTree = "<absolute>"; };
+		280D0C781299A92000CBD7A3 /* libosgDB.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgDB.dylib; path = /opt/local/lib/libosgDB.dylib; sourceTree = "<absolute>"; };
+		280D0C7A1299A92000CBD7A3 /* libosg.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosg.dylib; path = /opt/local/lib/libosg.dylib; sourceTree = "<absolute>"; };
+		280D0C7C1299A92000CBD7A3 /* libOpenThreads.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libOpenThreads.dylib; path = /opt/local/lib/libOpenThreads.dylib; sourceTree = "<absolute>"; };
+		282048C81299266800ECAB89 /* InitViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InitViewer.cpp; path = ../../src/InitViewer.cpp; sourceTree = SOURCE_ROOT; };
+		282048C91299266800ECAB89 /* InitViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewer.h; path = ../../src/InitViewer.h; sourceTree = SOURCE_ROOT; };
+		282048CA1299266800ECAB89 /* InitViewerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewerTypes.h; path = ../../src/InitViewerTypes.h; sourceTree = SOURCE_ROOT; };
+		282048CB1299266800ECAB89 /* KeyboardEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardEventHandler.h; path = ../../src/KeyboardEventHandler.h; sourceTree = SOURCE_ROOT; };
+		282048CC1299266800ECAB89 /* LoadPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadPNG.cpp; path = ../../src/LoadPNG.cpp; sourceTree = SOURCE_ROOT; };
+		282048CD1299266800ECAB89 /* LoadPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadPNG.h; path = ../../src/LoadPNG.h; sourceTree = SOURCE_ROOT; };
+		282048CE1299266800ECAB89 /* ReadPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ReadPNG.cpp; path = ../../src/ReadPNG.cpp; sourceTree = SOURCE_ROOT; };
+		282048CF1299266800ECAB89 /* Vec4Colors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vec4Colors.h; path = ../../src/Vec4Colors.h; sourceTree = SOURCE_ROOT; };
+		8DD76F6C0486A84900D96B5E /* fissure */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = fissure; sourceTree = BUILT_PRODUCTS_DIR; };
+		C6859E8B029090EE04C91782 /* fissure.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = fissure.1; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8DD76F660486A84900D96B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				280D0C731299A92000CBD7A3 /* libosgViewer.dylib in Frameworks */,
+				280D0C751299A92000CBD7A3 /* libosgUtil.dylib in Frameworks */,
+				280D0C771299A92000CBD7A3 /* libosgGA.dylib in Frameworks */,
+				280D0C791299A92000CBD7A3 /* libosgDB.dylib in Frameworks */,
+				280D0C7B1299A92000CBD7A3 /* libosg.dylib in Frameworks */,
+				280D0C7D1299A92000CBD7A3 /* libOpenThreads.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		08FB7794FE84155DC02AAC07 /* fissure */ = {
+			isa = PBXGroup;
+			children = (
+				08FB7795FE84155DC02AAC07 /* Source */,
+				C6859E8C029090F304C91782 /* Documentation */,
+				1AB674ADFE9D54B511CA2CBB /* Products */,
+				280D0C721299A92000CBD7A3 /* libosgViewer.dylib */,
+				280D0C741299A92000CBD7A3 /* libosgUtil.dylib */,
+				280D0C761299A92000CBD7A3 /* libosgGA.dylib */,
+				280D0C781299A92000CBD7A3 /* libosgDB.dylib */,
+				280D0C7A1299A92000CBD7A3 /* libosg.dylib */,
+				280D0C7C1299A92000CBD7A3 /* libOpenThreads.dylib */,
+			);
+			name = fissure;
+			sourceTree = "<group>";
+		};
+		08FB7795FE84155DC02AAC07 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				282048C81299266800ECAB89 /* InitViewer.cpp */,
+				282048C91299266800ECAB89 /* InitViewer.h */,
+				282048CA1299266800ECAB89 /* InitViewerTypes.h */,
+				282048CB1299266800ECAB89 /* KeyboardEventHandler.h */,
+				282048CC1299266800ECAB89 /* LoadPNG.cpp */,
+				282048CD1299266800ECAB89 /* LoadPNG.h */,
+				282048CE1299266800ECAB89 /* ReadPNG.cpp */,
+				282048CF1299266800ECAB89 /* Vec4Colors.h */,
+			);
+			name = Source;
+			sourceTree = "<group>";
+		};
+		1AB674ADFE9D54B511CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8DD76F6C0486A84900D96B5E /* fissure */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C6859E8C029090F304C91782 /* Documentation */ = {
+			isa = PBXGroup;
+			children = (
+				C6859E8B029090EE04C91782 /* fissure.1 */,
+			);
+			name = Documentation;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8DD76F620486A84900D96B5E /* fissure */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "fissure" */;
+			buildPhases = (
+				8DD76F640486A84900D96B5E /* Sources */,
+				8DD76F660486A84900D96B5E /* Frameworks */,
+				8DD76F690486A84900D96B5E /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = fissure;
+			productInstallPath = "$(HOME)/bin";
+			productName = fissure;
+			productReference = 8DD76F6C0486A84900D96B5E /* fissure */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+			};
+			buildConfigurationList = 1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "fissure" */;
+			compatibilityVersion = "Xcode 3.1";
+			developmentRegion = English;
+			hasScannedForEncodings = 1;
+			knownRegions = (
+				English,
+				Japanese,
+				French,
+				German,
+			);
+			mainGroup = 08FB7794FE84155DC02AAC07 /* fissure */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8DD76F620486A84900D96B5E /* fissure */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8DD76F640486A84900D96B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				282048D01299266800ECAB89 /* InitViewer.cpp in Sources */,
+				282048DC1299281B00ECAB89 /* InitViewer.h in Sources */,
+				282048DD1299281B00ECAB89 /* InitViewerTypes.h in Sources */,
+				282048DE1299281B00ECAB89 /* KeyboardEventHandler.h in Sources */,
+				282048D11299266800ECAB89 /* LoadPNG.cpp in Sources */,
+				282048DF1299281B00ECAB89 /* LoadPNG.h in Sources */,
+				282048D21299266800ECAB89 /* ReadPNG.cpp in Sources */,
+				282048E01299281B00ECAB89 /* Vec4Colors.h in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		1DEB923208733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = fissure;
+				USER_HEADER_SEARCH_PATHS = /opt/local/include;
+			};
+			name = Debug;
+		};
+		1DEB923308733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = /opt/local/lib;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = fissure;
+				USER_HEADER_SEARCH_PATHS = /opt/local/include;
+			};
+			name = Release;
+		};
+		1DEB923608733DC60010E9CD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "(OSG_LIB)";
+				OBJROOT = build;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				SYMROOT = ../../bin;
+				USER_HEADER_SEARCH_PATHS = "(OSG_INC)";
+			};
+			name = Debug;
+		};
+		1DEB923708733DC60010E9CD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LIBRARY_SEARCH_PATHS = "(OSG_LIB)";
+				OBJROOT = build;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				SYMROOT = ../../bin;
+				USER_HEADER_SEARCH_PATHS = "(OSG_INC)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1DEB923108733DC60010E9CD /* Build configuration list for PBXNativeTarget "fissure" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923208733DC60010E9CD /* Debug */,
+				1DEB923308733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1DEB923508733DC60010E9CD /* Build configuration list for PBXProject "fissure" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1DEB923608733DC60010E9CD /* Debug */,
+				1DEB923708733DC60010E9CD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

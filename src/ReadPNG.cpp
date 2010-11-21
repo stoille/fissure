@@ -184,10 +184,9 @@ void waitEnd()
 }
 int main(int argc, char* argv[])
 {
-	if(argc < 1)
+	if(argc != 2)
 	{
-		cout<<endl<<"Syntax usage: Fissure <model filename> <options...>"
-		<<endl<<"options: -firing <filename>"<<endl;
+		cout<<"Syntax usage: Fissure <model filename>"<<endl;
 		return -1;
 	}
 	//our primary viewer and informational object
@@ -207,7 +206,6 @@ int main(int argc, char* argv[])
 	cout<<"Section 1:"<<endl;
 	next_section();
 	cout<<"count:"<<howMany<<endl;
-	int numSomaTypes = howMany;
 	while((tmp_c = give_file_section1()))
 		initViewer.AddSomaType(tmp_c);
 
@@ -215,7 +213,6 @@ int main(int argc, char* argv[])
 	cout<<"Section 2:"<<endl;
 	next_section();
 	cout<<"count:"<<howMany<<endl;
-	int numSomas = howMany;
 	while(give_file_section2(temp_i))
 		initViewer.AddSoma(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
 	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
@@ -224,7 +221,6 @@ int main(int argc, char* argv[])
 	cout<<"Section 3:"<<endl;
 	next_section();
 	cout<<"count:"<<howMany<<endl;
-	int numSynapses = howMany;
 	while(give_file_section3(temp_i))
 		initViewer.AddSynapse(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
 	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
@@ -235,7 +231,6 @@ int main(int argc, char* argv[])
 	cout<<"Section 4:"<<endl;
 	next_section();
 	cout<<"count:"<<howMany<<endl;
-	int numFirings = howMany;
 	while(give_file_section4(temp_i))
 	{
 		initViewer.AddFiring(temp_i[0],temp_i[1],temp_i[2]);
