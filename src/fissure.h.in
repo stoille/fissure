@@ -1,3 +1,0 @@
-// the configured options and settings for fissure
-#define fissure_VERSION_MAJOR @fissure_VERSION_MAJOR@
-#define fissure_VERSION_MINOR @fissure_VERSION_MINOR@
