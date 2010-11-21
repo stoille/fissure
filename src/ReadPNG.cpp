@@ -1,11 +1,13 @@
 // ReadPNG.cpp : Defines the entry point for the console application.
-#include <cstdio>
-#include <stdlib.h>
-#include <istream>
+
+#include <iostream>
+
 #include "LoadPNG.h"
+#include "InitViewer.h"
 
 using namespace std;
 using namespace LodePNG;
+using namespace Fissure;
 
 //for txtFormat
 int init_file();
@@ -34,9 +36,11 @@ vector<unsigned char> buffer, image;
 unsigned int width, height;
 int * pixel;
 
-int init_file()
+using namespace std;
+
+int init_file(const string &fileName)
 {
-	fp=fopen("test.txt", "r");
+	fp=fopen(fileName.c_str(), "r");
 	if(fp == NULL)
 		return -1;
 
@@ -105,88 +109,9 @@ int close_file()
 {
 	return fclose(fp);
 }
-
-int main(int argc, char* argv[])
+int init_decode(const string &fileName)
 {
-	int ret = 0;
-	int choice = 1;
-
-	char tmp_c =  ' ';
-	int * temp_i = new int [5];
-
-	switch(choice)
-	{
-		case 0://PNG
-			ret = init_decode();
-			if(ret < 0)
-				goto exit;
-
-			printPNG();
-
-			break;
-
-		case 1://TXTFILE
-			ret = init_file();
-			if(ret < 0)
-				goto exit;
-
-			printf("Section 1:\n");
-			next_section();
-			printf("count:%d\n", howMany);
-			
-			while((tmp_c = give_file_section1()))
-			{//you can read an individual value here
-			}
-			//note* no last here because this function does not use a *, the char == 0;
-			printf("\n");
-
-			printf("Section 2:\n");
-			next_section();
-			printf("count:%d\n", howMany);
-
-			while(give_file_section2(temp_i))
-			{//you can read an individual value here
-			}
-			printf("last: %d %d %d %d %d\n", temp_i[0], temp_i[1], temp_i[2], temp_i[3], temp_i[4]);
-			printf("\n");
-
-			printf("Section 3:\n");
-			next_section();
-			printf("count:%d\n", howMany);
-
-			while(give_file_section3(temp_i))
-			{//you can read an individual value here
-			}
-			printf("last: %d %d %d %d %d\n", temp_i[0], temp_i[1], temp_i[2], temp_i[3], temp_i[4]);
-			printf("\n");
-
-			printf("Section 4:\n");
-			next_section();
-			printf("count:%d\n", howMany);
-
-			while(give_file_section4(temp_i))
-			{//you can read an individual value here
-			}
-			printf("last: %d %d %d\n", temp_i[0], temp_i[1], temp_i[2]);
-			printf("\n");
-
-			ret = close_file();
-			if(ret < 0)
-				goto exit;
-			break;
-		default:
-			break;
-	}
-
-exit:
-
-	waitEnd();
-	return 0;
-}
-
-int init_decode()
-{
-	loadFile(buffer, "test.png");
+	loadFile(buffer, fileName);
 	decoder.decode(image, buffer.empty() ? 0 : &buffer[0], (unsigned)buffer.size());
 	if(decoder.hasError())
 	{
@@ -256,4 +181,87 @@ void waitEnd()
 {
 	printf("Press Enter to Close\n");
 	//cin.get();
+}
+int main(int argc, char* argv[])
+{
+	if(argc < 1)
+	{
+		cout<<endl<<"Syntax usage: Fissure <model filename> <options...>"
+		<<endl<<"options: -firing <filename>"<<endl;
+		return -1;
+	}
+	//our primary viewer and informational object
+	InitViewer initViewer;
+
+	char tmp_c =  ' ';
+	int * temp_i = new int [5], ret = 0;
+
+	string modelFileName(argv[1]);
+	string firingFileName;
+	
+	//initialize our model
+	ret = init_file(modelFileName);
+	if(ret < 0) return ret;
+
+	//read the soma types
+	cout<<"Section 1:"<<endl;
+	next_section();
+	cout<<"count:"<<howMany<<endl;
+	int numSomaTypes = howMany;
+	while((tmp_c = give_file_section1()))
+		initViewer.AddSomaType(tmp_c);
+
+	//read the soma info
+	cout<<"Section 2:"<<endl;
+	next_section();
+	cout<<"count:"<<howMany<<endl;
+	int numSomas = howMany;
+	while(give_file_section2(temp_i))
+		initViewer.AddSoma(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
+	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
+
+	//read the synapse info
+	cout<<"Section 3:"<<endl;
+	next_section();
+	cout<<"count:"<<howMany<<endl;
+	int numSynapses = howMany;
+	while(give_file_section3(temp_i))
+		initViewer.AddSynapse(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
+	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
+
+	//read firing data
+	int numFiringCycles = 0;
+	int lastFiringCycle = 0;
+	cout<<"Section 4:"<<endl;
+	next_section();
+	cout<<"count:"<<howMany<<endl;
+	int numFirings = howMany;
+	while(give_file_section4(temp_i))
+	{
+		initViewer.AddFiring(temp_i[0],temp_i[1],temp_i[2]);
+		//this assumes they come in order
+		if(lastFiringCycle != temp_i[0])
+			++numFiringCycles;
+		lastFiringCycle = temp_i[0];
+	}
+	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<endl;
+	if(close_file() < 0) return -1;
+	initViewer.SetNumFiringCycles(numFiringCycles);
+
+	//initialize any extra firing data or options on our model
+	if(argc > 1)
+	{
+		for(int i = 2; 2 < argc-1; i+=2)
+		{
+			if(strcmp(argv[i],"-firing") == 0)
+			{
+				firingFileName = string(argv[i+1]);
+				ret = init_decode(firingFileName);
+				if(ret < 0) return ret;
+			}
+		}
+	}
+
+	//start the osg viewer
+	initViewer.StartViewer();
 }
