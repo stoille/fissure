@@ -51,17 +51,39 @@ namespace Fissure
 					hitr != intersections.end();
 					++hitr)
 				{
-					
-					stringstream s(hitr->drawable->getName());
-					int somaId;
-					s>>somaId;
-					_selectedSoma = &_somaMap[somaId];
-					std::ostringstream os;
-					os<<"Soma Id: "<<_selectedSoma->id<<""<<std::endl;
-					os<<"cellTypeId: "<<_selectedSoma->cellTypeId<<std::endl;
-					os<<"location ("<< _selectedSoma->x<<","<<_selectedSoma->y<<","<<_selectedSoma->z<<")"<<std::endl;
-					
-					gdlist += os.str();
+					string hitType = hitr->drawable->getName().substr(0,2);
+					string hitName = hitr->drawable->getName().substr(2);
+					//if neuron selected
+					if(hitType == "n_")
+					{
+						stringstream s(hitName);
+						int somaId;
+						s>>somaId;
+						Soma & soma = _somaMap[somaId];
+
+						std::ostringstream os;
+						os<<"Soma Id: "<<soma.id<<""<<std::endl;
+						os<<"cellTypeId: "<<soma.cellTypeId<<std::endl;
+						os<<"location ("<< soma.x<<","<<soma.y<<","<<soma.z<<")"<<std::endl;
+						_selectedSomaId = somaId;
+						gdlist += os.str();
+					}
+					//if soma selected
+					else if(hitType == "s_")
+					{
+						stringstream s(hitName);
+						int synapseId;
+						s>>synapseId;
+						Synapse &synapse = _synapseMap[synapseId];
+
+						std::ostringstream os;
+						os<<"Synapse Id: "<<synapse.id<<""<<std::endl;
+						os<<"axonalSomaId: "<<synapse.axonalSomaId<<std::endl;
+						os<<"dendriticSomaId: "<<synapse.dendriticSomaId<<std::endl;
+						os<<"location ("<< synapse.x<<","<<synapse.y<<","<<synapse.z<<")"<<std::endl;
+						_selectedSynapseId = synapseId;
+						gdlist += os.str();
+					}
 					//only show the first hit for now
 					break;
 				}

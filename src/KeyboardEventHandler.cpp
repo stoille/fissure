@@ -14,37 +14,46 @@ namespace Fissure
 				switch(ea.getKey())
 				{
 					//FILTERING CONTROLS
-					case 'n':
+					case 'N':
 						ToggleVisibility(_somaGeode);
 						break;
-					case 'm':
+					case 'n':
 						ToggleVisibility(_synapseGeode);
 						break;
 					case 'l':
 						ToggleVisibility(_linesGeode);
 						break;
 					case 'v':
+						FilterSynapses();
+						break;
+					case 'V':
 						FilterSomas();
 						break;
 					//MOTION CONTROLS
 					//translations
 					case 'w':
+					case 'W':
 						_fpm->moveForward(_moveSpeed);
 						break;
 					case 'a':
+					case 'A':
 						_fpm->moveRight(-_moveSpeed);
 						break;
 					case 's':
+					case 'S':
 						_fpm->moveForward(-_moveSpeed);
 						break;
 					case 'd':
+					case 'D':
 						_fpm->moveRight(_moveSpeed);
 						break;
 					case 'e':
-						_fpm->moveUp(_moveSpeed);
+					case 'E':
+						_fpm->moveUp(_moveSpeed/2);
 						break;
 					case 'x':
-						_fpm->moveUp(-_moveSpeed);
+					case 'X':
+						_fpm->moveUp(-_moveSpeed/2);
 						break;
 					//rotations
 					case osgGA::GUIEventAdapter::KEY_Up:
@@ -66,10 +75,10 @@ namespace Fissure
 					case 'o':
 						_moveSpeed *= 0.5;
 						break;
-					case 'u':
+					case 'P':
 						_rotateSpeed *= 1.5;
 						break;
-					case 'i':
+					case 'O':
 						_rotateSpeed *= 0.5;
 						break;
 					default:
@@ -102,7 +111,7 @@ namespace Fissure
 		{
 			_somaFiltered = true;
 			for(int i = 0; i < colors->size(); ++i)
-				if(i != _selectedSoma->id)
+				if(i != _selectedSomaId)
 					colors->at(i) = Vec4(colors->at(i).x(),colors->at(i).y(),colors->at(i).z(),0.0);
 		}
 		else {
@@ -112,6 +121,37 @@ namespace Fissure
 				colors->at(i) = Vec4(colors->at(i).x(),colors->at(i).y(),colors->at(i).z(),1);
 		}
 		_somaGeom->setColorArray(colors);
+	}
 
+	void KeyboardEventHandler::FilterSynapses()
+	{
+		//fetch the currently selected synapse
+		Synapse &synapse = _synapseMap[_selectedSynapseId];
+
+		//fetch the synapse geometry
+		ref_ptr<Vec4Array> synapseColors = static_cast<Vec4Array*>(_synapseGeom->getColorArray());
+		ref_ptr<Vec4Array> somaColors = static_cast<Vec4Array*>(_somaGeom->getColorArray());
+		
+		//show only the selected synapse and its connected somas
+		if(!_synapseFiltered)
+		{
+			_synapseFiltered = true;
+			for(int i = 0; i < synapseColors->size(); ++i)
+				if(i != _selectedSynapseId)
+					synapseColors->at(i) = Vec4(synapseColors->at(i).x(),synapseColors->at(i).y(),synapseColors->at(i).z(),0.0);
+			for(int i = 0; i < somaColors->size(); ++i)
+				if(i != synapse.axonalSomaId && i != synapse.dendriticSomaId)
+					somaColors->at(i) = Vec4(somaColors->at(i).x(),somaColors->at(i).y(),somaColors->at(i).z(),0.0);
+		}
+		else {
+			//show all synapses and somas
+			_synapseFiltered = false;
+			for(int i = 0; i < synapseColors->size(); ++i)
+				synapseColors->at(i) = Vec4(synapseColors->at(i).x(),synapseColors->at(i).y(),synapseColors->at(i).z(),1);
+			for(int i = 0; i < somaColors->size(); ++i)
+				somaColors->at(i) = Vec4(somaColors->at(i).x(),somaColors->at(i).y(),somaColors->at(i).z(),1);
+		}
+		_synapseGeom->setColorArray(synapseColors);
+		_somaGeom->setColorArray(somaColors);
 	}
 }//namespace Fissure

@@ -27,10 +27,12 @@ namespace Fissure
 	class PickHandler : public osgGA::GUIEventHandler {
 	public: 
 		
-		PickHandler(osgText::Text* updateText, SomaMap& somaMap, Soma* selectedSoma):
+		PickHandler(osgText::Text* updateText, SomaMap& somaMap, int& selectedSomaId, SynapseMap& synapseMap, int& selectedSynapseId):
 		_updateText(updateText)
 		,_somaMap(somaMap)
-		,_selectedSoma(selectedSoma)
+		,_selectedSomaId(selectedSomaId)
+		,_synapseMap(synapseMap)
+		,_selectedSynapseId(selectedSynapseId)
 		{
 		}
 		
@@ -47,7 +49,9 @@ namespace Fissure
 		
 	protected:
 		SomaMap &_somaMap;
-		Soma *_selectedSoma;
+		int &_selectedSomaId;
+		SynapseMap &_synapseMap;
+		int &_selectedSynapseId;
 		osg::ref_ptr<osgText::Text>  _updateText;
 	};
 

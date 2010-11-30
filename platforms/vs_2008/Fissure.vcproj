@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE)"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE);../../src/"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osgd.lib osgUtild.lib osgDBd.lib osgGAd.lib osgViewerd.lib"
+				AdditionalDependencies="osgd.lib osgUtild.lib osgDBd.lib osgGAd.lib osgViewerd.lib osgTextd.lib osgManipulatord.lib"
 				OutputFile="../../bin/$(ProjectName)d.exe"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="$(OSG_LIB)"
@@ -119,7 +119,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="$(OSG_INCLUDE)"
+				AdditionalIncludeDirectories="$(OSG_INCLUDE);../../src/"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -139,7 +139,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="osg.lib osgUtil.lib osgDB.lib osgGA.lib osgViewer.lib"
+				AdditionalDependencies="osg.lib osgGA.lib osgUtil.lib osgDB.lib osgViewer.lib osgText.lib osgManipulator.lib"
 				OutputFile="../../bin/$(ProjectName).exe"
 				LinkIncremental="1"
 				AdditionalLibraryDirectories="$(OSG_LIB)"
@@ -181,11 +181,23 @@
 			UniqueIdentifier="{4FC737F1-C7A5-4376-A066-2A32D752A2FF}"
 			>
 			<File
+				RelativePath="..\..\src\FPSManipulator.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\InitViewer.cpp"
 				>
 			</File>
 			<File
+				RelativePath="..\..\src\KeyboardEventHandler.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\..\src\LoadPNG.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\PickHandler.cpp"
 				>
 			</File>
 			<File
@@ -198,6 +210,10 @@
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\src\FPSManipulator.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\InitViewer.h"
 				>
@@ -212,6 +228,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\LoadPNG.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\PickHandler.h"
 				>
 			</File>
 			<File

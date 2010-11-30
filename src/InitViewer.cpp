@@ -135,12 +135,12 @@ namespace Fissure
 		std::string timesFont("fonts/times.ttf");
 		
 		// turn lighting off for the text and disable depth test to ensure its always ontop.
-		osg::Vec3 position(800.0f,100.0f,0.0f);
+		osg::Vec3 position(800.0f,130.0f,0.0f);
 		osg::Vec3 delta(0.0f,-60.0f,0.0f);
 
 		//background rectangle
 		{
-			osg::Vec3 dy(0.0f,-100.0f,0.0f);
+			osg::Vec3 dy(0.0f,-130.0f,0.0f);
 			osg::Vec3 dx(500.0f,0.0f,0.0f);
 			osg::Geode* geode = new osg::Geode();
 			osg::StateSet* stateset = geode->getOrCreateStateSet();
@@ -175,7 +175,7 @@ namespace Fissure
 			updateText->setCharacterSize(30.0f);
 			updateText->setFont(timesFont);
 			updateText->setText("Detail Panel");
-			updateText->setPosition(position + Vec3(0,-10,0));
+			updateText->setPosition(position + Vec3(0,-30,0));
 			updateText->setDataVariance(osg::Object::DYNAMIC);
         
         position += delta;
@@ -209,7 +209,7 @@ namespace Fissure
 			somaSphereDrawable->setCullCallback(cullCB); 
 			stringstream somaId;
 			somaId<<soma.id;
-			somaSphereDrawable->setName(somaId.str());
+			somaSphereDrawable->setName("n_"+somaId.str());
 			somaGeode->addDrawable(somaSphereDrawable);
 		}
 		_somaGeom->setVertexArray(somaVertices);
@@ -232,6 +232,14 @@ namespace Fissure
 
 			synapseVertices->push_back(Vec3(synapse.x,synapse.y,synapse.z) );
 			synapseColors->push_back(DEFAULT_SYNAPSE_COLOR);
+
+			//for picking
+			ShapeDrawable *synapseSphereDrawable = new ShapeDrawable(new Sphere(Vec3(synapse.x,synapse.y,synapse.z),SOMA_RADIUS*2));
+			synapseSphereDrawable->setCullCallback(cullCB); 
+			stringstream synapseId;
+			synapseId<<synapse.id;
+			synapseSphereDrawable->setName("s_"+synapseId.str());
+			synapseGeode->addDrawable(synapseSphereDrawable);
 		}
 		synapseGeom->setVertexArray(synapseVertices);
 		synapseGeom->setColorArray(synapseColors);
@@ -305,13 +313,24 @@ namespace Fissure
 		ksm->addNumberedMatrixManipulator(new OrbitManipulator());
 		viewer.setCameraManipulator(ksm);
 		
-		Soma selectedSoma;
-		KeyboardEventHandler *keh = new KeyboardEventHandler(fpm,somaGeode,synapseGeode,synapseLinesGeode,&selectedSoma,_somaGeom);
+		int selectedSomaId, selectedSynapseId;
+		KeyboardEventHandler *keh = new KeyboardEventHandler(
+			fpm,
+			_somas,
+			somaGeode,
+			_somaGeom,
+			selectedSomaId,
+			_synapses,
+			synapseGeode,
+			synapseGeom,
+			selectedSynapseId,
+			synapseLinesGeode,
+			synapseLineGeom);
 		viewer.addEventHandler(keh);
 		
 		// add the picker stuff
 		osg::ref_ptr<osgText::Text> updateText = new osgText::Text;
-		PickHandler *ph = new PickHandler(updateText,_somas,&selectedSoma);
+		PickHandler *ph = new PickHandler(updateText,_somas,selectedSomaId,_synapses,selectedSynapseId);
 		root->addChild(createHUD(updateText.get()));
 		viewer.addEventHandler(ph);
 		
