@@ -1,6 +1,8 @@
 #include "InitViewer.h"
 #include "Vec4Colors.h"
 #include "KeyboardEventHandler.h"
+#include "FPSManipulator.h"
+#include "PickHandler.h"
 
 #include <osg/PointSprite>
 #include <osg/BlendFunc>
@@ -12,13 +14,21 @@
 #include <osg/GLExtensions>
 #include <osg/TexEnv>
 #include <osg/LineWidth>
+#include <osg/ShapeDrawable>
 #include <osgDB/ReadFile>
 #include <osgViewer/Viewer>
+#include <osgViewer/ViewerEventHandlers>
+
 #include <osgGA/StateSetManipulator>
+#include <osgGA/CameraManipulator>
 #include <osgGA/TrackballManipulator>
+#include <osgGA/OrbitManipulator>
+#include <osgGA/UFOManipulator>
+#include <osgGA/KeySwitchMatrixManipulator>
 #include <osgUtil/Optimizer>
 
 using namespace osg;
+using namespace osgGA;
 
 namespace Fissure
 {
@@ -26,6 +36,16 @@ namespace Fissure
 	const int SOMA_RADIUS = 20;
 	const int SYNAPSE_RADIUS = 15;
 	const Vec4 DEFAULT_SYNAPSE_COLOR(0,1,0,1);
+
+	class ForceCullCallback : public osg::Drawable::CullCallback 
+	{ 
+	public: 
+        virtual bool cull(osg::NodeVisitor*, osg::Drawable*, osg::State*) const 
+        { 
+            return true; 
+        }
+		
+	}; 
 
 	InitViewer::InitViewer() : 
 		_numFiringCycles(0)
@@ -96,17 +116,78 @@ namespace Fissure
 
 		return set;
 	}
+	
+	osg::Node* createHUD(osgText::Text* updateText)
+	{
+		
+		// create the hud. derived from osgHud.cpp
+		// adds a set of quads, each in a separate Geode - which can be picked individually
+		// eg to be used as a menuing/help system!
+		// Can pick texts too!
+		
+		osg::Camera* hudCamera = new osg::Camera;
+		hudCamera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
+		hudCamera->setProjectionMatrixAsOrtho2D(0,1280,0,1024);
+		hudCamera->setViewMatrix(osg::Matrix::identity());
+		hudCamera->setRenderOrder(osg::Camera::POST_RENDER);
+		hudCamera->setClearMask(GL_DEPTH_BUFFER_BIT);
+		
+		std::string timesFont("fonts/times.ttf");
+		
+		// turn lighting off for the text and disable depth test to ensure its always ontop.
+		osg::Vec3 position(800.0f,100.0f,0.0f);
+		osg::Vec3 delta(0.0f,-60.0f,0.0f);
+
+		//background rectangle
+		{
+			osg::Vec3 dy(0.0f,-100.0f,0.0f);
+			osg::Vec3 dx(500.0f,0.0f,0.0f);
+			osg::Geode* geode = new osg::Geode();
+			osg::StateSet* stateset = geode->getOrCreateStateSet();
+			osg::Geometry *quad=new osg::Geometry;
+			stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::OFF);
+			osg::Vec3Array* vertices = new osg::Vec3Array(4); // 1 quad
+			osg::Vec4Array* colors = new osg::Vec4Array;
+			colors = new osg::Vec4Array;
+			colors->push_back(osg::Vec4(0.4,0.4,0.4,1.0));
+			quad->setColorArray(colors);
+			quad->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS,0,4));
+			geode->addDrawable(quad);
+			hudCamera->addChild(geode);
+		}  
+		
+		{ // this displays what has been selected
+			osg::Geode* geode = new osg::Geode();
+			osg::StateSet* stateset = geode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::OFF);
+			geode->setName("The text label");
+			geode->addDrawable( updateText );
+			hudCamera->addChild(geode);
+			
+			updateText->setCharacterSize(30.0f);
+			updateText->setFont(timesFont);
+			updateText->setText("Detail Panel");
+			updateText->setPosition(position + Vec3(0,-10,0));
+			updateText->setDataVariance(osg::Object::DYNAMIC);
+        
+        position += delta;
+		}    
+    
+    return hudCamera;
+
+	}
 
 	void InitViewer::StartViewer()
 	{
-		//create the main viewer and set the background color to white
-		osgViewer::Viewer viewer;
-		viewer.addEventHandler(new osgViewer::StatsHandler);
-		viewer.addEventHandler(new osgViewer::WindowSizeHandler());
-		viewer.addEventHandler(new KeyboardEventHandler(viewer.getCamera()));
-		viewer.addEventHandler(new osgViewer::HelpHandler());
-		viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getStateSet()));
-		//viewer.getCamera()->setClearColor(Vec4(126.0/255.0,128.0/255.0,119.0/255.0,1.0));
+		
 		ref_ptr<Group> root = new Group();
 
 		//Create each soma as a point and add to the scene
@@ -114,6 +195,7 @@ namespace Fissure
 		_somaGeom = new Geometry();
 		ref_ptr<Vec3Array> somaVertices = new Vec3Array();
 		_somaColors = new Vec4Array();
+		ForceCullCallback* cullCB = new ForceCullCallback(); //use this to make soma geometry invisible
 		for(SomaMap::iterator smi = _somas.begin(); smi != _somas.end(); ++smi)
 		{
 			SomaMapPair smp = *smi;
@@ -121,6 +203,14 @@ namespace Fissure
 
 			somaVertices->push_back(Vec3(soma.x,soma.y,soma.z) );
 			_somaColors->push_back(GetSomaTypeColor(soma.cellTypeId));
+			
+			//for picking
+			ShapeDrawable *somaSphereDrawable = new ShapeDrawable(new Sphere(Vec3(soma.x,soma.y,soma.z),SOMA_RADIUS*2));
+			somaSphereDrawable->setCullCallback(cullCB); 
+			stringstream somaId;
+			somaId<<soma.id;
+			somaSphereDrawable->setName(somaId.str());
+			somaGeode->addDrawable(somaSphereDrawable);
 		}
 		_somaGeom->setVertexArray(somaVertices);
 		_somaGeom->setColorArray(_somaColors);
@@ -152,13 +242,15 @@ namespace Fissure
 		root->addChild(synapseGeode);
 
 		//setups connection lines between neurons
+		ref_ptr<Geode> synapseLinesGeode = new Geode();
 		ref_ptr<Geometry> synapseLineGeom = new Geometry();
-		synapseGeode->addDrawable(synapseLineGeom);
-		synapseGeode->addDrawable(synapseLineGeom);
-		//setup the line width of the connextions and their state
+		synapseLinesGeode->addDrawable(synapseLineGeom);
+		root->addChild(synapseLinesGeode);
+		//setup the line width of the connections and their state
 		ref_ptr<StateSet> ss = synapseGeode->getOrCreateStateSet();
 		ss->setAttributeAndModes(new LineWidth(1.0));
 		ss->setAttributeAndModes(new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::CONSTANT_ALPHA));
+		ss->setMode( GL_BLEND, osg::StateAttribute::ON );
 		synapseGeode->setStateSet(ss);
 		//create the line/point arrays
 		ref_ptr<DrawArrays> synapseLineDrawArray = new DrawArrays(PrimitiveSet::LINES);
@@ -198,10 +290,31 @@ namespace Fissure
 		osgUtil::Optimizer optimizer;
 		optimizer.optimize(root);
 
+		//create the main viewer and set the background color to white
+		osgViewer::Viewer viewer;
+		viewer.addEventHandler(new osgViewer::WindowSizeHandler());
+		//viewer.addEventHandler(new osgViewer::StatsHandler);
+		//viewer.addEventHandler(new osgViewer::HelpHandler());
+		//viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getStateSet()));
+		//viewer.getCamera()->setClearColor(Vec4(126.0/255.0,128.0/255.0,119.0/255.0,1.0));
 		//Set the scene data and enter the simulation loop.
 		viewer.setSceneData( root );
-		//viewer.run();
-		viewer.setCameraManipulator(new osgGA::TrackballManipulator());
+		ref_ptr<KeySwitchMatrixManipulator> ksm = new KeySwitchMatrixManipulator();
+		ref_ptr<FPSManipulator> fpm = new FPSManipulator();
+		ksm->addNumberedMatrixManipulator(fpm);
+		ksm->addNumberedMatrixManipulator(new OrbitManipulator());
+		viewer.setCameraManipulator(ksm);
+		
+		Soma selectedSoma;
+		KeyboardEventHandler *keh = new KeyboardEventHandler(fpm,somaGeode,synapseGeode,synapseLinesGeode,&selectedSoma,_somaGeom);
+		viewer.addEventHandler(keh);
+		
+		// add the picker stuff
+		osg::ref_ptr<osgText::Text> updateText = new osgText::Text;
+		PickHandler *ph = new PickHandler(updateText,_somas,&selectedSoma);
+		root->addChild(createHUD(updateText.get()));
+		viewer.addEventHandler(ph);
+		
 		viewer.realize();
 
 		while( !viewer.done() )

@@ -1,14 +1,11 @@
 Tfissure
 v7
 r0
-t312802527.572342
+t312083294.816534
 cCheck dependencies
 cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/FPSManipulator.o /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-cCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cLd /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure normal x86_64
 cGenerateDSYMFile /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure
 
@@ -63,70 +60,50 @@ t1254464642
 s6030
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libOpenThreads.dylib
-c000000004CE9EEBD00000000000095D8
-t1290399421
-s38360
+c000000004CE97047000000000001D430
+t1290367047
+s119856
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosg.dylib
-c000000004CE9EEBF00000000002EE400
-t1290399423
-s3073024
+c000000004CE97187000000000084AEAC
+t1290367367
+s8695468
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgDB.dylib
-c000000004CE9EF0A0000000000122CA0
-t1290399498
-s1191072
+c000000004CE97247000000000033F950
+t1290367559
+s3406160
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgGA.dylib
-c000000004CE9EF0B000000000006A378
-t1290399499
-s435064
+c000000004CE97414000000000012D520
+t1290368020
+s1234208
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgUtil.dylib
-c000000004CE9EEC200000000001DDA30
-t1290399426
-s1956400
+c000000004CE9739C00000000005437D0
+t1290367900
+s5519312
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgViewer.dylib
-c000000004CE9EF0C00000000000D25B8
-t1290399500
-s861624
-
-N/Users/markus/DEV/lib/OSG/build_osx/lib/libosgText.dylib
-c000000004CE9DD2D000000000014CAC0
-t1290394925
-s1362624
+c000000004CE97523000000000025D2A8
+t1290368291
+s2478760
 
 N/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure
-t1291109631
-s288160
+t1290390494
+s202344
 
 N/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM
-t1291109631
+t1290390494
 s102
 
-N/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp
-c000000004CF49B4B0000000000000777
-t1291098955
-s1911
-i"FPSManipulator.h"
-i<limits>
-
-N/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.h
-c000000004CF48E7A000000000000030C
-t1291095674
-s780
-i<osgGA/FirstPersonManipulator>
-
 N/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp
-c000000004CF4C4F70000000000003319
-t1291109623
-s13081
+c000000004CE95CA70000000000002310
+t1290362023
+s8976
 i"InitViewer.h"
 i"Vec4Colors.h"
 i"KeyboardEventHandler.h"
-i"FPSManipulator.h"
-i"PickHandler.h"
 i<osg/PointSprite>
 i<osg/BlendFunc>
 i<osg/StateAttribute>
@@ -137,16 +114,10 @@ i<osg/TexEnv>
 i<osg/GLExtensions>
 i<osg/TexEnv>
 i<osg/LineWidth>
-i<osg/ShapeDrawable>
 i<osgDB/ReadFile>
 i<osgViewer/Viewer>
-i<osgViewer/ViewerEventHandlers>
 i<osgGA/StateSetManipulator>
-i<osgGA/CameraManipulator>
 i<osgGA/TrackballManipulator>
-i<osgGA/OrbitManipulator>
-i<osgGA/UFOManipulator>
-i<osgGA/KeySwitchMatrixManipulator>
 i<osgUtil/Optimizer>
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.h
@@ -164,22 +135,16 @@ s1672
 i<map>
 i<vector>
 
-N/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp
-c000000004CF4C46A0000000000000A05
-t1291109482
-s2565
-i"KeyboardEventHandler.h"
-i"FPSManipulator.h"
-i<osgGA/GUIEventAdapter>
-
 N/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h
-c000000004CF4C3C30000000000000455
-t1291109315
-s1109
-i<osg/Geode>
+c000000004CE8E7B200000000000003E4
+t1290332082
+s996
+i<osg/Camera>
+i<osg/PositionAttitudeTransform>
+i<osgViewer/Viewer>
+i<osgViewer/ViewerEventHandlers>
 i<osgGA/GUIEventHandler>
 i<osgGA/GUIEventAdapter>
-i"FPSManipulator.h"
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp
 c000000004CC4F7AC000000000002A117
@@ -203,35 +168,10 @@ i"lodepng.h"
 i<iostream>
 i"lodepng.h"
 
-N/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp
-c000000004CF4C41300000000000007F2
-t1291109395
-s2034
-i"PickHandler.h"
-
-N/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.h
-c000000004CF4C45C0000000000000483
-t1291109468
-s1155
-i<osgViewer/Viewer>
-i<osgViewer/CompositeViewer>
-i<osg/Material>
-i<osg/Geode>
-i<osg/BlendFunc>
-i<osg/Depth>
-i<osg/Projection>
-i<osg/MatrixTransform>
-i<osg/Camera>
-i<osg/io_utils>
-i<osg/ShapeDrawable>
-i<osgText/Text>
-i<osgText/TextBase>
-i<sstream>
-
 N/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp
-c000000004CF44F580000000000001583
-t1291079512
-s5507
+c000000004CE9651C0000000000001580
+t1290364188
+s5504
 i<iostream>
 i"LoadPNG.h"
 i"InitViewer.h"
@@ -242,11 +182,6 @@ t1290331947
 s5749
 i<osg/Array>
 i<osg/ref_ptr>
-
-N/Users/markus/Development/fissure/platforms/osx/PickHandler.cpp
-c000000004CF4A7220000000000000091
-t1291101986
-s145
 
 N/Users/markus/Development/fissure/platforms/osx/build/Release/fissure
 t1290363356
@@ -298,28 +233,16 @@ c00000000000000000000000000000000
 t2
 s0
 
-N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/FPSManipulator.o
-t1291098958
-s1966512
-
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o
-t1291109631
-s3727256
-
-N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o
-t1291109486
-s1979548
+t1290390494
+s3536396
 
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o
 t1290390490
 s438580
 
-N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o
-t1291109478
-s2754012
-
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o
-t1291079656
+t1290390491
 s190680
 
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/fissure
@@ -327,9 +250,9 @@ t2
 s0
 
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/fissure.LinkFileList
-c000000004CF4A754000000000000032A
-t1291102036
-s810
+c000000004CE9CBD60000000000000193
+t1290390486
+s403
 
 N/Users/markus/Development/fissure/src/InitViewer.h
 c000000004CE8E47800000000000007F4
@@ -412,7 +335,7 @@ s819272
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies312802527#312802527#0(642"[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_645(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64312802527#18446744073709551615#0#0(1@0"0(22@124"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64312802527#18446744073709551615#0#0(1@0"0(22@129"warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64312802527#18446744073709551615#0#0(1@0"0(22@116"warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64312802527#18446744073709551615#0#0(1@0"0(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_64312802527#18446744073709551615#0#0(1@0"0(0#1#0"8697436288#0"0#
+lSLF07#2@18"Check dependencies312083286#312083286#0(841"[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: skipping file '/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release/osgdb_rgb.so' (unexpected file type 'compiled.mach-o.bundle' in Link Binary with Libraries build phase)6(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64312083286#18446744073709551615#0#0(1@0"0(22@124"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64312083286#18446744073709551615#0#0(1@0"0(22@129"warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64312083286#18446744073709551615#0#0(1@0"0(22@116"warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64312083286#18446744073709551615#0#0(1@0"0(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_64312083286#18446744073709551615#0#0(1@0"0(22@192"warning: skipping file '/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release/osgdb_rgb.so' (unexpected file type 'compiled.mach-o.bundle' in Link Binary with Libraries build phase)312083286#18446744073709551615#0#0(1@0"0(0#1#0"8741911808#0"0#
 
 CCompileC build/fissure.build/Release/fissure.build/Objects-normal/i386/InitViewer-44C5917292AA9452.o /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp normal i386 c++ com.apple.compilers.gcc.4_2
 s312060799.975658
@@ -498,22 +421,9 @@ xc++
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp312060285#312060287#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp8618025888#1075"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch ppc -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.6.sdk -mtune=G5 -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.6 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/opt/local/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/ppc -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/ppc/ReadPNG.o0#
 
-CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/FPSManipulator.o /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312791865.289532
-e312791865.291323
-r1
-xCompileC
-xbuild/fissure.build/Release/fissure.build/Objects-normal/x86_64/FPSManipulator.o
-x/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@84"Compile /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp312791865#312791865#0(0"0(0#0#76"/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp8695484000#1103"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/FPSManipulator.o0#
-
 CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312802425.419661
-e312802431.396474
+s312083286.747564
+e312083294.484070
 r1
 xCompileC
 xbuild/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o
@@ -522,20 +432,10 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@80"Compile /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312802425#312802431#0(0"0(0#0#72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp8741033216#1112"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o0#
-
-CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312802282.846574
-e312802286.165895
-r1
-xCompileC
-xbuild/fissure.build/Release/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o
-x/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@90"Compile /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp312802282#312802286#0(0"0(0#0#82"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp8630569984#1132"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o0#
+oIn file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:3:
+o/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h: In member function 'virtual bool Fissure::KeyboardEventHandler::handle(const osgGA::GUIEventAdapter&, osgGA::GUIActionAdapter&)':
+o/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h:30: warning: unused variable 'camPosition'
+lSLF07#2@80"Compile /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312083286#312083294#0(434"In file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:3:/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h: In member function 'virtual bool Fissure::KeyboardEventHandler::handle(const osgGA::GUIEventAdapter&, osgGA::GUIActionAdapter&)':/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h:30: warning: unused variable 'camPosition'1(22@29"Unused variable 'camPosition'312083289#310#124#2(7@94"In file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312083289#18446744073709551615#0#0(6@72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312054823#3#0#3#0#0"0(13@113"Unused variable 'camPosition' in /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312083289#18446744073709551615#0#0(6@80"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312024882#30#0#30#0#0"0(6@80"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312024882#30#0#30#0#19"unused variable '*'0(0#0#72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp8737842592#1112"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o0#
 
 CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 s312083286.748994
@@ -550,25 +450,9 @@ xc++
 xcom.apple.compilers.gcc.4_2
 lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp312083286#312083290#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp8737334624#1106"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o0#
 
-CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312802271.987757
-e312802278.015513
-r1
-xCompileC
-xbuild/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o
-x/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp
-xnormal
-xx86_64
-xc++
-xcom.apple.compilers.gcc.4_2
-lSLF07#2@81"Compile /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp312802271#312802278#0(0"0(0#0#73"/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp8628938176#1097"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o0#
-
-CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/PickHandler.o /Users/markus/Development/fissure/platforms/osx/PickHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-r0
-
 CCompileC build/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312772454.947844
-e312772456.625060
+s312083290.016548
+e312083291.091622
 r1
 xCompileC
 xbuild/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o
@@ -577,19 +461,19 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp312772454#312772456#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp8743564896#1089"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o0#
+lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp312083290#312083291#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp8611136576#1089"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -Os -mdynamic-no-pic -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -fvisibility=hidden -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Release/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/ReadPNG.o0#
 
 CCreateUniversalBinary /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure normal "x86_64 i386 ppc"
 r0
 
 CGenerateDSYMFile /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure
-s312802431.480819
-e312802431.962748
+s312083294.622253
+e312083294.816368
 r1
 xGenerateDSYMFile
 x/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM
 x/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure
-lSLF07#2@73"GenerateDSYMFile ../../bin/Release/fissure.dSYM ../../bin/Release/fissure312802431#312802431#0(0"0(0#0#73"/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure8743435808#243"    cd /Users/markus/Development/fissure/platforms/osx    /Developer/usr/bin/dsymutil /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure -o /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM0#
+lSLF07#2@73"GenerateDSYMFile ../../bin/Release/fissure.dSYM ../../bin/Release/fissure312083294#312083294#0(0"0(0#0#73"/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure8737318720#243"    cd /Users/markus/Development/fissure/platforms/osx    /Developer/usr/bin/dsymutil /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure -o /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure.dSYM0#
 
 CGenerateDSYMFile /Users/markus/Development/fissure/platforms/osx/build/Release/fissure.dSYM /Users/markus/Development/fissure/platforms/osx/build/Release/fissure
 s312056156.659987
@@ -815,14 +699,14 @@ ocollect2: ld returned 1 exit status
 lSLF07#2@78"Link /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure312060814#312060814#0(16363"ld: warning: in /opt/local/lib/libosgViewer.dylib, file was built for unsupported file format which is not the architecture being linked (i386)ld: warning: in /opt/local/lib/libosgUtil.dylib, file was built for unsupported file format which is not the architecture being linked (i386)ld: warning: in /opt/local/lib/libosgGA.dylib, file was built for unsupported file format which is not the architecture being linked (i386)ld: warning: in /opt/local/lib/libosgDB.dylib, file was built for unsupported file format which is not the architecture being linked (i386)ld: warning: in /opt/local/lib/libosg.dylib, file was built for unsupported file format which is not the architecture being linked (i386)ld: warning: in /opt/local/lib/libOpenThreads.dylib, file was built for unsupported file format which is not the architecture being linked (i386)Undefined symbols:  "OpenThreads::Atomic::operator--()", referenced from:      osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o  "osg::Referenced::deleteUsingDeleteHandler() const", referenced from:      osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o  "osgGA::TrackballManipulator::TrackballManipulator()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Drawable::setStateSet(osg::StateSet*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::WindowSizeHandler::WindowSizeHandler()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::BlendFunc::BlendFunc()", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osg::Node::setStateSet(osg::StateSet*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "typeinfo for osg::Array", referenced from:      typeinfo for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o      typeinfo for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o      __ZTIN3osg5ArrayE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTIN3osg5ArrayE$non_lazy_ptr)  "osgViewer::StatsHandler::StatsHandler()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgGA::GUIEventHandler::event(osg::NodeVisitor*, osg::Drawable*)", referenced from:      vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o  "osgViewer::ViewerBase::frame(double)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::StateSet::setMode(unsigned int, unsigned int)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::Viewer::Viewer()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::Viewer::setSceneData(osg::Node*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::View::addEventHandler(osgGA::GUIEventHandler*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgUtil::Optimizer::optimize(osg::Node*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Point::Point()", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "typeinfo for osgGA::GUIEventHandler", referenced from:      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      typeinfo for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      __ZTIN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTIN5osgGA15GUIEventHandlerE$non_lazy_ptr)  "osg::Geometry::setVertexArray(osg::Array*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Object::Object(osg::Object const&, osg::CopyOp const&)", referenced from:      osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>::TemplateArray(osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126> const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o      osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>::TemplateArray(osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126> const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o  "osg::Array::className() const", referenced from:      vtable for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o      vtable for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o  "osgViewer::View::setCameraManipulator(osgGA::MatrixManipulator*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Referenced::getDeleteHandler()", referenced from:      osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o  "osg::Geometry::setColorBinding(osg::Geometry::AttributeBinding)", referenced from:      Fissure::InitViewer::UpdateFiring(osgViewer::Viewer&)       in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::StateSet::StateSet()", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osg::StateSet::setAttribute(osg::StateAttribute*, unsigned int)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "vtable for osgUtil::Optimizer", referenced from:      __ZTVN7osgUtil9OptimizerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTVN7osgUtil9OptimizerE$non_lazy_ptr)  "osg::Geometry::Geometry()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::Viewer::~Viewer()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Node::getOrCreateStateSet()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osgViewer::HelpHandler::HelpHandler(osg::ApplicationUsage*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Texture2D::Texture2D()", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osg::BlendFunc::BlendFunc(unsigned int, unsigned int)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "vtable for osg::DrawArrays", referenced from:      __ZTVN3osg10DrawArraysE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTVN3osg10DrawArraysE$non_lazy_ptr)  "osgViewer::Viewer::realize()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Geometry::addPrimitiveSet(osg::PrimitiveSet*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::PointSprite::PointSprite()", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osgGA::GUIEventHandler::operator()(osg::Node*, osg::NodeVisitor*)", referenced from:      vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o  "osg::Group::Group()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::StateSet::setAttributeAndModes(osg::StateAttribute*, unsigned int)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Referenced::Referenced()", referenced from:      osg::Object::Object()in InitViewer-44C5917292AA9452.o  "osgDB::Registry::instance(bool)", referenced from:      osgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)in InitViewer-44C5917292AA9452.o  "VTT for osgGA::GUIEventHandler", referenced from:      __ZTTN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTTN5osgGA15GUIEventHandlerE$non_lazy_ptr)  "osg::VertexBufferObject::removeArray(osg::Array*)", referenced from:      osg::Array::~Array()in InitViewer-44C5917292AA9452.o  "osg::StateSet::setTextureAttributeAndModes(unsigned int, osg::StateAttribute*, unsigned int)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osgGA::StateSetManipulator::StateSetManipulator(osg::StateSet*)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "non-virtual thunk to osgGA::GUIEventHandler::event(osg::NodeVisitor*, osg::Drawable*)", referenced from:      vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o  "OpenThreads::Atomic::operator++()", referenced from:      Fissure::MakeVec4Colors()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      osg::ref_ptr<osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126> >::operator=(osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>*)in InitViewer-44C5917292AA9452.o      osg::ref_ptr<osg::Geometry>::operator=(osg::Geometry*)in InitViewer-44C5917292AA9452.o      Fissure::KeyboardEventHandler::KeyboardEventHandler(osg::ref_ptr<osg::Camera>)in InitViewer-44C5917292AA9452.o      osg::NodeCallback::NodeCallback(osg::NodeCallback const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o  "vtable for osgGA::GUIEventHandler", referenced from:      __ZTVN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTVN5osgGA15GUIEventHandlerE$non_lazy_ptr)  "typeinfo for osg::Referenced", referenced from:      typeinfo for osg::Objectin InitViewer-44C5917292AA9452.o  "osg::Referenced::setThreadSafeRefUnref(bool)", referenced from:      vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osg::NodeCallback-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      construction vtable for osg::Drawable::EventCallback-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o      vtable for osg::Drawable::EventCallbackin InitViewer-44C5917292AA9452.o      vtable for osg::NodeCallbackin InitViewer-44C5917292AA9452.o      vtable for osg::Objectin InitViewer-44C5917292AA9452.o      vtable for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o      vtable for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o  "osg::LineWidth::LineWidth(float)", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Referenced::~Referenced()", referenced from:      osg::Object::~Object()in InitViewer-44C5917292AA9452.o      osg::Object::~Object()in InitViewer-44C5917292AA9452.o      osg::Object::~Object()in InitViewer-44C5917292AA9452.o      osg::Object::~Object()in InitViewer-44C5917292AA9452.o  "osg::Point::setSize(float)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o  "osg::Geode::Geode()", referenced from:      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "osg::Geometry::setColorArray(osg::Array*)", referenced from:      Fissure::InitViewer::UpdateFiring(osgViewer::Viewer&)       in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o      Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o  "vtable for osg::Array", referenced from:      __ZTVN3osg5ArrayE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTVN3osg5ArrayE$non_lazy_ptr)  "osgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, osgDB::ReaderWriter::Options const*)", referenced from:      osgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)in InitViewer-44C5917292AA9452.o  "osg::NodeCallback::traverse(osg::Node*, osg::NodeVisitor*)", referenced from:      osg::NodeCallback::operator()(osg::Node*, osg::NodeVisitor*)in InitViewer-44C5917292AA9452.o  "vtable for osg::PrimitiveSet", referenced from:      __ZTVN3osg12PrimitiveSetE$non_lazy_ptr in InitViewer-44C5917292AA9452.o     (maybe you meant: __ZTVN3osg12PrimitiveSetE$non_lazy_ptr)  "osg::Texture2D::setImage(osg::Image*)", referenced from:      Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.old: symbol(s) not foundcollect2: ld returned 1 exit status203(22@130"In /opt/local/lib/libosgViewer.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#0#144#0(6@0"312060814#0#0#0#0#0"0(22@128"In /opt/local/lib/libosgUtil.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#144#142#0(6@0"312060814#0#0#0#0#0"0(22@126"In /opt/local/lib/libosgGA.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#286#140#0(6@0"312060814#0#0#0#0#0"0(22@126"In /opt/local/lib/libosgDB.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#426#140#0(6@0"312060814#0#0#0#0#0"0(22@124"In /opt/local/lib/libosg.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#566#138#0(6@0"312060814#0#0#0#0#0"0(22@132"In /opt/local/lib/libOpenThreads.dylib, file was built for unsupported file format which is not the architecture being linked (i386)312060814#704#146#0(6@0"312060814#0#0#0#0#0"0(4@53""OpenThreads::Atomic::operator--()", referenced from:312060814#869#56#0(6@0"312060814#0#0#0#0#0"0(13@62"Osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o312060814#925#69#0(6@0"312060814#0#0#0#0#0"0(4@69""osg::Referenced::deleteUsingDeleteHandler() const", referenced from:312060814#994#72#0(6@0"312060814#0#0#0#0#0"0(13@62"Osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o312060814#1066#69#0(6@0"312060814#0#0#0#0#0"0(4@71""osgGA::TrackballManipulator::TrackballManipulator()", referenced from:312060814#1135#74#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#1209#79#0(6@0"312060814#0#0#0#0#0"0(4@62""osg::Drawable::setStateSet(osg::StateSet*)", referenced from:312060814#1288#65#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#1353#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#1432#79#0(6@0"312060814#0#0#0#0#0"0(4@69""osgViewer::WindowSizeHandler::WindowSizeHandler()", referenced from:312060814#1511#72#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#1583#79#0(6@0"312060814#0#0#0#0#0"0(4@47""osg::BlendFunc::BlendFunc()", referenced from:312060814#1662#50#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#1712#80#0(6@0"312060814#0#0#0#0#0"0(4@58""osg::Node::setStateSet(osg::StateSet*)", referenced from:312060814#1792#61#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#1853#79#0(6@0"312060814#0#0#0#0#0"0(4@43""typeinfo for osg::Array", referenced from:312060814#1932#46#0(6@0"312060814#0#0#0#0#0"0(13@106"Typeinfo for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o312060814#1978#113#0(6@0"312060814#0#0#0#0#0"0(13@106"Typeinfo for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o312060814#2091#113#0(6@0"312060814#0#0#0#0#0"0(13@63"__ZTIN3osg5ArrayE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#2204#70#0(6@0"312060814#0#0#0#0#0"0(13@49"(maybe you meant: __ZTIN3osg5ArrayE$non_lazy_ptr)312060814#2274#55#0(6@0"312060814#0#0#0#0#0"0(4@59""osgViewer::StatsHandler::StatsHandler()", referenced from:312060814#2329#62#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#2391#79#0(6@0"312060814#0#0#0#0#0"0(4@84""osgGA::GUIEventHandler::event(osg::NodeVisitor*, osg::Drawable*)", referenced from:312060814#2470#87#0(6@0"312060814#0#0#0#0#0"0(13@72"Vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#2557#79#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#2636#118#0(6@0"312060814#0#0#0#0#0"0(4@56""osgViewer::ViewerBase::frame(double)", referenced from:312060814#2754#59#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#2813#79#0(6@0"312060814#0#0#0#0#0"0(4@70""osg::StateSet::setMode(unsigned int, unsigned int)", referenced from:312060814#2892#73#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#2965#80#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#3045#80#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#3125#80#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3205#79#0(6@0"312060814#0#0#0#0#0"0(4@47""osgViewer::Viewer::Viewer()", referenced from:312060814#3284#50#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3334#79#0(6@0"312060814#0#0#0#0#0"0(4@63""osgViewer::Viewer::setSceneData(osg::Node*)", referenced from:312060814#3413#66#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3479#79#0(6@0"312060814#0#0#0#0#0"0(4@77""osgViewer::View::addEventHandler(osgGA::GUIEventHandler*)", referenced from:312060814#3558#80#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3638#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3717#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3796#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3875#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#3954#79#0(6@0"312060814#0#0#0#0#0"0(4@60""osgUtil::Optimizer::optimize(osg::Node*)", referenced from:312060814#4033#63#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#4096#79#0(6@0"312060814#0#0#0#0#0"0(4@39""osg::Point::Point()", referenced from:312060814#4175#42#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#4217#80#0(6@0"312060814#0#0#0#0#0"0(4@55""typeinfo for osgGA::GUIEventHandler", referenced from:312060814#4297#58#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#4355#118#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#4473#118#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#4591#118#0(6@0"312060814#0#0#0#0#0"0(13@74"Typeinfo for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#4709#81#0(6@0"312060814#0#0#0#0#0"0(13@76"__ZTIN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#4790#83#0(6@0"312060814#0#0#0#0#0"0(13@62"(maybe you meant: __ZTIN5osgGA15GUIEventHandlerE$non_lazy_ptr)312060814#4873#68#0(6@0"312060814#0#0#0#0#0"0(4@62""osg::Geometry::setVertexArray(osg::Array*)", referenced from:312060814#4941#65#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#5006#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#5085#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#5164#79#0(6@0"312060814#0#0#0#0#0"0(4@79""osg::Object::Object(osg::Object const&, osg::CopyOp const&)", referenced from:312060814#5243#82#0(6@0"312060814#0#0#0#0#0"0(13@198"Osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>::TemplateArray(osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126> const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o312060814#5325#205#0(6@0"312060814#0#0#0#0#0"0(13@198"Osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>::TemplateArray(osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126> const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o312060814#5530#205#0(6@0"312060814#0#0#0#0#0"0(4@49""osg::Array::className() const", referenced from:312060814#5735#52#0(6@0"312060814#0#0#0#0#0"0(13@104"Vtable for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o312060814#5787#111#0(6@0"312060814#0#0#0#0#0"0(13@104"Vtable for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o312060814#5898#111#0(6@0"312060814#0#0#0#0#0"0(4@84""osgViewer::View::setCameraManipulator(osgGA::MatrixManipulator*)", referenced from:312060814#6009#87#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#6096#79#0(6@0"312060814#0#0#0#0#0"0(4@55""osg::Referenced::getDeleteHandler()", referenced from:312060814#6175#58#0(6@0"312060814#0#0#0#0#0"0(13@62"Osg::Referenced::unref() constin InitViewer-44C5917292AA9452.o312060814#6233#69#0(6@0"312060814#0#0#0#0#0"0(4@83""osg::Geometry::setColorBinding(osg::Geometry::AttributeBinding)", referenced from:312060814#6302#86#0(6@0"312060814#0#0#0#0#0"0(13@92"Fissure::InitViewer::UpdateFiring(osgViewer::Viewer&)       in InitViewer-44C5917292AA9452.o312060814#6388#99#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#6487#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#6566#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#6645#79#0(6@0"312060814#0#0#0#0#0"0(4@45""osg::StateSet::StateSet()", referenced from:312060814#6724#48#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#6772#80#0(6@0"312060814#0#0#0#0#0"0(4@83""osg::StateSet::setAttribute(osg::StateAttribute*, unsigned int)", referenced from:312060814#6852#86#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#6938#80#0(6@0"312060814#0#0#0#0#0"0(4@49""vtable for osgUtil::Optimizer", referenced from:312060814#7018#52#0(6@0"312060814#0#0#0#0#0"0(13@71"__ZTVN7osgUtil9OptimizerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#7070#78#0(6@0"312060814#0#0#0#0#0"0(13@57"(maybe you meant: __ZTVN7osgUtil9OptimizerE$non_lazy_ptr)312060814#7148#63#0(6@0"312060814#0#0#0#0#0"0(4@45""osg::Geometry::Geometry()", referenced from:312060814#7211#48#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7259#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7338#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7417#79#0(6@0"312060814#0#0#0#0#0"0(4@48""osgViewer::Viewer::~Viewer()", referenced from:312060814#7496#51#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7547#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7626#79#0(6@0"312060814#0#0#0#0#0"0(4@52""osg::Node::getOrCreateStateSet()", referenced from:312060814#7705#55#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7760#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#7839#79#0(6@0"312060814#0#0#0#0#0"0(4@79""osgViewer::HelpHandler::HelpHandler(osg::ApplicationUsage*)", referenced from:312060814#7918#82#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8000#79#0(6@0"312060814#0#0#0#0#0"0(4@47""osg::Texture2D::Texture2D()", referenced from:312060814#8079#50#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#8129#80#0(6@0"312060814#0#0#0#0#0"0(4@73""osg::BlendFunc::BlendFunc(unsigned int, unsigned int)", referenced from:312060814#8209#76#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8285#79#0(6@0"312060814#0#0#0#0#0"0(4@46""vtable for osg::DrawArrays", referenced from:312060814#8364#49#0(6@0"312060814#0#0#0#0#0"0(13@69"__ZTVN3osg10DrawArraysE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#8413#76#0(6@0"312060814#0#0#0#0#0"0(13@55"(maybe you meant: __ZTVN3osg10DrawArraysE$non_lazy_ptr)312060814#8489#61#0(6@0"312060814#0#0#0#0#0"0(4@48""osgViewer::Viewer::realize()", referenced from:312060814#8550#51#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8601#79#0(6@0"312060814#0#0#0#0#0"0(4@70""osg::Geometry::addPrimitiveSet(osg::PrimitiveSet*)", referenced from:312060814#8680#73#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8753#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8832#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#8911#79#0(6@0"312060814#0#0#0#0#0"0(4@51""osg::PointSprite::PointSprite()", referenced from:312060814#8990#54#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#9044#80#0(6@0"312060814#0#0#0#0#0"0(4@85""osgGA::GUIEventHandler::operator()(osg::Node*, osg::NodeVisitor*)", referenced from:312060814#9124#88#0(6@0"312060814#0#0#0#0#0"0(13@72"Vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#9212#79#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#9291#118#0(6@0"312060814#0#0#0#0#0"0(4@39""osg::Group::Group()", referenced from:312060814#9409#42#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#9451#79#0(6@0"312060814#0#0#0#0#0"0(4@91""osg::StateSet::setAttributeAndModes(osg::StateAttribute*, unsigned int)", referenced from:312060814#9530#94#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#9624#80#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#9704#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#9783#79#0(6@0"312060814#0#0#0#0#0"0(4@49""osg::Referenced::Referenced()", referenced from:312060814#9862#52#0(6@0"312060814#0#0#0#0#0"0(13@53"Osg::Object::Object()in InitViewer-44C5917292AA9452.o312060814#9914#60#0(6@0"312060814#0#0#0#0#0"0(4@51""osgDB::Registry::instance(bool)", referenced from:312060814#9974#54#0(6@0"312060814#0#0#0#0#0"0(13@131"OsgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)in InitViewer-44C5917292AA9452.o312060814#10028#138#0(6@0"312060814#0#0#0#0#0"0(4@50""VTT for osgGA::GUIEventHandler", referenced from:312060814#10166#53#0(6@0"312060814#0#0#0#0#0"0(13@76"__ZTTN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#10219#83#0(6@0"312060814#0#0#0#0#0"0(13@62"(maybe you meant: __ZTTN5osgGA15GUIEventHandlerE$non_lazy_ptr)312060814#10302#68#0(6@0"312060814#0#0#0#0#0"0(4@69""osg::VertexBufferObject::removeArray(osg::Array*)", referenced from:312060814#10370#72#0(6@0"312060814#0#0#0#0#0"0(13@52"Osg::Array::~Array()in InitViewer-44C5917292AA9452.o312060814#10442#59#0(6@0"312060814#0#0#0#0#0"0(4@112""osg::StateSet::setTextureAttributeAndModes(unsigned int, osg::StateAttribute*, unsigned int)", referenced from:312060814#10501#115#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#10616#80#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#10696#80#0(6@0"312060814#0#0#0#0#0"0(4@83""osgGA::StateSetManipulator::StateSetManipulator(osg::StateSet*)", referenced from:312060814#10776#86#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#10862#79#0(6@0"312060814#0#0#0#0#0"0(4@105""non-virtual thunk to osgGA::GUIEventHandler::event(osg::NodeVisitor*, osg::Drawable*)", referenced from:312060814#10941#108#0(6@0"312060814#0#0#0#0#0"0(13@72"Vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#11049#79#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#11128#118#0(6@0"312060814#0#0#0#0#0"0(4@53""OpenThreads::Atomic::operator++()", referenced from:312060814#11246#56#0(6@0"312060814#0#0#0#0#0"0(13@63"Fissure::MakeVec4Colors()      in InitViewer-44C5917292AA9452.o312060814#11302#70#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11372#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11451#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11530#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11609#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11688#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11767#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11846#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#11925#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#12004#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#12083#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#12162#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#12241#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#12320#79#0(6@0"312060814#0#0#0#0#0"0(13@183"Osg::ref_ptr<osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126> >::operator=(osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>*)in InitViewer-44C5917292AA9452.o312060814#12399#190#0(6@0"312060814#0#0#0#0#0"0(13@86"Osg::ref_ptr<osg::Geometry>::operator=(osg::Geometry*)in InitViewer-44C5917292AA9452.o312060814#12589#93#0(6@0"312060814#0#0#0#0#0"0(13@110"Fissure::KeyboardEventHandler::KeyboardEventHandler(osg::ref_ptr<osg::Camera>)in InitViewer-44C5917292AA9452.o312060814#12682#117#0(6@0"312060814#0#0#0#0#0"0(13@109"Osg::NodeCallback::NodeCallback(osg::NodeCallback const&, osg::CopyOp const&)in InitViewer-44C5917292AA9452.o312060814#12799#116#0(6@0"312060814#0#0#0#0#0"0(4@53""vtable for osgGA::GUIEventHandler", referenced from:312060814#12915#56#0(6@0"312060814#0#0#0#0#0"0(13@76"__ZTVN5osgGA15GUIEventHandlerE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#12971#83#0(6@0"312060814#0#0#0#0#0"0(13@62"(maybe you meant: __ZTVN5osgGA15GUIEventHandlerE$non_lazy_ptr)312060814#13054#68#0(6@0"312060814#0#0#0#0#0"0(4@48""typeinfo for osg::Referenced", referenced from:312060814#13122#51#0(6@0"312060814#0#0#0#0#0"0(13@56"Typeinfo for osg::Objectin InitViewer-44C5917292AA9452.o312060814#13173#63#0(6@0"312060814#0#0#0#0#0"0(4@64""osg::Referenced::setThreadSafeRefUnref(bool)", referenced from:312060814#13236#67#0(6@0"312060814#0#0#0#0#0"0(13@72"Vtable for Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#13303#79#0(6@0"312060814#0#0#0#0#0"0(13@111"Construction vtable for osgGA::GUIEventHandler-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#13382#118#0(6@0"312060814#0#0#0#0#0"0(13@106"Construction vtable for osg::NodeCallback-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#13500#113#0(6@0"312060814#0#0#0#0#0"0(13@117"Construction vtable for osg::Drawable::EventCallback-in-Fissure::KeyboardEventHandlerin InitViewer-44C5917292AA9452.o312060814#13613#124#0(6@0"312060814#0#0#0#0#0"0(13@71"Vtable for osg::Drawable::EventCallbackin InitViewer-44C5917292AA9452.o312060814#13737#78#0(6@0"312060814#0#0#0#0#0"0(13@60"Vtable for osg::NodeCallbackin InitViewer-44C5917292AA9452.o312060814#13815#67#0(6@0"312060814#0#0#0#0#0"0(13@54"Vtable for osg::Objectin InitViewer-44C5917292AA9452.o312060814#13882#61#0(6@0"312060814#0#0#0#0#0"0(13@104"Vtable for osg::TemplateArray<osg::Vec3f, (osg::Array::Type)10, 3, 5126>in InitViewer-44C5917292AA9452.o312060814#13943#111#0(6@0"312060814#0#0#0#0#0"0(13@104"Vtable for osg::TemplateArray<osg::Vec4f, (osg::Array::Type)11, 4, 5126>in InitViewer-44C5917292AA9452.o312060814#14054#111#0(6@0"312060814#0#0#0#0#0"0(4@52""osg::LineWidth::LineWidth(float)", referenced from:312060814#14165#55#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#14220#79#0(6@0"312060814#0#0#0#0#0"0(4@50""osg::Referenced::~Referenced()", referenced from:312060814#14299#53#0(6@0"312060814#0#0#0#0#0"0(13@54"Osg::Object::~Object()in InitViewer-44C5917292AA9452.o312060814#14352#61#0(6@0"312060814#0#0#0#0#0"0(13@54"Osg::Object::~Object()in InitViewer-44C5917292AA9452.o312060814#14413#61#0(6@0"312060814#0#0#0#0#0"0(13@54"Osg::Object::~Object()in InitViewer-44C5917292AA9452.o312060814#14474#61#0(6@0"312060814#0#0#0#0#0"0(13@54"Osg::Object::~Object()in InitViewer-44C5917292AA9452.o312060814#14535#61#0(6@0"312060814#0#0#0#0#0"0(4@46""osg::Point::setSize(float)", referenced from:312060814#14596#49#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#14645#80#0(6@0"312060814#0#0#0#0#0"0(4@39""osg::Geode::Geode()", referenced from:312060814#14725#42#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#14767#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#14846#79#0(6@0"312060814#0#0#0#0#0"0(4@61""osg::Geometry::setColorArray(osg::Array*)", referenced from:312060814#14925#64#0(6@0"312060814#0#0#0#0#0"0(13@92"Fissure::InitViewer::UpdateFiring(osgViewer::Viewer&)       in InitViewer-44C5917292AA9452.o312060814#14989#99#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#15088#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#15167#79#0(6@0"312060814#0#0#0#0#0"0(13@72"Fissure::InitViewer::StartViewer()      in InitViewer-44C5917292AA9452.o312060814#15246#79#0(6@0"312060814#0#0#0#0#0"0(4@41""vtable for osg::Array", referenced from:312060814#15325#44#0(6@0"312060814#0#0#0#0#0"0(13@63"__ZTVN3osg5ArrayE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#15369#70#0(6@0"312060814#0#0#0#0#0"0(13@49"(maybe you meant: __ZTVN3osg5ArrayE$non_lazy_ptr)312060814#15439#55#0(6@0"312060814#0#0#0#0#0"0(4@156""osgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, osgDB::ReaderWriter::Options const*)", referenced from:312060814#15494#159#0(6@0"312060814#0#0#0#0#0"0(13@131"OsgDB::readImageFile(std::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)in InitViewer-44C5917292AA9452.o312060814#15653#138#0(6@0"312060814#0#0#0#0#0"0(4@78""osg::NodeCallback::traverse(osg::Node*, osg::NodeVisitor*)", referenced from:312060814#15791#81#0(6@0"312060814#0#0#0#0#0"0(13@92"Osg::NodeCallback::operator()(osg::Node*, osg::NodeVisitor*)in InitViewer-44C5917292AA9452.o312060814#15872#99#0(6@0"312060814#0#0#0#0#0"0(4@48""vtable for osg::PrimitiveSet", referenced from:312060814#15971#51#0(6@0"312060814#0#0#0#0#0"0(13@71"__ZTVN3osg12PrimitiveSetE$non_lazy_ptr in InitViewer-44C5917292AA9452.o312060814#16022#78#0(6@0"312060814#0#0#0#0#0"0(13@57"(maybe you meant: __ZTVN3osg12PrimitiveSetE$non_lazy_ptr)312060814#16100#63#0(6@0"312060814#0#0#0#0#0"0(4@57""osg::Texture2D::setImage(osg::Image*)", referenced from:312060814#16163#60#0(6@0"312060814#0#0#0#0#0"0(13@73"Fissure::InitViewer::makeStateSet(float) in InitViewer-44C5917292AA9452.o312060814#16223#80#0(6@0"312060814#0#0#0#0#0"0(13@19"Symbol(s) not found312060814#16303#24#0(6@0"312060814#0#0#0#0#0"0(13@35"Collect2: ld returned 1 exit status312060814#16327#36#0(6@0"312060814#0#0#0#0#0"0(0#0#0"8748720192#634"    cd /Users/markus/Development/fissure/platforms/osx    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/g++-4.2 -arch i386 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/markus/Development/fissure/platforms/osx/../../bin/Release -L/opt/local/lib -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -filelist /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/i386/fissure.LinkFileList -mmacosx-version-min=10.5 -losgViewer -losgUtil -losgGA -losgDB -losg -lOpenThreads -o /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure1#
 
 CLd /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure normal x86_64
-s312802431.397227
-e312802431.480588
+s312083294.484253
+e312083294.622146
 r1
 xLd
 x/Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure
 xnormal
 xx86_64
-lSLF07#2@78"Link /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure312802431#312802431#0(0"0(0#0#0"8617063200#1100"    cd /Users/markus/Development/fissure/platforms/osx    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/markus/Development/fissure/platforms/osx/../../bin/Release -L/Users/markus/DEV/lib/OSG/build_osx/lib -L/Users/markus/DEV/lib/OSG/build_osx/lib/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9 -L. -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -filelist /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/fissure.LinkFileList -mmacosx-version-min=10.5 -losgViewer -losgGA -losgUtil -losgDB -losg -lOpenThreads -losgText -o /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure0#
+lSLF07#2@78"Link /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure312083294#312083294#0(0"0(0#0#0"8609578592#1002"    cd /Users/markus/Development/fissure/platforms/osx    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/markus/Development/fissure/platforms/osx/../../bin/Release -L/Users/markus/DEV/lib/OSG/build_osx/lib -L/Users/markus/DEV/lib/OSG/build_osx/lib/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9 -L. -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib/Release -F/Users/markus/Development/fissure/platforms/osx/../../bin/Release -filelist /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Release/fissure.build/Objects-normal/x86_64/fissure.LinkFileList -mmacosx-version-min=10.5 -losgViewer -losgGA -losgUtil -losgDB -losg -lOpenThreads -o /Users/markus/Development/fissure/platforms/osx/../../bin/Release/fissure0#
 
 CLd /Users/markus/Development/fissure/platforms/osx/build/Release/fissure normal x86_64
 s312056156.523531

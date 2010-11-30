@@ -181,7 +181,7 @@ void waitEnd()
 {
 	printf("Press Enter to Close\n");
 	//cin.get();
-}
+}			
 int main(int argc, char* argv[])
 {
 	if(argc != 2)
