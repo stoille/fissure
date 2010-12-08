@@ -533,9 +533,11 @@ namespace Fissure
 		//Set the scene data and enter the simulation loop.
 		viewer.setSceneData( GLOBAL->gRoot );
 		ref_ptr<KeySwitchMatrixManipulator> ksm = new KeySwitchMatrixManipulator();
-		ref_ptr<FPSManipulator> fpm = new FPSManipulator();
-		ksm->addNumberedMatrixManipulator(fpm);
+		r
 		ksm->addNumberedMatrixManipulator(GLOBAL->gOrbitManipulator);
+		
+		ef_ptr<FPSManipulator> fpm = new FPSManipulator();
+		ksm->addNumberedMatrixManipulator(fpm);
 		viewer.setCameraManipulator(ksm);
 		
 		KeyboardEventHandler *keh = new KeyboardEventHandler(fpm);

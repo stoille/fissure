@@ -197,49 +197,7 @@
 	<key>Notifications</key>
 	<array/>
 	<key>OpenEditors</key>
-	<array>
-		<dict>
-			<key>Content</key>
-			<dict>
-				<key>PBXProjectModuleGUID</key>
-				<string>28A30BC112AF1DB300D65538</string>
-				<key>PBXProjectModuleLabel</key>
-				<string>InitViewer.cpp</string>
-				<key>PBXSplitModuleInNavigatorKey</key>
-				<dict>
-					<key>Split0</key>
-					<dict>
-						<key>PBXProjectModuleGUID</key>
-						<string>28A30BC212AF1DB300D65538</string>
-						<key>PBXProjectModuleLabel</key>
-						<string>InitViewer.cpp</string>
-						<key>_historyCapacity</key>
-						<integer>0</integer>
-						<key>bookmark</key>
-						<string>287DFBE312AF7E7F00DC7E14</string>
-						<key>history</key>
-						<array>
-							<string>28A30D7D12AF64D100D65538</string>
-							<string>28A30E4A12AF7E3800D65538</string>
-						</array>
-					</dict>
-					<key>SplitCount</key>
-					<string>1</string>
-				</dict>
-				<key>StatusBarVisibility</key>
-				<true/>
-			</dict>
-			<key>Geometry</key>
-			<dict>
-				<key>Frame</key>
-				<string>{{0, 20}, {720, 777}}</string>
-				<key>PBXModuleWindowStatusBarHidden2</key>
-				<false/>
-				<key>RubberWindowFrame</key>
-				<string>720 60 720 818 0 0 1440 878 </string>
-			</dict>
-		</dict>
-	</array>
+	<array/>
 	<key>PerspectiveWidths</key>
 	<array>
 		<integer>-1</integer>
@@ -371,7 +329,7 @@
 										<key>_historyCapacity</key>
 										<integer>0</integer>
 										<key>bookmark</key>
-										<string>287DFBE212AF7E7F00DC7E14</string>
+										<string>28EBDC4312AF802D00B17EFD</string>
 										<key>history</key>
 										<array>
 											<string>2891BF9C12A48FC900C6F796</string>
@@ -394,7 +352,7 @@
 											<string>28A30DF112AF711600D65538</string>
 											<string>28A30E3712AF7C7800D65538</string>
 											<string>28A30E3812AF7C7800D65538</string>
-											<string>28A30E4912AF7E3800D65538</string>
+											<string>287DFBE212AF7E7F00DC7E14</string>
 										</array>
 									</dict>
 									<key>SplitCount</key>
@@ -452,9 +410,9 @@
 			</array>
 			<key>TableOfContents</key>
 			<array>
-				<string>287DFBD812AF7E7F00DC7E14</string>
+				<string>28EBDC3812AF801300B17EFD</string>
 				<string>1CE0B1FE06471DED0097A5F4</string>
-				<string>287DFBD912AF7E7F00DC7E14</string>
+				<string>28EBDC3912AF801300B17EFD</string>
 				<string>1CE0B20306471E060097A5F4</string>
 				<string>1CE0B20506471E060097A5F4</string>
 			</array>
@@ -593,9 +551,9 @@
 	<key>WindowOrderList</key>
 	<array>
 		<string>282048BA1299261200ECAB89</string>
+		<string>28A30BC112AF1DB300D65538</string>
 		<string>/Users/markus/Development/fissure/platforms/osx/fissure.xcodeproj</string>
 		<string>1CD10A99069EF8BA00B06720</string>
-		<string>28A30BC112AF1DB300D65538</string>
 	</array>
 	<key>WindowString</key>
 	<string>0 59 896 819 0 0 1440 878 </string>
@@ -675,7 +633,7 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>282048BA1299261200ECAB89</string>
-				<string>287DFBDB12AF7E7F00DC7E14</string>
+				<string>28EBDC3B12AF801300B17EFD</string>
 				<string>1CD0528F0623707200166675</string>
 				<string>XCMainBuildResultsModuleGUID</string>
 			</array>
@@ -797,13 +755,13 @@
 			<key>TableOfContents</key>
 			<array>
 				<string>1CD10A99069EF8BA00B06720</string>
-				<string>287DFBDC12AF7E7F00DC7E14</string>
+				<string>28EBDC3C12AF801300B17EFD</string>
 				<string>1C162984064C10D400B95A72</string>
-				<string>287DFBDD12AF7E7F00DC7E14</string>
-				<string>287DFBDE12AF7E7F00DC7E14</string>
-				<string>287DFBDF12AF7E7F00DC7E14</string>
-				<string>287DFBE012AF7E7F00DC7E14</string>
-				<string>287DFBE112AF7E7F00DC7E14</string>
+				<string>28EBDC3D12AF801300B17EFD</string>
+				<string>28EBDC3E12AF801300B17EFD</string>
+				<string>28EBDC3F12AF801300B17EFD</string>
+				<string>28EBDC4012AF801300B17EFD</string>
+				<string>28EBDC4112AF801300B17EFD</string>
 			</array>
 			<key>ToolbarConfiguration</key>
 			<string>xcode.toolbar.config.debugV3</string>
