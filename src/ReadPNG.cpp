@@ -1,4 +1,4 @@
-// ReadPNG.cpp : Defines the entry point for the console application.
+// ReadPNG.cpp : Defines the entry pounsigned for the console application.
 
 #include <iostream>
 
@@ -10,13 +10,13 @@ using namespace LodePNG;
 using namespace Fissure;
 
 //for txtFormat
-int init_file();
-int close_file();
+unsigned init_file();
+unsigned close_file();
 
 void movePastBlanks();
 
 char give_file_section1();
-int give_file_section2(int * list);
+unsigned give_file_section2(unsigned * list);
 void next_section();
 
 FILE * fp;
@@ -25,20 +25,20 @@ int howMany;
 
 
 //for PNG
-int init_decode();
-void printPNG(void);
-void printPixel(int x, int y);
-void getPixel(int *, int x, int y);
+unsigned init_decode();
+void prunsignedPNG(void);
+void prunsignedPixel(unsigned x, unsigned y);
+void getPixel(unsigned *, unsigned x, unsigned y);
 void waitEnd(void);
 
 Decoder decoder;
 vector<unsigned char> buffer, image;
-unsigned int width, height;
-int * pixel;
+unsigned width, height;
+unsigned * pixel;
 
 using namespace std;
 
-int init_file(const string &fileName)
+unsigned init_file(const string &fileName)
 {
 	fp=fopen(fileName.c_str(), "r");
 	if(fp == NULL)
@@ -69,7 +69,7 @@ char give_file_section1()//return char
 	howMany--;
 	return temp;
 }
-int give_file_section2(int * list)//read 5
+unsigned give_file_section2(unsigned * list)//read 5
 {
 	if(howMany >= 0)
 		fscanf(fp, "%d %d %d %d %d", &list[0], &list[1], &list[2], &list[3], &list[4]);
@@ -80,7 +80,7 @@ int give_file_section2(int * list)//read 5
 	return 1;
 }
 
-int give_file_section3(int * list)//read 5
+unsigned give_file_section3(unsigned * list)//read 5
 {
 	if(howMany >= 0)
 		fscanf(fp, "%d %d %d %d %d", &list[0], &list[1], &list[2], &list[3], &list[4]);
@@ -90,7 +90,7 @@ int give_file_section3(int * list)//read 5
 	howMany --;
 	return 1;
 }
-int give_file_section4(int * list)//read 3
+unsigned give_file_section4(unsigned * list)//read 3
 {
 	if(howMany >= 0)
 		fscanf(fp, "%d %d %d", &list[0], &list[1], &list[2]);
@@ -105,11 +105,11 @@ void next_section()
 	movePastBlanks();
 	fscanf(fp, "%d", &howMany);
 }
-int close_file()
+unsigned close_file()
 {
 	return fclose(fp);
 }
-int init_decode(const string &fileName)
+unsigned init_decode(const string &fileName)
 {
 	loadFile(buffer, fileName);
 	decoder.decode(image, buffer.empty() ? 0 : &buffer[0], (unsigned)buffer.size());
@@ -118,7 +118,7 @@ int init_decode(const string &fileName)
 		printf("decode PNG error\n");
 		return -1;
 	}
-	pixel = (int *) malloc(4 * sizeof(int));
+	pixel = (unsigned *) malloc(4 * sizeof(unsigned));
 	if(pixel == NULL)
 		return -1;
 
@@ -127,26 +127,26 @@ int init_decode(const string &fileName)
 
 	return 0;
 }
-int getPNGWidth()
+unsigned getPNGWidth()
 {
 	return width;
 }
-int getPNGHeight()
+unsigned getPNGHeight()
 {
 	return height;
 }
-void printPNG()
+void prunsignedPNG()
 {
 	for(unsigned y = 0; y < height; y ++)
 	{
 		for(unsigned x = 0; x < width; x ++)
-			printPixel(x, y);
+			prunsignedPixel(x, y);
 		printf("\n");
 	}
 }
-void getPixel(int * pixel, int x,int y)
+void getPixel(unsigned * pixel, unsigned x,unsigned y)
 {
-	unsigned int r=0, g=0, b=0, a=0;
+	unsigned r=0, g=0, b=0, a=0;
 	
 	r = image[4 * y * width + 4 * x + 0]; //red
 	g = image[4 * y * width + 4 * x + 1]; //green
@@ -158,9 +158,9 @@ void getPixel(int * pixel, int x,int y)
 	pixel[2] = b;
 	pixel[3] = a;
 }
-void printPixel(int x, int y)
+void prunsignedPixel(unsigned x, unsigned y)
 {
-	unsigned int r=0, g=0, b=0, a=0;
+	unsigned r=0, g=0, b=0, a=0;
 	
 	r = image[4 * y * width + 4 * x + 0]; //red
 	g = image[4 * y * width + 4 * x + 1]; //green
@@ -169,7 +169,7 @@ void printPixel(int x, int y)
 
 	printf("(%d,%d,%d,%d)", r,g,b,a);
 }
-int pixelFiring(int x, int y)
+unsigned pixelFiring(unsigned x, unsigned y)
 {
 	//if the pixel is black = 0, green = 1
 	getPixel(pixel, x, y);
@@ -193,7 +193,7 @@ int main(int argc, char* argv[])
 	InitViewer initViewer;
 
 	char tmp_c =  ' ';
-	int * temp_i = new int [5], ret = 0;
+	unsigned * temp_i = new unsigned [5], ret = 0;
 
 	string modelFileName(argv[1]);
 	string firingFileName;
@@ -207,7 +207,8 @@ int main(int argc, char* argv[])
 	next_section();
 	cout<<"count:"<<howMany<<endl;
 	while((tmp_c = give_file_section1()))
-		initViewer.AddSomaType(tmp_c);
+		if( (tmp_c >= 'A' && tmp_c <= 'Z') )
+			initViewer.AddSomaType(tmp_c);
 
 	//read the soma info
 	cout<<"Section 2:"<<endl;
@@ -226,8 +227,8 @@ int main(int argc, char* argv[])
 	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
 
 	//read firing data
-	int numFiringCycles = 0;
-	int lastFiringCycle = 0;
+	unsigned numFiringCycles = 0;
+	unsigned lastFiringCycle = 0;
 	cout<<"Section 4:"<<endl;
 	next_section();
 	cout<<"count:"<<howMany<<endl;
@@ -246,7 +247,7 @@ int main(int argc, char* argv[])
 	//initialize any extra firing data or options on our model
 	if(argc > 1)
 	{
-		for(int i = 2; 2 < argc-1; i+=2)
+		for(unsigned i = 2; 2 < argc-1; i+=2)
 		{
 			if(strcmp(argv[i],"-firing") == 0)
 			{

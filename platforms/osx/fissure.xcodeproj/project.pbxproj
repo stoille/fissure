@@ -11,7 +11,7 @@
 		282048D11299266800ECAB89 /* LoadPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282048CC1299266800ECAB89 /* LoadPNG.cpp */; };
 		282048D21299266800ECAB89 /* ReadPNG.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 282048CE1299266800ECAB89 /* ReadPNG.cpp */; };
 		282048DC1299281B00ECAB89 /* InitViewer.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048C91299266800ECAB89 /* InitViewer.h */; };
-		282048DD1299281B00ECAB89 /* InitViewerTypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CA1299266800ECAB89 /* InitViewerTypes.h */; };
+		282048DD1299281B00ECAB89 /* FissureTypes.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CA1299266800ECAB89 /* FissureTypes.h */; };
 		282048DE1299281B00ECAB89 /* KeyboardEventHandler.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CB1299266800ECAB89 /* KeyboardEventHandler.h */; };
 		282048DF1299281B00ECAB89 /* LoadPNG.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CD1299266800ECAB89 /* LoadPNG.h */; };
 		282048E01299281B00ECAB89 /* Vec4Colors.h in Sources */ = {isa = PBXBuildFile; fileRef = 282048CF1299266800ECAB89 /* Vec4Colors.h */; };
@@ -19,6 +19,7 @@
 		2891BFBD12A49B6B00C6F796 /* FPSManipulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2891BFBC12A49B6B00C6F796 /* FPSManipulator.cpp */; };
 		2891C1D212A4DEB800C6F796 /* PickHandler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2891C1D112A4DEB800C6F796 /* PickHandler.cpp */; };
 		2891C1DE12A4DF8D00C6F796 /* libosgText.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2891C1DD12A4DF8D00C6F796 /* libosgText.dylib */; };
+		28A30B8A12AF15C400D65538 /* SimInfo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 28A30B8912AF15C400D65538 /* SimInfo.cpp */; };
 		28A3132A129A024D00FF8CAC /* libosgViewer.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A31329129A024D00FF8CAC /* libosgViewer.dylib */; };
 		28A3132C129A024D00FF8CAC /* libosgGA.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A3132B129A024D00FF8CAC /* libosgGA.dylib */; };
 		28A3132E129A024D00FF8CAC /* libosgUtil.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 28A3132D129A024D00FF8CAC /* libosgUtil.dylib */; };
@@ -44,7 +45,7 @@
 /* Begin PBXFileReference section */
 		282048C81299266800ECAB89 /* InitViewer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = InitViewer.cpp; path = ../../src/InitViewer.cpp; sourceTree = SOURCE_ROOT; };
 		282048C91299266800ECAB89 /* InitViewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewer.h; path = ../../src/InitViewer.h; sourceTree = SOURCE_ROOT; };
-		282048CA1299266800ECAB89 /* InitViewerTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InitViewerTypes.h; path = ../../src/InitViewerTypes.h; sourceTree = SOURCE_ROOT; };
+		282048CA1299266800ECAB89 /* FissureTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FissureTypes.h; path = ../../src/FissureTypes.h; sourceTree = SOURCE_ROOT; };
 		282048CB1299266800ECAB89 /* KeyboardEventHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = KeyboardEventHandler.h; path = ../../src/KeyboardEventHandler.h; sourceTree = SOURCE_ROOT; };
 		282048CC1299266800ECAB89 /* LoadPNG.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = LoadPNG.cpp; path = ../../src/LoadPNG.cpp; sourceTree = SOURCE_ROOT; };
 		282048CD1299266800ECAB89 /* LoadPNG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoadPNG.h; path = ../../src/LoadPNG.h; sourceTree = SOURCE_ROOT; };
@@ -56,6 +57,8 @@
 		2891C19C12A4DAAF00C6F796 /* PickHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PickHandler.h; path = ../../src/PickHandler.h; sourceTree = SOURCE_ROOT; };
 		2891C1D112A4DEB800C6F796 /* PickHandler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PickHandler.cpp; path = ../../src/PickHandler.cpp; sourceTree = SOURCE_ROOT; };
 		2891C1DD12A4DF8D00C6F796 /* libosgText.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgText.dylib; path = /Users/markus/DEV/lib/OSG/build_osx/lib/libosgText.dylib; sourceTree = "<absolute>"; };
+		28A3087C12ADE20A00D65538 /* SimInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SimInfo.h; path = ../../src/SimInfo.h; sourceTree = SOURCE_ROOT; };
+		28A30B8912AF15C400D65538 /* SimInfo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SimInfo.cpp; path = ../../src/SimInfo.cpp; sourceTree = SOURCE_ROOT; };
 		28A31329129A024D00FF8CAC /* libosgViewer.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgViewer.dylib; path = /Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgViewer.dylib; sourceTree = "<absolute>"; };
 		28A3132B129A024D00FF8CAC /* libosgGA.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgGA.dylib; path = /Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgGA.dylib; sourceTree = "<absolute>"; };
 		28A3132D129A024D00FF8CAC /* libosgUtil.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libosgUtil.dylib; path = /Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgUtil.dylib; sourceTree = "<absolute>"; };
@@ -104,19 +107,13 @@
 		08FB7795FE84155DC02AAC07 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				28A308B212ADF49000D65538 /* headers */,
 				2891C1D112A4DEB800C6F796 /* PickHandler.cpp */,
-				2891C19C12A4DAAF00C6F796 /* PickHandler.h */,
-				2891BFBB12A49B6B00C6F796 /* FPSManipulator.h */,
 				2891BFBC12A49B6B00C6F796 /* FPSManipulator.cpp */,
 				2891BFB712A498D000C6F796 /* KeyboardEventHandler.cpp */,
 				282048C81299266800ECAB89 /* InitViewer.cpp */,
-				282048C91299266800ECAB89 /* InitViewer.h */,
-				282048CA1299266800ECAB89 /* InitViewerTypes.h */,
-				282048CB1299266800ECAB89 /* KeyboardEventHandler.h */,
 				282048CC1299266800ECAB89 /* LoadPNG.cpp */,
-				282048CD1299266800ECAB89 /* LoadPNG.h */,
 				282048CE1299266800ECAB89 /* ReadPNG.cpp */,
-				282048CF1299266800ECAB89 /* Vec4Colors.h */,
 			);
 			name = Source;
 			sourceTree = "<group>";
@@ -127,6 +124,30 @@
 				8DD76F6C0486A84900D96B5E /* fissure */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		28A308B112ADF48200D65538 /* common */ = {
+			isa = PBXGroup;
+			children = (
+				282048CF1299266800ECAB89 /* Vec4Colors.h */,
+				28A3087C12ADE20A00D65538 /* SimInfo.h */,
+				28A30B8912AF15C400D65538 /* SimInfo.cpp */,
+				282048CA1299266800ECAB89 /* FissureTypes.h */,
+			);
+			name = common;
+			sourceTree = "<group>";
+		};
+		28A308B212ADF49000D65538 /* headers */ = {
+			isa = PBXGroup;
+			children = (
+				2891C19C12A4DAAF00C6F796 /* PickHandler.h */,
+				2891BFBB12A49B6B00C6F796 /* FPSManipulator.h */,
+				282048C91299266800ECAB89 /* InitViewer.h */,
+				282048CB1299266800ECAB89 /* KeyboardEventHandler.h */,
+				282048CD1299266800ECAB89 /* LoadPNG.h */,
+				28A308B112ADF48200D65538 /* common */,
+			);
+			name = headers;
 			sourceTree = "<group>";
 		};
 		C6859E8C029090F304C91782 /* Documentation */ = {
@@ -192,7 +213,7 @@
 			files = (
 				282048D01299266800ECAB89 /* InitViewer.cpp in Sources */,
 				282048DC1299281B00ECAB89 /* InitViewer.h in Sources */,
-				282048DD1299281B00ECAB89 /* InitViewerTypes.h in Sources */,
+				282048DD1299281B00ECAB89 /* FissureTypes.h in Sources */,
 				282048DE1299281B00ECAB89 /* KeyboardEventHandler.h in Sources */,
 				282048D11299266800ECAB89 /* LoadPNG.cpp in Sources */,
 				282048DF1299281B00ECAB89 /* LoadPNG.h in Sources */,
@@ -201,6 +222,7 @@
 				2891BFB812A498D000C6F796 /* KeyboardEventHandler.cpp in Sources */,
 				2891BFBD12A49B6B00C6F796 /* FPSManipulator.cpp in Sources */,
 				2891C1D212A4DEB800C6F796 /* PickHandler.cpp in Sources */,
+				28A30B8A12AF15C400D65538 /* SimInfo.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,13 +6,12 @@
 using namespace osg;
 namespace Fissure
 {
-	ref_ptr<Vec4Array> MakeVec4Colors()
+	static ref_ptr<Vec4Array> MakeVec4Colors()
 	{
 		ref_ptr<Vec4Array> colors = new Vec4Array();
 		/* grabbed from:
-		http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=58674&page=2 
-		*/
-		colors->push_back(Vec4(0.439216f, 0.858824f, 0.576471f, 1.0f));
+		 http://www.opengl.org/discussion_boards/ubbthreads.php?ubb=showflat&Number=58674&page=2 
+		 */
 		colors->push_back(Vec4(0.62352f, 0.372549f, 0.623529f, 1.0f));
 		colors->push_back(Vec4(0.647059f, 0.164706f, 0.164706f, 1.0f));
 		colors->push_back(Vec4(0.372549f, 0.623529f, 0.623529f, 1.0f));
@@ -100,7 +99,7 @@ namespace Fissure
 		colors->push_back(Vec4(0.52f, 0.39f, 0.39f, 1.0f));
 		colors->push_back(Vec4(0.13f, 0.37f, 0.31f, 1.0f));
 		colors->push_back(Vec4(0.55f, 0.09f, 0.09f, 1.0f));
-
+		
 		return colors;
 	}
 }

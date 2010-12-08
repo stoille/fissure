@@ -1,19 +1,14 @@
 #ifndef InitViwer_H
 #define InitViewer_H
 
-#include "InitViewerTypes.h"
 #include <time.h>
-#include <osg/Array>
 
-namespace osgViewer
-{
-	class Viewer;
-}
-
-namespace osg
-{
+namespace osg {
 	class StateSet;
-	class Geometry;
+	class Vec4f;
+}
+namespace osgViewer {
+	class Viewer;
 }
 
 namespace Fissure {
@@ -34,6 +29,7 @@ to visualize using OSG.
 class InitViewer
 {
 public:
+	
 	InitViewer();
 	~InitViewer();
 
@@ -48,19 +44,13 @@ public:
 	void UpdateFiring(osgViewer::Viewer &viewer);
 	void SetNumFiringCycles(int numFiringIntervals) { _numFiringCycles = numFiringIntervals; }
 	void SetIntervalPeriod(double intervalPeriod) { _intervalPeriod = intervalPeriod; }
+	
 private:
-	SomaTypeMap _somaTypes;
-	SomaMap _somas;
-	SynapseMap _synapses;
-	FiringMap _firings;
 	//firing stuff
 	int _activeFiringCycle;
 	int _numFiringCycles;
 	time_t _time;
 	double _intervalPeriod;
-	bool _isFiringActive;
-	osg::ref_ptr<osg::Geometry> _somaGeom;
-	osg::ref_ptr<osg::Vec4Array> _somaColors;
 };
 
 }//namespace Fissure

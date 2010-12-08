@@ -1,11 +1,15 @@
 Tfissure
 v7
 r0
-t312084451.161012
+t313490550.750157
 cCheck dependencies
 cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/FPSManipulator.o /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/PickHandler.o /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+cCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/SimInfo.o /Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
 cLd /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure normal x86_64
 
 N/Developer/SDKs/MacOSX10.5.sdk
@@ -34,46 +38,80 @@ t1203411250
 s6030
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libOpenThreads.dylib
-c000000004CE97047000000000001D430
-t1290367047
-s119856
+c000000004CE9EEBD00000000000095D8
+t1290399421
+s38360
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosg.dylib
-c000000004CE97187000000000084AEAC
-t1290367367
-s8695468
+c000000004CE9EEBF00000000002EE400
+t1290399423
+s3073024
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgDB.dylib
-c000000004CE97247000000000033F950
-t1290367559
-s3406160
+c000000004CE9EF0A0000000000122CA0
+t1290399498
+s1191072
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgGA.dylib
-c000000004CE97414000000000012D520
-t1290368020
-s1234208
+c000000004CE9EF0B000000000006A378
+t1290399499
+s435064
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgUtil.dylib
-c000000004CE9739C00000000005437D0
-t1290367900
-s5519312
+c000000004CE9EEC200000000001DDA30
+t1290399426
+s1956400
 
 N/Users/markus/DEV/lib/OSG/build_osx/lib/Release/libosgViewer.dylib
-c000000004CE97523000000000025D2A8
-t1290368291
-s2478760
+c000000004CE9EF0C00000000000D25B8
+t1290399500
+s861624
+
+N/Users/markus/DEV/lib/OSG/build_osx/lib/libosgText.dylib
+c000000004CE9DD2D000000000014CAC0
+t1290394925
+s1362624
 
 N/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure
-t1290391651
-s474648
+t1291797748
+s734528
+
+N/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp
+c000000004CF49B4B0000000000000777
+t1291098955
+s1911
+i"FPSManipulator.h"
+i<limits>
+
+N/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.h
+c000000004CF48E7A000000000000030C
+t1291095674
+s780
+i<osgGA/FirstPersonManipulator>
+
+N/Users/markus/Development/fissure/platforms/osx/../../src/FissureCommon.h
+c000000004CFEDC17000000000000069F
+t1291770903
+s1695
+i"InitViewerTypes.h"
+i"Vec4Colors.h"
+i<osg/Geometry>
+i<osg/Geode>
+i<osg/StateSet>
+i<osg/ref_ptr>
+i<osg/Array>
+i<osgViewer/Viewer>
+i<osgViewer/ViewerEventHandlers>
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp
-c000000004CE95CA70000000000002310
-t1290362023
-s8976
+c000000004CFF44CB000000000000588E
+t1291797707
+s22670
 i"InitViewer.h"
-i"Vec4Colors.h"
+i"SimInfo.h"
 i"KeyboardEventHandler.h"
+i"FPSManipulator.h"
+i"PickHandler.h"
 i<osg/PointSprite>
 i<osg/BlendFunc>
 i<osg/StateAttribute>
@@ -84,37 +122,47 @@ i<osg/TexEnv>
 i<osg/GLExtensions>
 i<osg/TexEnv>
 i<osg/LineWidth>
+i<osg/ShapeDrawable>
 i<osgDB/ReadFile>
-i<osgViewer/Viewer>
 i<osgGA/StateSetManipulator>
+i<osgGA/CameraManipulator>
 i<osgGA/TrackballManipulator>
+i<osgGA/OrbitManipulator>
+i<osgGA/UFOManipulator>
+i<osgGA/KeySwitchMatrixManipulator>
 i<osgUtil/Optimizer>
+i<osgViewer/Viewer>
+i<osgViewer/ViewerEventHandlers>
+i"SimInfo.h"
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.h
-c000000004CE8E47800000000000007F4
-t1290331256
-s2036
-i"InitViewerTypes.h"
+c000000004CFF156D00000000000006F8
+t1291785581
+s1784
 i<time.h>
-i<osg/Array>
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/InitViewerTypes.h
-c000000004CE8AD240000000000000688
-t1290317092
-s1672
+c000000004CFED5BB0000000000000751
+t1291769275
+s1873
 i<map>
 i<vector>
 
+N/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp
+c000000004CFF1A0800000000000015AF
+t1291786760
+s5551
+i"KeyboardEventHandler.h"
+i"FissureCommon.h"
+
 N/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h
-c000000004CE8E7B200000000000003E4
-t1290332082
-s996
-i<osg/Camera>
-i<osg/PositionAttitudeTransform>
-i<osgViewer/Viewer>
-i<osgViewer/ViewerEventHandlers>
+c000000004CFEE3640000000000000225
+t1291772772
+s549
+i"SimInfo.h"
 i<osgGA/GUIEventHandler>
 i<osgGA/GUIEventAdapter>
+i"FPSManipulator.h"
 
 N/Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp
 c000000004CC4F7AC000000000002A117
@@ -138,37 +186,99 @@ i"lodepng.h"
 i<iostream>
 i"lodepng.h"
 
+N/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp
+c000000004CFF44CC0000000000001591
+t1291797708
+s5521
+i"PickHandler.h"
+i"FissureCommon.h"
+
+N/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.h
+c000000004CFF08A7000000000000020E
+t1291782311
+s526
+i<osgViewer/Viewer>
+i<osgViewer/CompositeViewer>
+i<osg/Material>
+i<osg/Geode>
+i<osg/BlendFunc>
+i<osg/Depth>
+i<osg/Projection>
+i<osg/MatrixTransform>
+i<osg/Camera>
+i<osg/io_utils>
+i<osg/ShapeDrawable>
+i<osgText/Text>
+i<osgText/TextBase>
+i<sstream>
+i"InitViewerTypes.h"
+
 N/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp
-c000000004CE9651C0000000000001580
-t1290364188
-s5504
+c000000004CFED7D70000000000001677
+t1291769815
+s5751
 i<iostream>
 i"LoadPNG.h"
 i"InitViewer.h"
 
+N/Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp
+c000000004CFF44EC0000000000000541
+t1291797740
+s1345
+i"SimInfo.h"
+i"InitViewerTypes.h"
+i"Vec4Colors.h"
+
+N/Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.h
+c000000004CFF445E0000000000000842
+t1291797598
+s2114
+i"InitViewerTypes.h"
+i<osg/Geometry>
+i<osg/Geode>
+i<osg/StateSet>
+i<osg/ref_ptr>
+i<osg/Array>
+
 N/Users/markus/Development/fissure/platforms/osx/../../src/Vec4Colors.h
-c000000004CE8E72B0000000000001675
-t1290331947
-s5749
+c000000004CFDDB910000000000001680
+t1291705233
+s5760
 i<osg/Array>
 i<osg/ref_ptr>
 
+N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/FPSManipulator.o
+t1291711092
+s1954992
+
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o
-t1290391650
-s3780020
+t1291797724
+s3991012
+
+N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o
+t1291797719
+s2207784
 
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o
-t1290391645
+t1291711082
 s396692
 
+N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/PickHandler.o
+t1291797721
+s2988984
+
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o
-t1290391646
-s198868
+t1291785581
+s121232
+
+N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/SimInfo.o
+t1291797747
+s2582648
 
 N/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/fissure.LinkFileList
-c000000004CE9D05B000000000000018D
-t1290391643
-s397
+c000000004CFEE3390000000000000396
+t1291772729
+s918
 
 N/opt/local/lib/libOpenThreads.dylib
 c000000004CC3147100000000000098F8
@@ -202,11 +312,24 @@ s819272
 
 CCheck dependencies
 r0
-lSLF07#2@18"Check dependencies312084443#312084443#0(642"[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_645(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64312084443#18446744073709551615#0#0(1@0"0(22@124"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewerTypes.h' of type sourcecode.c.h for architecture x86_64312084443#18446744073709551615#0#0(1@0"0(22@129"warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64312084443#18446744073709551615#0#0(1@0"0(22@116"warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64312084443#18446744073709551615#0#0(1@0"0(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_64312084443#18446744073709551615#0#0(1@0"0(0#1#0"8696731456#0"0#
+lSLF07#2@18"Check dependencies313490550#313490550#0(639"[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/FissureTypes.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64[WARN]warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_645(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/InitViewer.h' of type sourcecode.c.h for architecture x86_64313490550#18446744073709551615#0#0(1@0"0(22@121"warning: no rule to process file '$(PROJECT_DIR)/../../src/FissureTypes.h' of type sourcecode.c.h for architecture x86_64313490550#18446744073709551615#0#0(1@0"0(22@129"warning: no rule to process file '$(PROJECT_DIR)/../../src/KeyboardEventHandler.h' of type sourcecode.c.h for architecture x86_64313490550#18446744073709551615#0#0(1@0"0(22@116"warning: no rule to process file '$(PROJECT_DIR)/../../src/LoadPNG.h' of type sourcecode.c.h for architecture x86_64313490550#18446744073709551615#0#0(1@0"0(22@119"warning: no rule to process file '$(PROJECT_DIR)/../../src/Vec4Colors.h' of type sourcecode.c.h for architecture x86_64313490550#18446744073709551615#0#0(1@0"0(0#1#0"8625054208#0"0#
+
+CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/FPSManipulator.o /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s313403889.013464
+e313403892.879360
+r1
+xCompileC
+xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/FPSManipulator.o
+x/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@84"Compile /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp313403889#313403892#0(0"0(0#0#76"/Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp8613582880#1073"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/FPSManipulator.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/FPSManipulator.o0#
 
 CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312084443.957839
-e312084451.001491
+s313490508.524539
+e313490524.359521
 r1
 xCompileC
 xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o
@@ -215,14 +338,24 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-oIn file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:3:
-o/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h: In member function 'virtual bool Fissure::KeyboardEventHandler::handle(const osgGA::GUIEventAdapter&, osgGA::GUIActionAdapter&)':
-o/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h:30: warning: unused variable 'camPosition'
-lSLF07#2@80"Compile /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312084443#312084451#0(434"In file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:3:/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h: In member function 'virtual bool Fissure::KeyboardEventHandler::handle(const osgGA::GUIEventAdapter&, osgGA::GUIActionAdapter&)':/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h:30: warning: unused variable 'camPosition'1(22@29"Unused variable 'camPosition'312084447#310#124#2(7@94"In file included from /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312084447#18446744073709551615#0#0(6@72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp312054823#3#0#3#0#0"0(13@113"Unused variable 'camPosition' in /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312084447#18446744073709551615#0#0(6@80"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312024882#30#0#30#0#0"0(6@80"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.h312024882#30#0#30#0#19"unused variable '*'0(0#0#72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp8610067776#1082"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o0#
+lSLF07#2@80"Compile /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp313490508#313490524#0(0"0(0#0#72"/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp8627115648#1082"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/InitViewer-44C5917292AA9452.o0#
+
+CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s313490508.579557
+e313490519.512493
+r1
+xCompileC
+xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o
+x/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@90"Compile /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp313490508#313490519#0(0"0(0#0#82"/Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp8627471104#1102"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/KeyboardEventHandler.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/KeyboardEventHandler-1C95B8E00E9CA76F.o0#
 
 CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312084443.961222
-e312084445.174211
+s313403880.817160
+e313403882.700183
 r1
 xCompileC
 xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o
@@ -231,11 +364,24 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp312084443#312084445#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp8740411744#1076"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o0#
+lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp313403880#313403882#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp8627194464#1076"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/LoadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/LoadPNG-7254A842B2D3445D.o0#
+
+CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/PickHandler.o /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s313490519.512962
+e313490521.501836
+r1
+xCompileC
+xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/PickHandler.o
+x/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@81"Compile /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp313490519#313490521#0(0"0(0#0#73"/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp8602919552#1067"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/PickHandler.o0#
 
 CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
-s312084445.174320
-e312084446.693853
+s313478381.260322
+e313478381.979265
 r1
 xCompileC
 xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o
@@ -244,15 +390,28 @@ xnormal
 xx86_64
 xc++
 xcom.apple.compilers.gcc.4_2
-lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp312084445#312084446#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp8737363552#1059"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o0#
+lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp313478381#313478381#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp8626899552#1059"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/ReadPNG.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/ReadPNG.o0#
+
+CCompileC build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/SimInfo.o /Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp normal x86_64 c++ com.apple.compilers.gcc.4_2
+s313490541.068238
+e313490547.845597
+r1
+xCompileC
+xbuild/fissure.build/Debug/fissure.build/Objects-normal/x86_64/SimInfo.o
+x/Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp
+xnormal
+xx86_64
+xc++
+xcom.apple.compilers.gcc.4_2
+lSLF07#2@77"Compile /Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp313490541#313490547#0(0"0(0#0#69"/Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp8622366464#1059"    cd /Users/markus/Development/fissure/platforms/osx    setenv LANG en_US.US-ASCII    /Developer/usr/bin/gcc-4.2 -x c++ -arch x86_64 -fmessage-length=0 -pipe -Wno-trigraphs -fpascal-strings -fasm-blocks -O0 -Wreturn-type -Wunused-variable -isysroot /Developer/SDKs/MacOSX10.5.sdk -mfix-and-continue -fvisibility-inlines-hidden -mmacosx-version-min=10.5 -gdwarf-2 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/fissure.hmap -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -I/Users/markus/DEV/lib/OSG/include -I/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/include -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources/x86_64 -I/Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/DerivedSources -c /Users/markus/Development/fissure/platforms/osx/../../src/SimInfo.cpp -o /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/SimInfo.o0#
 
 CLd /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure normal x86_64
-s312084451.001677
-e312084451.160958
+s313490547.845864
+e313490548.738312
 r1
 xLd
 x/Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure
 xnormal
 xx86_64
-lSLF07#2@76"Link /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure312084451#312084451#0(0"0(0#0#0"8736655040#994"    cd /Users/markus/Development/fissure/platforms/osx    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib -L/Users/markus/DEV/lib/OSG/build_osx/lib/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9 -L. -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib/Release -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -filelist /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/fissure.LinkFileList -mmacosx-version-min=10.5 -losgViewer -losgGA -losgUtil -losgDB -losg -lOpenThreads -o /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure0#
+lSLF07#2@76"Link /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure313490547#313490548#0(0"0(0#0#0"8622082336#1092"    cd /Users/markus/Development/fissure/platforms/osx    setenv MACOSX_DEPLOYMENT_TARGET 10.5    /Developer/usr/bin/g++-4.2 -arch x86_64 -isysroot /Developer/SDKs/MacOSX10.5.sdk -L/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib -L/Users/markus/DEV/lib/OSG/build_osx/lib/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9 -L. -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Debug -L/Users/markus/DEV/lib/OSG/build_osx/lib/osgPlugins-2.9.9/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib/Release -L/Users/markus/Development/fissure/platforms/osx/../../../../DEV/lib/OSG/build_osx/lib -F/Users/markus/Development/fissure/platforms/osx/../../bin/Debug -filelist /Users/markus/Development/fissure/platforms/osx/build/fissure.build/Debug/fissure.build/Objects-normal/x86_64/fissure.LinkFileList -mmacosx-version-min=10.5 -losgViewer -losgGA -losgUtil -losgDB -losg -lOpenThreads -losgText -o /Users/markus/Development/fissure/platforms/osx/../../bin/Debug/fissure0#
 
