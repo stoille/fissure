@@ -1,89 +1,122 @@
 #include "KeyboardEventHandler.h"
-#include "FPSManipulator.h"
-#include <osgGA/GUIEventAdapter>
-#include <osg/Geometry>
+#include "SimInfo.h"
 
 namespace Fissure 
 {
+	
 	bool KeyboardEventHandler::handle(const GUIEventAdapter& ea, GUIActionAdapter&)
 	{
 		switch(ea.getEventType())
 		{
-			case(GUIEventAdapter::KEYDOWN):
+			case GUIEventAdapter::KEYDOWN :
 			{
+				//to pull up help menu and pause running state
+				if(ea.getKey() == 'h' || ea.getKey() == 'H')
+				{
+					if(GLOBAL->gSimState & SimInfo::RUNNING)
+					{	//show help and pause
+						GLOBAL->gHUD_HelpGeode->setNodeMask(0xFFFFFF);
+						GLOBAL->gHUD_HelpTextGeode->setNodeMask(0xFFFFFF);
+						GLOBAL->gSimState ^= SimInfo::RUNNING;
+						GLOBAL->gHUD_TimeText->setText("Firing Paused");
+					}
+					else {
+						GLOBAL->gSimState |= SimInfo::RUNNING;
+						GLOBAL->gHUD_HelpGeode->setNodeMask(0);
+						GLOBAL->gHUD_HelpTextGeode->setNodeMask(0);
+					}
+				}
+				
+				//only accept all other key input if running
+				if(GLOBAL->gSimState & SimInfo::RUNNING)
 				switch(ea.getKey())
 				{
+				
 					//FILTERING CONTROLS
-					case 'N':
-						ToggleVisibility(_somaGeode);
+					case ( 'N' ) :
+						ToggleVisibility(GLOBAL->gSomaGeode.get());
 						break;
-					case 'n':
-						ToggleVisibility(_synapseGeode);
+					case ( 'n' ) :
+						ToggleVisibility(GLOBAL->gSynapseGeode.get());
 						break;
-					case 'l':
-						ToggleVisibility(_linesGeode);
+					case ( 'l' ) :
+						ToggleVisibility(GLOBAL->gLinesGeode.get());
 						break;
-					case 'v':
+					case ( 'v' ) :
 						FilterSynapses();
 						break;
-					case 'V':
+					case ( 'V' ) :
 						FilterSomas();
 						break;
 					//MOTION CONTROLS
 					//translations
-					case 'w':
-					case 'W':
-						_fpm->moveForward(_moveSpeed);
+					case 'w' :
+					case 'W' :
+						_fpm->moveForward(GLOBAL->gCamSpeed);
 						break;
 					case 'a':
 					case 'A':
-						_fpm->moveRight(-_moveSpeed);
+						_fpm->moveRight(-GLOBAL->gCamSpeed);
 						break;
-					case 's':
-					case 'S':
-						_fpm->moveForward(-_moveSpeed);
+					case 's' :
+					case 'S' :
+						_fpm->moveForward(-GLOBAL->gCamSpeed);
 						break;
-					case 'd':
-					case 'D':
-						_fpm->moveRight(_moveSpeed);
+					case 'd' :
+					case 'D' :
+						_fpm->moveRight(GLOBAL->gCamSpeed);
 						break;
-					case 'e':
-					case 'E':
-						_fpm->moveUp(_moveSpeed/2);
+					case 'e' : 
+					case 'E' :
+						_fpm->moveUp(GLOBAL->gCamSpeed/2);
 						break;
-					case 'x':
-					case 'X':
-						_fpm->moveUp(-_moveSpeed/2);
+					case 'x' : 
+					case 'X' :
+						_fpm->moveUp(-GLOBAL->gCamSpeed/2);
 						break;
 					//rotations
-					case osgGA::GUIEventAdapter::KEY_Up:
-						_fpm->rotateUp(_rotateSpeed);
+					case ( osgGA::GUIEventAdapter::KEY_Up ) :
+						_fpm->rotateUp(GLOBAL->gCamRotSpeed);
 						break;
-					case osgGA::GUIEventAdapter::KEY_Down:
-						_fpm->rotateDown(_rotateSpeed);
+					case ( osgGA::GUIEventAdapter::KEY_Down ) :
+						_fpm->rotateDown(GLOBAL->gCamRotSpeed);
 						break;
-					case osgGA::GUIEventAdapter::KEY_Left:
-						_fpm->rotateLeft(_rotateSpeed);
-						break;
-					case osgGA::GUIEventAdapter::KEY_Right:
-						_fpm->rotateRight(_rotateSpeed);
+					case ( osgGA::GUIEventAdapter::KEY_Left ) :
+						_fpm->rotateLeft(GLOBAL->gCamRotSpeed);
 						break;	
+					case ( osgGA::GUIEventAdapter::KEY_Right ) :
+						_fpm->rotateRight(GLOBAL->gCamRotSpeed);
+						break;		
 					//speed control
-					case 'p':
-						_moveSpeed *=1.5;
+					
+					case ( '-' ) :
+						GLOBAL->gCamSpeed *= 0.5;
 						break;
-					case 'o':
-						_moveSpeed *= 0.5;
+					case ( '=' ) :
+						GLOBAL->gCamSpeed *=1.5;
 						break;
-					case 'P':
-						_rotateSpeed *= 1.5;
+					case ( '_' ) :
+						GLOBAL->gCamRotSpeed *= 0.5;
 						break;
-					case 'O':
-						_rotateSpeed *= 0.5;
+					case ( '+' ) :
+						GLOBAL->gCamRotSpeed *= 1.5;
+						break;
+					//firing control
+					case 'g' ://start/pause
+						if(GLOBAL->gSimState & SimInfo::FIRING_ACTIVE)
+						{
+							GLOBAL->gSimState ^= SimInfo::FIRING_ACTIVE;
+							GLOBAL->gHUD_TimeText->setText("Firing Paused");
+						}
+						else GLOBAL->gSimState |= SimInfo::FIRING_ACTIVE;
+						break;
+					case 'G' ://reset
+						GLOBAL->gFiringTimeElapsed = 0;
 						break;
 					default:
 						break;
 				}
+				break;
 			}
 			default:
 				break;
@@ -103,55 +136,52 @@ namespace Fissure
 	
 	void KeyboardEventHandler::FilterSomas()
 	{
-		//fetch the soma geometry
-		ref_ptr<Vec4Array> colors = static_cast<Vec4Array*>(_somaGeom->getColorArray());
-		
 		//show only the selected soma
-		if(!_somaFiltered)
+		if(GLOBAL->gSimState & ~SimInfo::FILTER_SOMA)
 		{
-			_somaFiltered = true;
-			for(int i = 0; i < colors->size(); ++i)
-				if(i != _selectedSomaId)
-					colors->at(i) = Vec4(colors->at(i).x(),colors->at(i).y(),colors->at(i).z(),0.0);
+			GLOBAL->gSimState |= SimInfo::FILTER_SOMA;
+			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
+				if(i != GLOBAL->gSelectedSomaId)
+					GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),0.0);
 		}
 		else {
 			//show all somas
-			_somaFiltered = false;
-			for(int i = 0; i < colors->size(); ++i)
-				colors->at(i) = Vec4(colors->at(i).x(),colors->at(i).y(),colors->at(i).z(),1);
+			GLOBAL->gSimState ^= SimInfo::FILTER_SOMA;
+			
+			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
+				GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),1);
 		}
-		_somaGeom->setColorArray(colors);
+		GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
 	}
 
 	void KeyboardEventHandler::FilterSynapses()
 	{
 		//fetch the currently selected synapse
-		Synapse &synapse = _synapseMap[_selectedSynapseId];
+		Synapse &synapse = GLOBAL->gSynapseMap[GLOBAL->gSelectedSynapseId];
 
-		//fetch the synapse geometry
-		ref_ptr<Vec4Array> synapseColors = static_cast<Vec4Array*>(_synapseGeom->getColorArray());
-		ref_ptr<Vec4Array> somaColors = static_cast<Vec4Array*>(_somaGeom->getColorArray());
-		
 		//show only the selected synapse and its connected somas
-		if(!_synapseFiltered)
+		if(GLOBAL->gSimState & ~SimInfo::FILTER_SYNAPSE)
 		{
-			_synapseFiltered = true;
-			for(int i = 0; i < synapseColors->size(); ++i)
-				if(i != _selectedSynapseId)
-					synapseColors->at(i) = Vec4(synapseColors->at(i).x(),synapseColors->at(i).y(),synapseColors->at(i).z(),0.0);
-			for(int i = 0; i < somaColors->size(); ++i)
+			//filter the synapses
+			GLOBAL->gSimState |= ~SimInfo::FILTER_SYNAPSE;
+			
+			for(unsigned i = 0; i < GLOBAL->gSynapseColors->size(); ++i)
+				if(i != GLOBAL->gSelectedSynapseId)
+					GLOBAL->gSynapseColors->at(i) = Vec4(GLOBAL->gSynapseColors->at(i).x(),GLOBAL->gSynapseColors->at(i).y(),GLOBAL->gSynapseColors->at(i).z(),0.0);
+			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
 				if(i != synapse.axonalSomaId && i != synapse.dendriticSomaId)
-					somaColors->at(i) = Vec4(somaColors->at(i).x(),somaColors->at(i).y(),somaColors->at(i).z(),0.0);
+					GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),0.0);
 		}
 		else {
-			//show all synapses and somas
-			_synapseFiltered = false;
-			for(int i = 0; i < synapseColors->size(); ++i)
-				synapseColors->at(i) = Vec4(synapseColors->at(i).x(),synapseColors->at(i).y(),synapseColors->at(i).z(),1);
-			for(int i = 0; i < somaColors->size(); ++i)
-				somaColors->at(i) = Vec4(somaColors->at(i).x(),somaColors->at(i).y(),somaColors->at(i).z(),1);
+			//show all synapses
+			GLOBAL->gSimState ^= ~SimInfo::FILTER_SYNAPSE;
+			
+			for(unsigned i = 0; i < GLOBAL->gSynapseColors->size(); ++i)
+				GLOBAL->gSynapseColors->at(i) = Vec4(GLOBAL->gSynapseColors->at(i).x(),GLOBAL->gSynapseColors->at(i).y(),GLOBAL->gSynapseColors->at(i).z(),1);
+			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
+				GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),1);
 		}
-		_synapseGeom->setColorArray(synapseColors);
-		_somaGeom->setColorArray(somaColors);
+		GLOBAL->gSynapseGeom->setColorArray(GLOBAL->gSynapseColors);
+		GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
 	}
 }//namespace Fissure

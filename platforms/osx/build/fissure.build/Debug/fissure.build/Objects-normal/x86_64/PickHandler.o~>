@@ -1,0 +1,4 @@
+/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp: In member function 'virtual void Fissure::PickHandler::pick(osgViewer::View*, const osgGA::GUIEventAdapter&)':
+/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp:48: error: 'f' was not declared in this scope
+/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp:49: error: expected `;' before 'osgUtil'
+/Users/markus/Development/fissure/platforms/osx/../../src/PickHandler.cpp:60: error: 'intersections' was not declared in this scope

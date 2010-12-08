@@ -1,5 +1,6 @@
 #include "InitViewer.h"
-#include "Vec4Colors.h"
+
+#include "SimInfo.h"
 #include "KeyboardEventHandler.h"
 #include "FPSManipulator.h"
 #include "PickHandler.h"
@@ -15,32 +16,40 @@
 #include <osg/TexEnv>
 #include <osg/LineWidth>
 #include <osg/ShapeDrawable>
+
+
 #include <osgDB/ReadFile>
-#include <osgViewer/Viewer>
-#include <osgViewer/ViewerEventHandlers>
 
 #include <osgGA/StateSetManipulator>
 #include <osgGA/CameraManipulator>
 #include <osgGA/TrackballManipulator>
 #include <osgGA/OrbitManipulator>
-#include <osgGA/UFOManipulator>
 #include <osgGA/KeySwitchMatrixManipulator>
 #include <osgUtil/Optimizer>
+#include <osgViewer/Viewer>
+#include <osgViewer/ViewerEventHandlers>
 
-using namespace osg;
+#include <osg/BlendFunc>
+
+#include "SimInfo.h"
+#include "Vec4Colors.h"
+
 using namespace osgGA;
 
 namespace Fissure
 {
+	const float WIDTH = 1280;
+	const float HEIGHT = 1024;
+	
 	ref_ptr<Vec4Array> colorsArray = MakeVec4Colors();
 	const int SOMA_RADIUS = 20;
 	const int SYNAPSE_RADIUS = 15;
 	const Vec4 DEFAULT_SYNAPSE_COLOR(0,1,0,1);
 
-	class ForceCullCallback : public osg::Drawable::CullCallback 
+	class ForceCullCallback : public Drawable::CullCallback 
 	{ 
 	public: 
-        virtual bool cull(osg::NodeVisitor*, osg::Drawable*, osg::State*) const 
+        virtual bool cull(NodeVisitor*, Drawable*, State*) const 
         { 
             return true; 
         }
@@ -51,7 +60,6 @@ namespace Fissure
 		_numFiringCycles(0)
 		,_intervalPeriod(0.5)
 		,_activeFiringCycle(0)
-		,_isFiringActive(true)
 	{
 		time(&_time);
 	}
@@ -61,28 +69,28 @@ namespace Fissure
 
 	void InitViewer::AddSomaType(char somaType)
 	{
-		Vec4 sc = colorsArray->at(_somaTypes.size());
-		_somaTypes[_somaTypes.size()] = SomaType(_somaTypes.size(),somaType,sc.r(),sc.g(),sc.b(),sc.a());
+		Vec4 sc = colorsArray->at( GLOBAL->gSomaTypeMap.size() );
+		GLOBAL->gSomaTypeMap[GLOBAL->gSomaTypeMap.size()] = SomaType(somaType,sc.r(),sc.g(),sc.b(),sc.a());
 	}
 
 	void InitViewer::AddSoma(int somaId, int cellTypeId, int somaX, int somaY, int somaZ) 
 	{
-		_somas[somaId] = Soma(somaId,cellTypeId,somaX,somaY,somaZ);
+		GLOBAL->gSomaMap[somaId] = Soma(somaId,cellTypeId,somaX,somaY,somaZ);
 	}
 	
 	void InitViewer::AddSynapse(int axonalSomaId, int dendriticSomaId, int somaX, int somaY, int somaZ) 
 	{
-		_synapses[_synapses.size()] = Synapse(_synapses.size(),axonalSomaId,dendriticSomaId,somaX,somaY,somaZ);
+		GLOBAL->gSynapseMap[GLOBAL->gSynapseMap.size()] = Synapse(GLOBAL->gSynapseMap.size(),axonalSomaId,dendriticSomaId,somaX,somaY,somaZ);
 	}
 
 	void InitViewer::AddFiring(int cycleNum, int axonalSomaId, int cellTypeId) 
 	{
-		_firings[_firings.size()] = Firing(_firings.size(),cycleNum,axonalSomaId,cellTypeId);
+		GLOBAL->gFiringMap[GLOBAL->gFiringMap.size()] = Firing(GLOBAL->gFiringMap.size(),cycleNum,axonalSomaId,cellTypeId);
 	}
 
-	osg::Vec4 InitViewer::GetSomaTypeColor(int cellTypeId)
+	Vec4 InitViewer::GetSomaTypeColor(int cellTypeId)
 	{
-		SomaType &st = _somaTypes[cellTypeId];
+		SomaType &st =GLOBAL->gSomaTypeMap[cellTypeId];
 		return Vec4(st.r,st.g,st.b,st.a);
 	}
 
@@ -117,70 +125,292 @@ namespace Fissure
 		return set;
 	}
 	
-	osg::Node* createHUD(osgText::Text* updateText)
+	Node* createHUD()
 	{
 		
 		// create the hud. derived from osgHud.cpp
 		// adds a set of quads, each in a separate Geode - which can be picked individually
 		// eg to be used as a menuing/help system!
 		// Can pick texts too!
-		
-		osg::Camera* hudCamera = new osg::Camera;
-		hudCamera->setReferenceFrame(osg::Transform::ABSOLUTE_RF);
-		hudCamera->setProjectionMatrixAsOrtho2D(0,1280,0,1024);
-		hudCamera->setViewMatrix(osg::Matrix::identity());
-		hudCamera->setRenderOrder(osg::Camera::POST_RENDER);
+
+		Camera* hudCamera = new Camera;
+		hudCamera->setReferenceFrame(Transform::ABSOLUTE_RF);
+		hudCamera->setProjectionMatrixAsOrtho2D(0,WIDTH,0,HEIGHT);
+		hudCamera->setViewMatrix(Matrix::identity());
+		hudCamera->setRenderOrder(Camera::POST_RENDER);
 		hudCamera->setClearMask(GL_DEPTH_BUFFER_BIT);
 		
-		std::string timesFont("fonts/times.ttf");
+		std::string timesFont("fonts/times->ttf");
 		
 		// turn lighting off for the text and disable depth test to ensure its always ontop.
-		osg::Vec3 position(800.0f,130.0f,0.0f);
-		osg::Vec3 delta(0.0f,-60.0f,0.0f);
-
+		Vec3 position(WIDTH - 200,0,0);
+		Vec3 dy(0,130,0);
+		Vec3 dx(200,0,0);
+//BOTTOM RIGHT - picker detail panel
 		//background rectangle
 		{
-			osg::Vec3 dy(0.0f,-130.0f,0.0f);
-			osg::Vec3 dx(500.0f,0.0f,0.0f);
-			osg::Geode* geode = new osg::Geode();
-			osg::StateSet* stateset = geode->getOrCreateStateSet();
-			osg::Geometry *quad=new osg::Geometry;
-			stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
-			stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::OFF);
-			osg::Vec3Array* vertices = new osg::Vec3Array(4); // 1 quad
-			osg::Vec4Array* colors = new osg::Vec4Array;
-			colors = new osg::Vec4Array;
-			colors->push_back(osg::Vec4(0.4,0.4,0.4,1.0));
+			
+			GLOBAL->gHUD_PickedGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_PickedGeode->getOrCreateStateSet();
+			Geometry *quad=new Geometry;
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			Vec3Array* vertices = new Vec3Array(4); // 1 quad
+			Vec4Array* colors = new Vec4Array;
+			colors = new Vec4Array;
+			colors->push_back(Vec4(0.4,0.4,0.4,1.0));
 			quad->setColorArray(colors);
-			quad->setColorBinding(osg::Geometry::BIND_PER_PRIMITIVE);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
 			(*vertices)[0]=position;
 			(*vertices)[1]=position+dx;
 			(*vertices)[2]=position+dx+dy;
 			(*vertices)[3]=position+dy;
 			quad->setVertexArray(vertices);
-			quad->addPrimitiveSet(new osg::DrawArrays(osg::PrimitiveSet::QUADS,0,4));
-			geode->addDrawable(quad);
-			hudCamera->addChild(geode);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			GLOBAL->gHUD_PickedGeode->addDrawable(quad);
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_PickedGeode);
 		}  
 		
 		{ // this displays what has been selected
-			osg::Geode* geode = new osg::Geode();
-			osg::StateSet* stateset = geode->getOrCreateStateSet();
-			stateset->setMode(GL_LIGHTING,osg::StateAttribute::OFF);
-			stateset->setMode(GL_DEPTH_TEST,osg::StateAttribute::OFF);
-			geode->setName("The text label");
-			geode->addDrawable( updateText );
-			hudCamera->addChild(geode);
+			GLOBAL->gHUD_PickedTextGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_PickedTextGeode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			GLOBAL->gHUD_PickedTextGeode->setName("Picked text label");
+			GLOBAL->gHUD_PickedTextGeode->addDrawable( GLOBAL->gHUD_PickedText );
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_PickedTextGeode);
 			
-			updateText->setCharacterSize(30.0f);
-			updateText->setFont(timesFont);
-			updateText->setText("Detail Panel");
-			updateText->setPosition(position + Vec3(0,-30,0));
-			updateText->setDataVariance(osg::Object::DYNAMIC);
-        
-        position += delta;
+			GLOBAL->gHUD_PickedText->setCharacterSize(30.0f);
+			GLOBAL->gHUD_PickedText->setFont(timesFont);
+			GLOBAL->gHUD_PickedText->setText("Detail Panel");
+			GLOBAL->gHUD_PickedText->setPosition(position + Vec3(0,120,0));
+			GLOBAL->gHUD_PickedText->setDataVariance(Object::DYNAMIC);
+
 		}    
-    
+//CENTER - Help panel
+		//background blockout
+		{
+			position = Vec3(0,0,0);
+			dy = Vec3(0.0f,HEIGHT,0.0f);
+			dx = Vec3(WIDTH,0.0f,0.0f);
+			GLOBAL->gHUD_HelpGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_HelpGeode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			stateset->setMode(GL_BLEND, BlendFunc::CONSTANT_ALPHA);
+			Vec3Array* vertices = new Vec3Array(4); // 1 quad
+			Vec4Array* colors = new Vec4Array;
+			colors = new Vec4Array;
+			colors->push_back(Vec4(0.4,0.4,0.4,0.4));
+			Geometry *quad=new Geometry;
+			quad->setColorArray(colors);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			GLOBAL->gHUD_HelpGeode->addDrawable(quad);
+			GLOBAL->gHUD_HelpGeode->setNodeMask(0);
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_HelpGeode);
+		} 
+		//raised help box
+		{
+			position = Vec3(WIDTH*0.25,HEIGHT*0.15,0);
+			dy = Vec3(0.0f,HEIGHT*0.7,0.0f);
+			dx = Vec3(WIDTH*0.5,0.0f,0.0f);
+			Vec3Array* vertices = new Vec3Array(4); // 1 quad
+			Vec4Array* colors = new Vec4Array;
+			colors = new Vec4Array;
+			colors->push_back(Vec4(0.4,0.4,0.4,1.0));
+			Geometry *quad=new Geometry;
+			quad->setColorArray(colors);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			GLOBAL->gHUD_HelpGeode->addDrawable(quad);
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_HelpGeode);
+		} 
+		//help text
+		{ // this displays what has been selected
+			GLOBAL->gHUD_HelpTextGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_HelpTextGeode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			GLOBAL->gHUD_HelpTextGeode->setName("");
+			GLOBAL->gHUD_HelpTextGeode->addDrawable( GLOBAL->gHUD_HelpText );
+			GLOBAL->gHUD_HelpTextGeode->setNodeMask(0);
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_HelpTextGeode);
+			
+			GLOBAL->gHUD_HelpText->setCharacterSize(30.0f);
+			GLOBAL->gHUD_HelpText->setFont(timesFont);
+			GLOBAL->gHUD_HelpText->setText("Fissure is an OSG based visualizer for the INIT / BOSS Brain\n"\
+										   "simulation model developed at Stony Brook University. Below\n"\
+										   "is a list of keys and their functionality.\n\n"\
+										   "Key  -  Description\n"\
+										   "------------------------------------------------------------\n"\
+										   "1   - Switch to Fly Motion 1:\n"\
+										   "        w,a,s,d       -       Forward,Left,Down,Right\n"\
+										   "        Arrow Keys       -       Rotation\n"\
+										   "        LClick + Drag       -       Looks Around\n"\
+										   "-/= -   Increase/Decrease Camera Speed\n"\
+										   "_/+ -   Increast/Decrease Camera Rotation Speed\n\n"\
+										   "2   -  Switch to Orbit Motion 2:\n"\
+										   "        LClick + Drag       -       Spins model about its center\n"\
+										   "        RClick + Drag       -       Zoom in and out\n"\
+										   "        MClick + Drag       -       Panning\n\n"\
+										   "g/G -   Starts/Resets Firing\n"\
+										   "n/N -   Toggle Synapse/Soma Visibility\n"\
+										   "l   -   Filters Lines Visibility\n"
+										   );
+										   
+			GLOBAL->gHUD_HelpText->setPosition(position + dy + Vec3(10,-30,0));
+			GLOBAL->gHUD_HelpText->setDataVariance(Object::DYNAMIC);
+			
+		}   
+//BOTTOM LEFT - soma filter
+		position = Vec3(10,10,0);
+		dy = Vec3(0,20,0);
+		dx = Vec3(20,0,0);
+		Vec3 delta(30,0,0); //this is the spacing between tiles
+		
+		for (int i = 0; i < GLOBAL->gSomaTypeMap.size() - 1; ++i)
+		{
+			
+			SomaType &st = GLOBAL->gSomaTypeMap[i];
+			
+				
+			//color box setup
+			Geode* geode = new Geode();
+			stringstream s;
+			s<<"t_"<<st.letter;
+			
+			//set states
+			StateSet* stateset = geode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			Vec3Array* vertices = new Vec3Array(4); // soma type # quad
+			Vec4Array* colors = new Vec4Array;
+			//create colored box
+			Geometry *quad=new Geometry;
+			colors->push_back(Vec4(st.r,st.g,st.b,1));
+			quad->setColorArray(colors);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			geode->addDrawable(quad);
+			GLOBAL->gHUD_LegendGeodes.push_back(geode);
+			GLOBAL->gHUD->addChild(geode);
+			
+			// text setup
+			Text* text = new Text();
+			text->setName(s.str());
+			geode->addDrawable( text );
+			text->setCharacterSize(30.0f);
+			text->setFont(timesFont);
+			stringstream ss;
+			ss<<st.letter;
+			text->setText(ss.str());
+			text->setPosition(position + Vec3(5,5,0));
+			text->setDataVariance(Object::DYNAMIC);
+			
+			//advance position 
+			position += delta;
+			
+		} 
+		//add a box after all of them for select all '*'
+		{
+			//color box setup
+			Geode* geode = new Geode();
+			//set states
+			StateSet* stateset = geode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			Vec3Array* vertices = new Vec3Array(4); // soma type # quad
+			Vec4Array* colors = new Vec4Array;
+			//create colored box
+			Geometry *quad=new Geometry;
+			colors->push_back(Vec4(0,0,0,1));
+			quad->setColorArray(colors);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			geode->addDrawable(quad);
+			GLOBAL->gHUD_LegendGeodes.push_back(geode);
+			GLOBAL->gHUD->addChild(geode);
+			
+			// text setup
+			Text* text = new Text();
+			text->setName("t_*");
+			geode->addDrawable( text );
+			text->setCharacterSize(30.0f);
+			text->setFont(timesFont);
+			text->setText("*");
+			text->setPosition(position + Vec3(5,5,0));
+			text->setDataVariance(Object::DYNAMIC);
+			
+			//advance position 
+			position += delta;
+			
+		} 
+//TOP LEFT - firing time
+		//background rectangle
+		{
+			 position = Vec3(0,HEIGHT,0);
+			 dy = Vec3(0.0f,-50,0.0f);
+			 dx = Vec3(150.0f,0.0f,0.0f);
+			GLOBAL->gHUD_TimeGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_TimeGeode->getOrCreateStateSet();
+			Geometry *quad=new Geometry;
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			Vec3Array* vertices = new Vec3Array(4); // 1 quad
+			Vec4Array* colors = new Vec4Array;
+			colors = new Vec4Array;
+			colors->push_back(Vec4(0.4,0.4,0.4,1.0));
+			quad->setColorArray(colors);
+			quad->setColorBinding(Geometry::BIND_PER_PRIMITIVE);
+			(*vertices)[0]=position;
+			(*vertices)[1]=position+dx;
+			(*vertices)[2]=position+dx+dy;
+			(*vertices)[3]=position+dy;
+			quad->setVertexArray(vertices);
+			quad->addPrimitiveSet(new DrawArrays(PrimitiveSet::QUADS,0,4));
+			GLOBAL->gHUD_TimeGeode->addDrawable(quad);
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_TimeGeode);
+		} 
+		
+		{ // this displays what has been selected
+			GLOBAL->gHUD_TimeTextGeode = new Geode();
+			StateSet* stateset = GLOBAL->gHUD_TimeTextGeode->getOrCreateStateSet();
+			stateset->setMode(GL_LIGHTING,StateAttribute::OFF);
+			stateset->setMode(GL_DEPTH_TEST,StateAttribute::OFF);
+			GLOBAL->gHUD_TimeTextGeode->setName("Time text Label");
+			GLOBAL->gHUD_TimeTextGeode->addDrawable( GLOBAL->gHUD_TimeText );
+			GLOBAL->gHUD->addChild(GLOBAL->gHUD_TimeTextGeode);
+			
+			GLOBAL->gHUD_TimeText->setCharacterSize(30.0f);
+			GLOBAL->gHUD_TimeText->setFont(timesFont);
+			GLOBAL->gHUD_TimeText->setText("Firing Time");
+			GLOBAL->gHUD_TimeText->setPosition(position + Vec3(10,-30,0));
+			GLOBAL->gHUD_TimeText->setDataVariance(Object::DYNAMIC);
+			
+		}   
+    //finally add the hud geode to the scene
+	hudCamera->addChild(GLOBAL->gHUD);
     return hudCamera;
 
 	}
@@ -188,158 +418,143 @@ namespace Fissure
 	void InitViewer::StartViewer()
 	{
 		
-		ref_ptr<Group> root = new Group();
+		
 
+//SOMA SETUP
 		//Create each soma as a point and add to the scene
-		ref_ptr<Geode> somaGeode = new Geode();
-		_somaGeom = new Geometry();
 		ref_ptr<Vec3Array> somaVertices = new Vec3Array();
-		_somaColors = new Vec4Array();
 		ForceCullCallback* cullCB = new ForceCullCallback(); //use this to make soma geometry invisible
-		for(SomaMap::iterator smi = _somas.begin(); smi != _somas.end(); ++smi)
+		for(SomaMap::iterator smi =GLOBAL->gSomaMap.begin(); smi !=GLOBAL->gSomaMap.end(); ++smi)
 		{
 			SomaMapPair smp = *smi;
 			Soma &soma = smp.second;
 
 			somaVertices->push_back(Vec3(soma.x,soma.y,soma.z) );
-			_somaColors->push_back(GetSomaTypeColor(soma.cellTypeId));
+			GLOBAL->gSomaColors->push_back(GetSomaTypeColor(soma.cellTypeId));
 			
 			//for picking
 			ShapeDrawable *somaSphereDrawable = new ShapeDrawable(new Sphere(Vec3(soma.x,soma.y,soma.z),SOMA_RADIUS*2));
 			somaSphereDrawable->setCullCallback(cullCB); 
-			stringstream somaId;
+			std::stringstream somaId;
 			somaId<<soma.id;
 			somaSphereDrawable->setName("n_"+somaId.str());
-			somaGeode->addDrawable(somaSphereDrawable);
+			GLOBAL->gSomaGeode->addDrawable(somaSphereDrawable);
 		}
-		_somaGeom->setVertexArray(somaVertices);
-		_somaGeom->setColorArray(_somaColors);
-		_somaGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
-		_somaGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0, _somas.size()));
-		_somaGeom->setStateSet(makeStateSet(SOMA_RADIUS));
-		somaGeode->addDrawable(_somaGeom);
-		root->addChild(somaGeode);
+		GLOBAL->gSomaGeom->setVertexArray(somaVertices);
+		GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
+		GLOBAL->gSomaGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
+		GLOBAL->gSomaGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0,GLOBAL->gSomaMap.size()));
+		GLOBAL->gSomaGeom->setStateSet(makeStateSet(SOMA_RADIUS));
+		GLOBAL->gSomaGeode->addDrawable(GLOBAL->gSomaGeom);
+		GLOBAL->gRoot->addChild(GLOBAL->gSomaGeode);
 
+//SYNAPSE SETUP
 		//Create each synapse as a point and add to the scene
-		ref_ptr<Geode> synapseGeode = new Geode();
-		ref_ptr<Geometry> synapseGeom = new Geometry();
 		ref_ptr<Vec3Array> synapseVertices = new Vec3Array();
-		ref_ptr<Vec4Array> synapseColors = new Vec4Array();
-		for(SynapseMap::iterator smi = _synapses.begin(); smi != _synapses.end(); ++smi)
+		for(SynapseMap::iterator smi =GLOBAL->gSynapseMap.begin(); smi !=GLOBAL->gSynapseMap.end(); ++smi)
 		{
 			SynapseMapPair smp = *smi;
 			Synapse &synapse = smp.second;
 
 			synapseVertices->push_back(Vec3(synapse.x,synapse.y,synapse.z) );
-			synapseColors->push_back(DEFAULT_SYNAPSE_COLOR);
+			GLOBAL->gSynapseColors->push_back(DEFAULT_SYNAPSE_COLOR);
 
 			//for picking
 			ShapeDrawable *synapseSphereDrawable = new ShapeDrawable(new Sphere(Vec3(synapse.x,synapse.y,synapse.z),SOMA_RADIUS*2));
 			synapseSphereDrawable->setCullCallback(cullCB); 
-			stringstream synapseId;
+			std::stringstream synapseId;
 			synapseId<<synapse.id;
 			synapseSphereDrawable->setName("s_"+synapseId.str());
-			synapseGeode->addDrawable(synapseSphereDrawable);
+			GLOBAL->gSynapseGeode->addDrawable(synapseSphereDrawable);
 		}
-		synapseGeom->setVertexArray(synapseVertices);
-		synapseGeom->setColorArray(synapseColors);
-		synapseGeom->setColorBinding(Geometry::BIND_OVERALL);
-		synapseGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0, _synapses.size()));
-		synapseGeom->setStateSet(makeStateSet(SYNAPSE_RADIUS));
-		synapseGeode->addDrawable(synapseGeom);
-		root->addChild(synapseGeode);
+		GLOBAL->gSynapseGeom->setVertexArray(synapseVertices);
+		GLOBAL->gSynapseGeom->setColorArray(GLOBAL->gSynapseColors);
+		GLOBAL->gSynapseGeom->setColorBinding(Geometry::BIND_OVERALL);
+		GLOBAL->gSynapseGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0,GLOBAL->gSynapseMap.size()));
+		GLOBAL->gSynapseGeom->setStateSet(makeStateSet(SYNAPSE_RADIUS));
+		GLOBAL->gSynapseGeode->addDrawable(GLOBAL->gSynapseGeom);
+		GLOBAL->gRoot->addChild(GLOBAL->gSynapseGeode);
 
+//LINES_SETUP
 		//setups connection lines between neurons
-		ref_ptr<Geode> synapseLinesGeode = new Geode();
-		ref_ptr<Geometry> synapseLineGeom = new Geometry();
-		synapseLinesGeode->addDrawable(synapseLineGeom);
-		root->addChild(synapseLinesGeode);
+		GLOBAL->gRoot->addChild(GLOBAL->gLinesGeode);
 		//setup the line width of the connections and their state
-		ref_ptr<StateSet> ss = synapseGeode->getOrCreateStateSet();
+		ref_ptr<StateSet> ss = GLOBAL->gLinesGeode->getOrCreateStateSet();
 		ss->setAttributeAndModes(new LineWidth(1.0));
-		ss->setAttributeAndModes(new osg::BlendFunc(osg::BlendFunc::SRC_ALPHA, osg::BlendFunc::CONSTANT_ALPHA));
-		ss->setMode( GL_BLEND, osg::StateAttribute::ON );
-		synapseGeode->setStateSet(ss);
+		ss->setAttributeAndModes(new BlendFunc(BlendFunc::SRC_ALPHA, BlendFunc::CONSTANT_ALPHA));
+		ss->setMode( GL_BLEND, StateAttribute::ON );
+		GLOBAL->gLinesGeode->setStateSet(ss);
 		//create the line/point arrays
 		ref_ptr<DrawArrays> synapseLineDrawArray = new DrawArrays(PrimitiveSet::LINES);
-		synapseLineGeom->addPrimitiveSet(synapseLineDrawArray);
+		GLOBAL->gLinesGeom->addPrimitiveSet(synapseLineDrawArray);
 		ref_ptr<Vec3Array> synapseLines = new Vec3Array();
-		synapseLineGeom->setVertexArray(synapseLines);
+		GLOBAL->gLinesGeom->setVertexArray(synapseLines);
 		//setup the synapse line colors
-		ref_ptr<Vec4Array> synapseLineColors = new Vec4Array;
-		synapseLineGeom->setColorArray(synapseLineColors);
-		synapseLineGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
+		GLOBAL->gLinesGeom->setColorArray(GLOBAL->gLinesColors);
+		GLOBAL->gLinesGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
 		//traverse through all synapses and add their geometry
-		for(SynapseMap::iterator sm = _synapses.begin(); sm != _synapses.end(); ++sm)
+		for(SynapseMap::iterator sm =GLOBAL->gSynapseMap.begin(); sm !=GLOBAL->gSynapseMap.end(); ++sm)
 		{
 			SynapseMapPair smp = *sm;
 			Synapse &synapse = smp.second;
 
 			//for each synapse add two lines to the related soma
-			Soma &aSoma = _somas[synapse.axonalSomaId],
-				 &dSoma = _somas[synapse.dendriticSomaId];
+			Soma &aSoma =GLOBAL->gSomaMap[synapse.axonalSomaId],
+				 &dSoma =GLOBAL->gSomaMap[synapse.dendriticSomaId];
 			synapseLines->push_back(Vec3(synapse.x,synapse.y,synapse.z));
 			synapseLines->push_back(Vec3(aSoma.x,aSoma.y,aSoma.z));
 			synapseLines->push_back(Vec3(synapse.x,synapse.y,synapse.z));
 			synapseLines->push_back(Vec3(dSoma.x,dSoma.y,dSoma.z));
 
-			//add color for each line - colored by soma the axon/dendrite belongs to
-			synapseLineColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
-			synapseLineColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
-			synapseLineColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
-			synapseLineColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
+			//add color for each line - colored by soma the axon/dendrite belonGLOBAL->gS to
+			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
 		}
 		synapseLineDrawArray->set(PrimitiveSet::LINES, 0, synapseLines->size());
+		GLOBAL->gLinesGeode->addDrawable(GLOBAL->gLinesGeom);
 
-		// switch off lighting as we haven't assigned any normals.
-		root->getOrCreateStateSet()->setMode(GL_LIGHTING, StateAttribute::OFF);
+//ENGINE STATES AND OPTIMIZATION
+		// switch off lighting as we haven't assigned any normals->
+		GLOBAL->gRoot->getOrCreateStateSet()->setMode(GL_LIGHTING, StateAttribute::OFF);
 
 		//optimize before showing to improve performance
 		osgUtil::Optimizer optimizer;
-		optimizer.optimize(root);
+		optimizer.optimize(GLOBAL->gRoot);
 
+//SCENE SETUP AND INPUT
 		//create the main viewer and set the background color to white
 		osgViewer::Viewer viewer;
 		viewer.addEventHandler(new osgViewer::WindowSizeHandler());
 		//viewer.addEventHandler(new osgViewer::StatsHandler);
 		//viewer.addEventHandler(new osgViewer::HelpHandler());
 		//viewer.addEventHandler(new osgGA::StateSetManipulator(viewer.getCamera()->getStateSet()));
-		//viewer.getCamera()->setClearColor(Vec4(126.0/255.0,128.0/255.0,119.0/255.0,1.0));
 		//Set the scene data and enter the simulation loop.
-		viewer.setSceneData( root );
+		viewer.setSceneData( GLOBAL->gRoot );
 		ref_ptr<KeySwitchMatrixManipulator> ksm = new KeySwitchMatrixManipulator();
 		ref_ptr<FPSManipulator> fpm = new FPSManipulator();
 		ksm->addNumberedMatrixManipulator(fpm);
-		ksm->addNumberedMatrixManipulator(new OrbitManipulator());
+		ksm->addNumberedMatrixManipulator(GLOBAL->gOrbitManipulator);
 		viewer.setCameraManipulator(ksm);
 		
-		int selectedSomaId, selectedSynapseId;
-		KeyboardEventHandler *keh = new KeyboardEventHandler(
-			fpm,
-			_somas,
-			somaGeode,
-			_somaGeom,
-			selectedSomaId,
-			_synapses,
-			synapseGeode,
-			synapseGeom,
-			selectedSynapseId,
-			synapseLinesGeode,
-			synapseLineGeom);
+		KeyboardEventHandler *keh = new KeyboardEventHandler(fpm);
 		viewer.addEventHandler(keh);
 		
 		// add the picker stuff
-		osg::ref_ptr<osgText::Text> updateText = new osgText::Text;
-		PickHandler *ph = new PickHandler(updateText,_somas,selectedSomaId,_synapses,selectedSynapseId);
-		root->addChild(createHUD(updateText.get()));
+		PickHandler *ph = new PickHandler();
+		GLOBAL->gRoot->addChild(createHUD());
 		viewer.addEventHandler(ph);
 		
+		//run main osg viewer
 		viewer.realize();
-
+		//render loop keeps track of firing activity
 		while( !viewer.done() )
 		{
 			viewer.frame();
-			if(_isFiringActive)
+			//if the simstate is running and the firing is active
+			if((GLOBAL->gSimState & SimInfo::RUNNING) && 
+			   (GLOBAL->gSimState & SimInfo::FIRING_ACTIVE))
 				UpdateFiring(viewer);
 		}
 	}
@@ -349,29 +564,42 @@ namespace Fissure
 		//if the time passed since the last update passes the interval period, update
 		time_t now;
 		time(&now);
-		if(difftime(now, _time) > _intervalPeriod)
+		if(difftime(now, _time) >= _intervalPeriod)
 		{
-			//traverse through all the firings for each soma and excite (color) its point
-			for(FiringMap::iterator fmi = _firings.begin(); fmi != _firings.end(); ++fmi)
+			//update the firing time that has been elapsed
+			if(GLOBAL->gFiringTimeElapsed > _numFiringCycles || 
+			   GLOBAL->gFiringTimeElapsed == 0)
+			{
+				GLOBAL->gFiringTimeElapsed = 0;
+				_activeFiringCycle = 0;
+			}
+			stringstream tt;
+			tt<< "Cycle #"<<GLOBAL->gFiringTimeElapsed<<" / "<<_numFiringCycles;
+			GLOBAL->gHUD_TimeText->setText( tt.str() );
+				
+			
+			//traverse through all the firinGLOBAL->gS for each soma and excite (color) its point
+			for(FiringMap::iterator fmi = GLOBAL->gFiringMap.begin(); fmi != GLOBAL->gFiringMap.end(); ++fmi)
 			{
 				FiringMapPair fmp = *fmi;
 				Firing &firing = fmp.second;
 				//get the excited soma and act on its color
-				Soma &soma = _somas[firing.axonalSomaId];
+				Soma &soma =GLOBAL->gSomaMap[firing.axonalSomaId];
 				//switch the active on and the one just passed off
 				if(firing.cycleNum == _activeFiringCycle)
 				{
-					_somaColors->at(soma.id) += Vec4(0.2,0.2,0.2,0.0);
+					GLOBAL->gSomaColors->at(soma.id) += Vec4(0.2,0.2,0.2,0.0);
 				}
 				else if(firing.cycleNum == _activeFiringCycle-1 ){
-					_somaColors->at(soma.id) -= Vec4(0.2,0.2,0.2,0.0);
+					GLOBAL->gSomaColors->at(soma.id) -= Vec4(0.2,0.2,0.2,0.0);
 				}
 			}
-			_somaGeom->setColorArray(_somaColors);
-			_somaGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
+			GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
+			GLOBAL->gSomaGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
 			//update the time and the active firing cycle
 			time(&_time);
 			_activeFiringCycle += 1 % (_numFiringCycles-1);
+			++GLOBAL->gFiringTimeElapsed;
 		}
 		viewer.requestRedraw();
 	}
