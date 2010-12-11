@@ -204,12 +204,20 @@
 				RelativePath="..\..\src\ReadPNG.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\..\src\SimInfo.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Header Files"
 			Filter="h;hpp;hxx;hm;inl;inc;xsd"
 			UniqueIdentifier="{93995380-89BD-4b04-88EB-625FBE52EBFB}"
 			>
+			<File
+				RelativePath="..\..\src\FissureTypes.h"
+				>
+			</File>
 			<File
 				RelativePath="..\..\src\FPSManipulator.h"
 				>
@@ -232,6 +240,10 @@
 			</File>
 			<File
 				RelativePath="..\..\src\PickHandler.h"
+				>
+			</File>
+			<File
+				RelativePath="..\..\src\SimInfo.h"
 				>
 			</File>
 			<File
