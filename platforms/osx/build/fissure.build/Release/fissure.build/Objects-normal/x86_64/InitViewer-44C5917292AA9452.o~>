@@ -1,6 +1,0 @@
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp: In member function 'void Fissure::InitViewer::StartViewer()':
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:536: error: 'r' was not declared in this scope
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:537: error: expected `;' before 'ksm'
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:539: error: 'ef_ptr' was not declared in this scope
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:539: error: expected primary-expression before '>' token
-/Users/markus/Development/fissure/platforms/osx/../../src/InitViewer.cpp:539: error: 'fpm' was not declared in this scope
