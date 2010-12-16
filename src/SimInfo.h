@@ -8,6 +8,7 @@
 #include <osg/StateSet>
 #include <osg/ref_ptr>
 #include <osg/Array>
+#include <osg/Vec4>
 #include <osgText/Text>
 #include <osgGA/OrbitManipulator>
 #include <time.h>
@@ -17,7 +18,7 @@ using namespace osg;
 using namespace osgText;
 
 namespace Fissure{
-		
+	
 	class SimInfo 
 	{
 	public:
@@ -25,21 +26,11 @@ namespace Fissure{
 		SimInfo();
 		~SimInfo();
 		
-		/* An enum that uses bits to represent active simulation states in one variable */
-		enum SimState {
-			STOPPED				= 0
-			,RUNNING			= 1 
-			,SELECTING_SPACE	= 1 << 1
-			,FILTER_SOMA		= 1 << 2
-			,FILTER_SYNAPSE		= 1 << 3
-			,FILTER_LINES		= 1 << 4
-			,MOTION_MODEL_ACTIVE= 1 << 5
-			,FIRING_ACTIVE		= 1 << 6
-			,SHOW_HELP			= 1 << 7
-			,SHOW_INDEX			= 1 << 8
-			,SHOW_HUD			= 1 << 9
-		};
 		unsigned gSimState;
+		
+		SelectedType gSelectedType;
+		
+		unsigned gSomaVisibilityState;
 
 		float gCamSpeed;
 		float gCamRotSpeed;
@@ -86,9 +77,32 @@ namespace Fissure{
 		std::vector< osg::ref_ptr<osg::Geode> > gHUD_LegendGeodes;
 		std::vector< osg::ref_ptr<osgText::Text> > gHUD_LegendTexts;
 		
+		SomaVisibilityStateMap gSomaVisibilityStateMap;
+		
 		//orbit motion model stuff
 		Vec3d gOrbitCenter;
 		ref_ptr<osgGA::OrbitManipulator> gOrbitManipulator;
+		
+		Vec4 GetSomaTypeColor(int cellTypeId)
+		{
+			SomaType &st = gSomaTypeMap[cellTypeId];
+			return Vec4(st.r,st.g,st.b,st.a);
+		}
+		
+		void SetCenter()
+		{
+			if(gSelectedType == SOMA)
+			{
+				Soma& soma = gSomaMap[gSelectedSomaId];
+				gOrbitCenter = Vec3d(soma.x,soma.y,soma.z);
+			}else if(gSelectedType == SYNAPSE){
+				Synapse& synapse = gSynapseMap[gSelectedSynapseId];
+				gOrbitCenter = Vec3d(synapse.x,synapse.y,synapse.z);
+			}
+			gOrbitManipulator->setCenter(gOrbitCenter);
+		}
+		
+		Vec4 DEFAULT_SYNAPSE_COLOR;
 		
 	private:
 		static SimInfo* _instance;

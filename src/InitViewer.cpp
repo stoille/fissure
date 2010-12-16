@@ -33,6 +33,7 @@
 
 #include "SimInfo.h"
 #include "Vec4Colors.h"
+#include "FissureTypes.h"
 
 using namespace osgGA;
 
@@ -41,10 +42,8 @@ namespace Fissure
 	const float WIDTH = 1280;
 	const float HEIGHT = 1024;
 	
-	ref_ptr<Vec4Array> colorsArray = MakeVec4Colors();
 	const int SOMA_RADIUS = 20;
-	const int SYNAPSE_RADIUS = 15;
-	const Vec4 DEFAULT_SYNAPSE_COLOR(0,1,0,1);
+	const int SYNAPSE_RADIUS = 4;
 
 	class ForceCullCallback : public Drawable::CullCallback 
 	{ 
@@ -62,6 +61,7 @@ namespace Fissure
 		,_activeFiringCycle(0)
 	{
 		time(&_time);
+		SimInfo::Instance();
 	}
 	InitViewer::~InitViewer() 
 	{
@@ -69,18 +69,26 @@ namespace Fissure
 
 	void InitViewer::AddSomaType(char somaType)
 	{
-		Vec4 sc = colorsArray->at( GLOBAL->gSomaTypeMap.size() );
-		GLOBAL->gSomaTypeMap[GLOBAL->gSomaTypeMap.size()] = SomaType(somaType,sc.r(),sc.g(),sc.b(),sc.a());
+		Vec4 sc = GLOBAL->gColorsArray->at( GLOBAL->gSomaTypeMap.size() );
+		unsigned id = GLOBAL->gSomaTypeMap.size();
+		GLOBAL->gSomaTypeMap[id] = SomaType(id,somaType,sc.r(),sc.g(),sc.b(),sc.a());
 	}
 
 	void InitViewer::AddSoma(int somaId, int cellTypeId, int somaX, int somaY, int somaZ) 
 	{
-		GLOBAL->gSomaMap[somaId] = Soma(somaId,cellTypeId,somaX,somaY,somaZ);
+		GLOBAL->gSomaMap[somaId] = Soma(somaId,cellTypeId-1,somaX,somaY,somaZ);
+		GLOBAL->gSomaVisibilityStateMap[cellTypeId] = BODY | LINES | SYN;
 	}
 	
 	void InitViewer::AddSynapse(int axonalSomaId, int dendriticSomaId, int somaX, int somaY, int somaZ) 
 	{
-		GLOBAL->gSynapseMap[GLOBAL->gSynapseMap.size()] = Synapse(GLOBAL->gSynapseMap.size(),axonalSomaId,dendriticSomaId,somaX,somaY,somaZ);
+		Synapse synapse = Synapse(GLOBAL->gSynapseMap.size(),
+					  axonalSomaId,
+					  dendriticSomaId,
+					  somaX,
+					  somaY,
+					  somaZ);
+		GLOBAL->gSynapseMap[GLOBAL->gSynapseMap.size()] = synapse;
 	}
 
 	void InitViewer::AddFiring(int cycleNum, int axonalSomaId, int cellTypeId) 
@@ -88,16 +96,10 @@ namespace Fissure
 		GLOBAL->gFiringMap[GLOBAL->gFiringMap.size()] = Firing(GLOBAL->gFiringMap.size(),cycleNum,axonalSomaId,cellTypeId);
 	}
 
-	Vec4 InitViewer::GetSomaTypeColor(int cellTypeId)
+	StateSet* InitViewer::makeStateSet(Geode* geode, float size)
 	{
-		SomaType &st =GLOBAL->gSomaTypeMap[cellTypeId];
-		return Vec4(st.r,st.g,st.b,st.a);
-	}
-
-	StateSet* InitViewer::makeStateSet(float size)
-	{
-		StateSet *set = new StateSet();
-
+		StateSet *set = geode->getOrCreateStateSet();
+		
 		/// Setup cool blending
 		set->setMode(GL_BLEND, StateAttribute::ON);
 		BlendFunc *fn = new BlendFunc();
@@ -258,12 +260,14 @@ namespace Fissure
 										   "        LClick + Drag       -       Spins model about its center\n"\
 										   "        RClick + Drag       -       Zoom in and out\n"\
 										   "        MClick + Drag       -       Panning\n\n"\
+										   "        'c'					-		Center around selected body\n"\
+										   "		<space>				-		Reset center to origin\n"\
 										   "2   - Switch to Fly Motion:\n"\
 										   "        w,a,s,d       -       Forward,Left,Down,Right\n"\
 										   "        Arrow Keys       -       Rotation\n"\
 										   "        LClick + Drag       -       Looks Around\n"\
-										   "-/= -   Increase/Decrease Camera Speed\n"\
-										   "_/+ -   Increase/Decrease Camera Rotation Speed\n\n"\
+										   "        -/= -   Increase/Decrease Camera Speed\n"\
+										   "        _/+ -   Increase/Decrease Camera Rotation Speed\n\n"\
 										   "g/G -   Starts/Resets Firing\n"\
 										   "n/N -   Toggle Synapse/Soma Visibility\n"\
 										   "l   -   Filters Lines Visibility\n"
@@ -279,7 +283,7 @@ namespace Fissure
 		dx = Vec3(20,0,0);
 		Vec3 delta(30,0,0); //this is the spacing between tiles
 		
-		for (int i = 0; i < GLOBAL->gSomaTypeMap.size() - 1; ++i)
+		for (int i = 0; i < GLOBAL->gSomaTypeMap.size(); ++i)
 		{
 			
 			SomaType &st = GLOBAL->gSomaTypeMap[i];
@@ -430,7 +434,7 @@ namespace Fissure
 			Soma &soma = smp.second;
 
 			somaVertices->push_back(Vec3(soma.x,soma.y,soma.z) );
-			GLOBAL->gSomaColors->push_back(GetSomaTypeColor(soma.cellTypeId));
+			GLOBAL->gSomaColors->push_back(GLOBAL->GetSomaTypeColor(soma.cellTypeId));
 			
 			//for picking
 			ShapeDrawable *somaSphereDrawable = new ShapeDrawable(new Sphere(Vec3(soma.x,soma.y,soma.z),SOMA_RADIUS*2));
@@ -439,12 +443,13 @@ namespace Fissure
 			somaId<<soma.id;
 			somaSphereDrawable->setName("n_"+somaId.str());
 			GLOBAL->gSomaGeode->addDrawable(somaSphereDrawable);
+			GLOBAL->gSomaMap[soma.id].drawable = somaSphereDrawable;
 		}
 		GLOBAL->gSomaGeom->setVertexArray(somaVertices);
 		GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
 		GLOBAL->gSomaGeom->setColorBinding(Geometry::BIND_PER_VERTEX);
 		GLOBAL->gSomaGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0,GLOBAL->gSomaMap.size()));
-		GLOBAL->gSomaGeom->setStateSet(makeStateSet(SOMA_RADIUS));
+		GLOBAL->gSomaGeom->setStateSet(makeStateSet(GLOBAL->gSomaGeode,SOMA_RADIUS));
 		GLOBAL->gSomaGeode->addDrawable(GLOBAL->gSomaGeom);
 		GLOBAL->gRoot->addChild(GLOBAL->gSomaGeode);
 
@@ -457,7 +462,7 @@ namespace Fissure
 			Synapse &synapse = smp.second;
 
 			synapseVertices->push_back(Vec3(synapse.x,synapse.y,synapse.z) );
-			GLOBAL->gSynapseColors->push_back(DEFAULT_SYNAPSE_COLOR);
+			GLOBAL->gSynapseColors->push_back(GLOBAL->DEFAULT_SYNAPSE_COLOR);
 
 			//for picking
 			ShapeDrawable *synapseSphereDrawable = new ShapeDrawable(new Sphere(Vec3(synapse.x,synapse.y,synapse.z),SOMA_RADIUS*2));
@@ -466,12 +471,16 @@ namespace Fissure
 			synapseId<<synapse.id;
 			synapseSphereDrawable->setName("s_"+synapseId.str());
 			GLOBAL->gSynapseGeode->addDrawable(synapseSphereDrawable);
+			GLOBAL->gSynapseMap[synapse.id].drawable = synapseSphereDrawable;
+			//setup synapses for each soma
+			GLOBAL->gSomaMap[synapse.axonalSomaId].axons.push_back(synapse.id);
+			GLOBAL->gSomaMap[synapse.dendriticSomaId].dendrites.push_back(synapse.id);
 		}
 		GLOBAL->gSynapseGeom->setVertexArray(synapseVertices);
 		GLOBAL->gSynapseGeom->setColorArray(GLOBAL->gSynapseColors);
 		GLOBAL->gSynapseGeom->setColorBinding(Geometry::BIND_OVERALL);
 		GLOBAL->gSynapseGeom->addPrimitiveSet(new DrawArrays(PrimitiveSet::POINTS, 0,GLOBAL->gSynapseMap.size()));
-		GLOBAL->gSynapseGeom->setStateSet(makeStateSet(SYNAPSE_RADIUS));
+		GLOBAL->gSynapseGeom->setStateSet(makeStateSet(GLOBAL->gSynapseGeode,SYNAPSE_RADIUS));
 		GLOBAL->gSynapseGeode->addDrawable(GLOBAL->gSynapseGeom);
 		GLOBAL->gRoot->addChild(GLOBAL->gSynapseGeode);
 
@@ -481,8 +490,8 @@ namespace Fissure
 		//setup the line width of the connections and their state
 		ref_ptr<StateSet> ss = GLOBAL->gLinesGeode->getOrCreateStateSet();
 		ss->setAttributeAndModes(new LineWidth(1.0));
-		ss->setAttributeAndModes(new BlendFunc(BlendFunc::SRC_ALPHA, BlendFunc::CONSTANT_ALPHA));
 		ss->setMode( GL_BLEND, StateAttribute::ON );
+		ss->setMode(GL_DEPTH_TEST, StateAttribute::ON);
 		GLOBAL->gLinesGeode->setStateSet(ss);
 		//create the line/point arrays
 		ref_ptr<DrawArrays> synapseLineDrawArray = new DrawArrays(PrimitiveSet::LINES);
@@ -506,11 +515,11 @@ namespace Fissure
 			synapseLines->push_back(Vec3(synapse.x,synapse.y,synapse.z));
 			synapseLines->push_back(Vec3(dSoma.x,dSoma.y,dSoma.z));
 
-			//add color for each line - colored by soma the axon/dendrite belonGLOBAL->gS to
-			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
-			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(aSoma.cellTypeId) );
-			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
-			GLOBAL->gLinesColors->push_back( GetSomaTypeColor(dSoma.cellTypeId) );
+			//add color for each line - colored by soma the axon/dendrite belongs to
+			GLOBAL->gLinesColors->push_back( GLOBAL->GetSomaTypeColor(aSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GLOBAL->GetSomaTypeColor(aSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GLOBAL->GetSomaTypeColor(dSoma.cellTypeId) );
+			GLOBAL->gLinesColors->push_back( GLOBAL->GetSomaTypeColor(dSoma.cellTypeId) );
 		}
 		synapseLineDrawArray->set(PrimitiveSet::LINES, 0, synapseLines->size());
 		GLOBAL->gLinesGeode->addDrawable(GLOBAL->gLinesGeom);
@@ -554,8 +563,8 @@ namespace Fissure
 		{
 			viewer.frame();
 			//if the simstate is running and the firing is active
-			if((GLOBAL->gSimState & SimInfo::RUNNING) && 
-			   (GLOBAL->gSimState & SimInfo::FIRING_ACTIVE))
+			if((GLOBAL->gSimState & RUNNING) && 
+			   (GLOBAL->gSimState & FIRING_ACTIVE))
 				UpdateFiring(viewer);
 		}
 	}

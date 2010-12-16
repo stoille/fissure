@@ -20,22 +20,11 @@ namespace Fissure
 	{
 		switch(ea.getEventType())
 		{
-			case(osgGA::GUIEventAdapter::PUSH):
+			case osgGA::GUIEventAdapter::DOUBLECLICK:
+			case osgGA::GUIEventAdapter::PUSH:
 			{
 				osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
 				if (view) pick(view,ea);
-				return false;
-			}    
-			case(osgGA::GUIEventAdapter::KEYDOWN):
-			{
-				if (ea.getKey()=='c')
-				{        
-					osgViewer::View* view = dynamic_cast<osgViewer::View*>(&aa);
-					osg::ref_ptr<osgGA::GUIEventAdapter> event = new osgGA::GUIEventAdapter(ea);
-					event->setX((ea.getXmin()+ea.getXmax())*0.5);
-					event->setY((ea.getYmin()+ea.getYmax())*0.5);
-					if (view) pick(view,*event);
-				}
 				return false;
 			}    
 			default:
@@ -54,7 +43,7 @@ namespace Fissure
 		osg::ref_ptr< osgUtil::LineSegmentIntersector > picker = new osgUtil::LineSegmentIntersector(osgUtil::Intersector::WINDOW, x, y);
 		osgUtil::IntersectionVisitor iv(picker.get());
 		view->getCamera()->accept(iv);
-		if ((GLOBAL->gSimState & SimInfo::RUNNING) && picker->containsIntersections())
+		if ((GLOBAL->gSimState & RUNNING) && picker->containsIntersections())
 		{
 			intersections = picker->getIntersections();
 
@@ -70,7 +59,7 @@ namespace Fissure
 					
 					string hitType = hitr->drawable->getName().substr(0,2);
 					string hitName = hitr->drawable->getName().substr(2);
-					//if neuron selected
+					//if neuron (soma) selected
 					if(hitType == "n_")
 					{
 						std::stringstream s(hitName);
@@ -85,12 +74,15 @@ namespace Fissure
 							os<<"Soma Id: "<<soma.id<<""<<std::endl;
 							os<<"cellTypeId: "<<GLOBAL->gSomaTypeMap[soma.cellTypeId].letter<<std::endl;
 							os<<"location ("<< soma.x<<","<<soma.y<<","<<soma.z<<")"<<std::endl;
+							//if(GLOBAL->gSelectedSomaId == somaId)
+							//	GLOBAL->SetCenter();
 							GLOBAL->gSelectedSomaId = somaId;
+							GLOBAL->gSelectedType = SOMA;
 							gdlist += os.str();
 						}
 						GLOBAL->gHUD_PickedText->setText(gdlist);
 					}
-					//if soma selected
+					//if synapse selected
 					else if(hitType == "s_")
 					{
 						std::stringstream s(hitName);
@@ -106,7 +98,10 @@ namespace Fissure
 							os<<"axonalSomaId: "<<synapse.axonalSomaId<<std::endl;
 							os<<"dendriticSomaId: "<<synapse.dendriticSomaId<<std::endl;
 							os<<"location ("<< synapse.x<<","<<synapse.y<<","<<synapse.z<<")"<<std::endl;
+							//if(GLOBAL->gSelectedSynapseId == synapseId)
+							//	GLOBAL->SetCenter();
 							GLOBAL->gSelectedSynapseId = synapseId;
+							GLOBAL->gSelectedType = SYNAPSE;
 							gdlist += os.str();
 						}
 						GLOBAL->gHUD_PickedText->setText(gdlist);
@@ -120,47 +115,174 @@ namespace Fissure
 						
 						//if the letter is a *, then reselect all the somas
 						if (somaTypeLetter == '*') {
-							//show all somas
+							//show all things and reset their types
+							//reset visiblity map
+							for(SomaVisibilityStateMap::iterator iter = GLOBAL->gSomaVisibilityStateMap.begin();
+								iter != GLOBAL->gSomaVisibilityStateMap.end();
+								++iter)
+							{
+								(*iter).second = BODY|LINES|SYN;
+							}
+							//reset soma colors to normal
 							for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
-								GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),1);
-					
+							{
+								Soma& soma = GLOBAL->gSomaMap[i];
+								GLOBAL->gSomaColors->at(i) = GLOBAL->GetSomaTypeColor(soma.cellTypeId);
+							}
+							//reset synapse colors to normal
+							for(unsigned i = 0; i < GLOBAL->gSynapseColors->size(); ++i)
+							{
+								Synapse& synapse = GLOBAL->gSynapseMap[i];
+								GLOBAL->gSynapseColors->at(i) = GLOBAL->DEFAULT_SYNAPSE_COLOR;
+							}
+							//reset lines to normal
+							for(SomaMap::iterator smi = GLOBAL->gSomaMap.begin(); 
+								smi != GLOBAL->gSomaMap.end(); 
+								++smi)
+							{
+								SomaMapPair smp = *smi;
+								Soma& soma = smp.second;
+								//enable axon visiblity
+								for (unsigned ai = 0; ai < soma.axons.size(); ++ai) 
+								{
+									unsigned synapseId = soma.axons[ai];
+									Synapse& synapse = GLOBAL->gSynapseMap[synapseId];
+									Soma& so = GLOBAL->gSomaMap[synapse.axonalSomaId];
+									Vec4 c = GLOBAL->GetSomaTypeColor(so.cellTypeId);
+									unsigned li = synapse.id*4; //line index
+									//enable/disable line visiblity
+									GLOBAL->gLinesColors->at(li) =
+										GLOBAL->gLinesColors->at(li+1) = c;
+								}
+								//enable dendrite visiblity
+								for (unsigned ai = 0; ai < soma.dendrites.size(); ++ai) 
+								{
+									unsigned synapseId = soma.dendrites[ai];
+									Synapse& synapse = GLOBAL->gSynapseMap[synapseId];
+									Soma& so = GLOBAL->gSomaMap[synapse.axonalSomaId];
+									Vec4 c = GLOBAL->GetSomaTypeColor(so.cellTypeId);
+									unsigned li = synapse.id*4; //line index
+									//enable/disable line visiblity
+									GLOBAL->gLinesColors->at(li+2) =
+									GLOBAL->gLinesColors->at(li+3) = c;
+								}
+							}
+							
+							GLOBAL->gLinesGeom->setColorArray(GLOBAL->gLinesColors);
+							GLOBAL->gSynapseGeom->setColorArray(GLOBAL->gSynapseColors);
 							GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
-							GLOBAL->gOrbitCenter = Vec3d(0,0,0);
-							GLOBAL->gOrbitManipulator->setCenter(GLOBAL->gOrbitCenter);
 						}
 						else {
 							//otherwise filter by type selected from legend
 							unsigned somaTypeId;
 							//get soma type id
-							for(int i = 0; i < GLOBAL->gSomaTypeMap.size(); ++i)
-								if (GLOBAL->gSomaTypeMap[i].letter == somaTypeLetter) {
-									somaTypeId = i;
+							for(SomaTypeMap::iterator stmi = GLOBAL->gSomaTypeMap.begin(); 
+								stmi != GLOBAL->gSomaTypeMap.end();
+								++stmi)
+							{
+								SomaTypeMapPair stmp = *stmi;
+								SomaType& somaType = stmp.second;
+								if (somaType.letter == somaTypeLetter) {
+									somaTypeId = somaType.id;
 									break;
 								}
-							//this is for calculating new orbit model center
-							Vec3d newCenter(0,0,0);
-							unsigned numCounted(0);
+							}
+							//toggle the soma state visiblity 
+							unsigned &somaVisState = GLOBAL->gSomaVisibilityStateMap[somaTypeId];
+							if(somaVisState == NONE)
+								somaVisState = BODY | LINES | SYN;
+							else if( somaVisState == (BODY|LINES|SYN) )
+									somaVisState = BODY | LINES;			
+							else if( somaVisState == (BODY|LINES))
+									somaVisState = BODY;
+							else if( somaVisState == BODY)
+								somaVisState = NONE;
 							
-							//show only the selected soma types
-							for(unsigned i = 0; i < GLOBAL->gSomaMap.size(); ++i)
+							//show soma bodies if needed
+							for(SomaMap::iterator smi = GLOBAL->gSomaMap.begin(); 
+								smi != GLOBAL->gSomaMap.end(); 
+								++smi)
 							{
-								Soma& soma = GLOBAL->gSomaMap[i];
+								SomaMapPair smp = *smi;
+								Soma soma =  smp.second;
+								//only change the selected soma types
 								if(soma.cellTypeId == somaTypeId)
 								{
-									newCenter += Vec3d(soma.x,soma.y,soma.z);
-									++numCounted;
-									GLOBAL->gSomaColors->at(i) = 
-									Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),1.0);
+									//enable/disable soma visiblity
+									string somaName = soma.drawable->getName();
+									if(somaVisState & BODY)
+									{
+										if(somaName.substr(0, 2) != "n_")
+											soma.drawable->setName("n_"+somaName);
+										GLOBAL->gSomaColors->at(soma.id) = GLOBAL->GetSomaTypeColor(soma.cellTypeId);
+									}
+									else {
+										if(somaName.substr(0, 2) == "n_")
+											soma.drawable->setName(somaName.substr(2, somaName.size()-2));
+										GLOBAL->gSomaColors->at(soma.id) = Vec4(0,0,0,0);
+									}
+									
+									//enable/disable axon visiblity
+									for (unsigned ai = 0; ai < soma.axons.size(); ++ai) 
+									{
+										unsigned synapseId = soma.axons[ai];
+										Synapse& synapse = GLOBAL->gSynapseMap[synapseId];
+										Soma& so = GLOBAL->gSomaMap[synapse.axonalSomaId];
+										Vec4 c = GLOBAL->GetSomaTypeColor(so.cellTypeId);
+										unsigned li = synapse.id*4; //line index
+										//enable/disable line visiblity
+										if(somaVisState & LINES)
+											GLOBAL->gLinesColors->at(li) =
+												GLOBAL->gLinesColors->at(li+1) = c;
+										else GLOBAL->gLinesColors->at(li) =
+												GLOBAL->gLinesColors->at(li+1) = Vec4(0,0,0,0);
+										//enable/disable synapse visiblity
+										string synName = synapse.drawable->getName();
+										if(somaVisState & SYN)
+										{
+											if (synName.substr(0, 2) != "s_") 
+												synapse.drawable->setName("s_"+synName);
+											GLOBAL->gSynapseColors->at(synapseId) = GLOBAL->DEFAULT_SYNAPSE_COLOR;
+										}
+										else {
+											if (synName.substr(0, 2) == "s_")
+												synapse.drawable->setName(synName.substr(2, synName.size()-2));
+											GLOBAL->gSynapseColors->at(synapseId) = Vec4(0,0,0,0);
+										}
+									}
+									//enable/disable dendrite visiblity
+									for (unsigned ai = 0; ai < soma.dendrites.size(); ++ai) 
+									{
+										unsigned synapseId = soma.dendrites[ai];
+										Synapse& synapse = GLOBAL->gSynapseMap[synapseId];
+										Soma& so = GLOBAL->gSomaMap[synapse.dendriticSomaId];
+										Vec4 c = GLOBAL->GetSomaTypeColor(so.cellTypeId);
+										unsigned li = synapse.id*4; //line index
+										//enable/disable line visiblity
+										if(somaVisState & LINES)
+											GLOBAL->gLinesColors->at(li+2) =
+												GLOBAL->gLinesColors->at(li+3) = c;
+										else GLOBAL->gLinesColors->at(li+2) =
+												GLOBAL->gLinesColors->at(li+3) = Vec4(0,0,0,0);
+										//enable/disable synapse visiblity
+										string synName = synapse.drawable->getName();
+										if(somaVisState & SYN)
+										{
+											if (synName.substr(0, 2) != "s_") 
+												synapse.drawable->setName("s_"+synName);
+											GLOBAL->gSynapseColors->at(synapseId) = GLOBAL->DEFAULT_SYNAPSE_COLOR;
+										}
+										else {
+											if (synName.substr(0, 2) == "s_")
+												synapse.drawable->setName(synName.substr(2, synName.size()-2));
+											GLOBAL->gSynapseColors->at(synapseId) = Vec4(0,0,0,0);
+										}
+									}
 								}
-								else GLOBAL->gSomaColors->at(i) = 
-										Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),0.0);
-								
-								GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
-								
-								//set the new focal center based upon active somas
-								GLOBAL->gOrbitCenter = newCenter / numCounted;
-								GLOBAL->gOrbitManipulator->setCenter(GLOBAL->gOrbitCenter);
 							}
+							GLOBAL->gLinesGeom->setColorArray(GLOBAL->gLinesColors);
+							GLOBAL->gSynapseGeom->setColorArray(GLOBAL->gSynapseColors);
+							GLOBAL->gSomaGeom->setColorArray(GLOBAL->gSomaColors);
 						}
 					}
 					//only show the first hit for now

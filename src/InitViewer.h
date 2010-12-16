@@ -6,6 +6,7 @@
 namespace osg {
 	class StateSet;
 	class Vec4f;
+	class Geode;
 }
 namespace osgViewer {
 	class Viewer;
@@ -37,8 +38,7 @@ public:
 	void AddSoma(int somaId, int cellTypeId, int somaX, int somaY, int somaZ);
 	void AddSynapse(int axonalSomaId, int dendriticSomaId, int somaX, int somaY, int somaZ);
 	void AddFiring(int cycleNum, int axonalSomaId, int cellTypeId);
-	osg::Vec4f GetSomaTypeColor(int cellTypeId);
-	static osg::StateSet* makeStateSet(float size);
+	static osg::StateSet* makeStateSet(osg::Geode* geode, float size);
 	void StartViewer();
 	//timing stuff
 	void UpdateFiring(osgViewer::Viewer &viewer);

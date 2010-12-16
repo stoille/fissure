@@ -13,22 +13,22 @@ namespace Fissure
 				//to pull up help menu and pause running state
 				if(ea.getKey() == 'h' || ea.getKey() == 'H')
 				{
-					if(GLOBAL->gSimState & SimInfo::RUNNING)
+					if(GLOBAL->gSimState & RUNNING)
 					{	//show help and pause
 						GLOBAL->gHUD_HelpGeode->setNodeMask(0xFFFFFF);
 						GLOBAL->gHUD_HelpTextGeode->setNodeMask(0xFFFFFF);
-						GLOBAL->gSimState ^= SimInfo::RUNNING;
+						GLOBAL->gSimState ^= RUNNING;
 						GLOBAL->gHUD_TimeText->setText("Firing Paused");
 					}
 					else {
-						GLOBAL->gSimState |= SimInfo::RUNNING;
+						GLOBAL->gSimState |= RUNNING;
 						GLOBAL->gHUD_HelpGeode->setNodeMask(0);
 						GLOBAL->gHUD_HelpTextGeode->setNodeMask(0);
 					}
 				}
 				
 				//only accept all other key input if running
-				if(GLOBAL->gSimState & SimInfo::RUNNING)
+				if(GLOBAL->gSimState & RUNNING)
 				switch(ea.getKey())
 				{
 				
@@ -103,15 +103,23 @@ namespace Fissure
 						break;
 					//firing control
 					case 'g' ://start/pause
-						if(GLOBAL->gSimState & SimInfo::FIRING_ACTIVE)
+						if(GLOBAL->gSimState & FIRING_ACTIVE)
 						{
-							GLOBAL->gSimState ^= SimInfo::FIRING_ACTIVE;
+							GLOBAL->gSimState ^= FIRING_ACTIVE;
 							GLOBAL->gHUD_TimeText->setText("Firing Paused");
 						}
-						else GLOBAL->gSimState |= SimInfo::FIRING_ACTIVE;
+						else GLOBAL->gSimState |= FIRING_ACTIVE;
 						break;
 					case 'G' ://reset
 						GLOBAL->gFiringTimeElapsed = 0;
+						break;
+					case 'c':
+						GLOBAL->SetCenter();
+						break;
+					case 'C':
+					case osgGA::GUIEventAdapter::KEY_Space :
+						GLOBAL->gOrbitCenter = Vec3d(0,0,0);
+						GLOBAL->gOrbitManipulator->setCenter(GLOBAL->gOrbitCenter);
 						break;
 					default:
 						break;
@@ -137,16 +145,16 @@ namespace Fissure
 	void KeyboardEventHandler::FilterSomas()
 	{
 		//show only the selected soma
-		if(GLOBAL->gSimState & ~SimInfo::FILTER_SOMA)
+		if(GLOBAL->gSimState & ~FILTER_SOMA)
 		{
-			GLOBAL->gSimState |= SimInfo::FILTER_SOMA;
+			GLOBAL->gSimState |= FILTER_SOMA;
 			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
 				if(i != GLOBAL->gSelectedSomaId)
 					GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),0.0);
 		}
 		else {
 			//show all somas
-			GLOBAL->gSimState ^= SimInfo::FILTER_SOMA;
+			GLOBAL->gSimState ^= FILTER_SOMA;
 			
 			for(unsigned i = 0; i < GLOBAL->gSomaColors->size(); ++i)
 				GLOBAL->gSomaColors->at(i) = Vec4(GLOBAL->gSomaColors->at(i).x(),GLOBAL->gSomaColors->at(i).y(),GLOBAL->gSomaColors->at(i).z(),1);
@@ -160,10 +168,10 @@ namespace Fissure
 		Synapse &synapse = GLOBAL->gSynapseMap[GLOBAL->gSelectedSynapseId];
 
 		//show only the selected synapse and its connected somas
-		if(GLOBAL->gSimState & ~SimInfo::FILTER_SYNAPSE)
+		if(GLOBAL->gSimState & FILTER_SYNAPSE)
 		{
 			//filter the synapses
-			GLOBAL->gSimState |= ~SimInfo::FILTER_SYNAPSE;
+			GLOBAL->gSimState |= FILTER_SYNAPSE;
 			
 			for(unsigned i = 0; i < GLOBAL->gSynapseColors->size(); ++i)
 				if(i != GLOBAL->gSelectedSynapseId)
@@ -174,7 +182,7 @@ namespace Fissure
 		}
 		else {
 			//show all synapses
-			GLOBAL->gSimState ^= ~SimInfo::FILTER_SYNAPSE;
+			GLOBAL->gSimState ^= FILTER_SYNAPSE;
 			
 			for(unsigned i = 0; i < GLOBAL->gSynapseColors->size(); ++i)
 				GLOBAL->gSynapseColors->at(i) = Vec4(GLOBAL->gSynapseColors->at(i).x(),GLOBAL->gSynapseColors->at(i).y(),GLOBAL->gSynapseColors->at(i).z(),1);

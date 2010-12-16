@@ -50,6 +50,12 @@ namespace Fissure
 		//center of our orbit model
 		gOrbitCenter = Vec3d(0,0,0);
 		gOrbitManipulator = new osgGA::OrbitManipulator();
+		
+		gSelectedType = NONE_SELECTED;
+		
+		gColorsArray = MakeVec4Colors();
+		
+		DEFAULT_SYNAPSE_COLOR = Vec4(0,1,0,0.5);
 	}
 	SimInfo::~SimInfo()
 	{
