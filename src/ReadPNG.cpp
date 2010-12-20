@@ -184,9 +184,9 @@ void waitEnd()
 }			
 int main(int argc, char* argv[])
 {
-	if(argc != 2)
+	if(argc != 3)
 	{
-		cout<<"Syntax usage: Fissure <model filename>"<<endl;
+		cout<<"Syntax usage: Fissure <model filename> <type>"<<endl;
 		return -1;
 	}
 	//our primary viewer and informational object
@@ -196,68 +196,147 @@ int main(int argc, char* argv[])
 	unsigned * temp_i = new unsigned [5], ret = 0;
 
 	string modelFileName(argv[1]);
+	string modelFileType(argv[2]); //text, png
 	string firingFileName;
+	
+	string text("text");
+	string png("png");
 	
 	//initialize our model
 	ret = init_file(modelFileName);
 	if(ret < 0) return ret;
 
-	//read the soma types
-	cout<<"Section 1:"<<endl;
-	next_section();
-	cout<<"count:"<<howMany<<endl;
-	while((tmp_c = give_file_section1()))
-		if( (tmp_c >= 'A' && tmp_c <= 'Z') )
-			initViewer.AddSomaType(tmp_c);
-
-	//read the soma info
-	cout<<"Section 2:"<<endl;
-	next_section();
-	cout<<"count:"<<howMany<<endl;
-	while(give_file_section2(temp_i))
-		initViewer.AddSoma(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
-	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
-
-	//read the synapse info
-	cout<<"Section 3:"<<endl;
-	next_section();
-	cout<<"count:"<<howMany<<endl;
-	while(give_file_section3(temp_i))
-		initViewer.AddSynapse(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
-	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
-
-	//read firing data
-	unsigned numFiringCycles = 0;
-	unsigned lastFiringCycle = 0;
-	cout<<"Section 4:"<<endl;
-	next_section();
-	cout<<"count:"<<howMany<<endl;
-	while(give_file_section4(temp_i))
+	//if we are type "text" or "png"
+	
+	//this is the text choice
+	if(modelFileType.compare(text)==0)
 	{
-		initViewer.AddFiring(temp_i[0],temp_i[1],temp_i[2]);
-		//this assumes they come in order
-		if(lastFiringCycle != temp_i[0])
-			++numFiringCycles;
-		lastFiringCycle = temp_i[0];
-	}
-	cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<endl;
-	if(close_file() < 0) return -1;
-	initViewer.SetNumFiringCycles(numFiringCycles);
+		//read the soma types
+		cout<<"Section 1:"<<endl;
+		next_section();
+		cout<<"count:"<<howMany<<endl;
+		while((tmp_c = give_file_section1()))
+			if( (tmp_c >= 'A' && tmp_c <= 'Z') )
+				initViewer.AddSomaType(tmp_c);
 
-	//initialize any extra firing data or options on our model
-	if(argc > 1)
-	{
-		for(unsigned i = 2; 2 < argc-1; i+=2)
+		//read the soma info
+		cout<<"Section 2:"<<endl;
+		next_section();
+		cout<<"count:"<<howMany<<endl;
+		while(give_file_section2(temp_i))
+			initViewer.AddSoma(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
+		cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
+
+		//read the synapse info
+		cout<<"Section 3:"<<endl;
+		next_section();
+		cout<<"count:"<<howMany<<endl;
+		while(give_file_section3(temp_i))
+			initViewer.AddSynapse(temp_i[0],temp_i[1],temp_i[2],temp_i[3],temp_i[4]);
+		cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<temp_i[3]<<temp_i[4]<<endl;
+
+		//read firing data
+		unsigned numFiringCycles = 0;
+		unsigned lastFiringCycle = 0;
+		cout<<"Section 4:"<<endl;
+		next_section();
+		cout<<"count:"<<howMany<<endl;
+		while(give_file_section4(temp_i))
 		{
-			if(strcmp(argv[i],"-firing") == 0)
+			initViewer.AddFiring(temp_i[0],temp_i[1],temp_i[2]);
+			//this assumes they come in order
+			if(lastFiringCycle != temp_i[0])
+				++numFiringCycles;
+			lastFiringCycle = temp_i[0];
+		}
+		cout<<"last:"<<temp_i[0]<<temp_i[1]<<temp_i[2]<<endl;
+		if(close_file() < 0) return -1;
+		initViewer.SetNumFiringCycles(numFiringCycles);
+
+		//initialize any extra firing data or options on our model
+		if(argc > 1)
+		{
+			for(unsigned i = 2; 2 < argc-1; i+=2)
 			{
-				firingFileName = string(argv[i+1]);
-				ret = init_decode(firingFileName);
-				if(ret < 0) return ret;
+				if(strcmp(argv[i],"-firing") == 0)
+				{
+					firingFileName = string(argv[i+1]);
+					ret = init_decode(firingFileName);
+					if(ret < 0) return ret;
+				}
 			}
 		}
 	}
-
+	else if(modelFileType.compare(png)==0)//png mode
+	{
+		cout<<"Section 1 types:"<<endl;//only one type
+		initViewer.AddSomaType('A');
+		
+		cout<<"Section 2 soma location:"<<endl;//add 252x252 grid of somas
+		for(int i=0;i<252;i++)
+			for(int x=0;x<252;x++)
+			{
+				initViewer.AddSoma(i*252+x,1,i,x,0);
+			}
+		
+		cout<<"Section 3 synapse location:"<<endl;//interconnect the somas to all 8 neighbors
+		int baseI, maxI, baseX, maxX;
+		for(int i=0;i<252;i++)
+			for(int x=0;x<252;x++)
+			{
+				if(i==0)//kinda bad
+					baseI=0;
+				else if(i==251)
+					maxI=0;
+				else
+				{
+					baseI=-1;
+					maxI=2;
+				}
+				if(x==0)
+					baseX=0;
+				else if(x==251)
+					maxX=0;
+				else
+				{
+					baseX=-1;
+					maxX=2;
+				}
+				for(int ti=baseI;ti<maxI;ti++)
+					for(int tx=baseX;tx<maxX;tx++)
+					{
+						if(tx==0 || ti ==0)//cannot connect a soma to itself
+							continue;
+						
+						initViewer.AddSynapse(i*252+x,(i+ti)*252 + (x+tx),i,x,-1);
+					}
+			}
+		
+		cout<<"Section 4 firing data:"<<endl;
+		char fileName[128];
+        strncpy(fileName, argv[1], 128);
+		ifstream pngStream(fileName);
+		char pngName[128];
+		
+		int timeStep = 0;//dur whoopsie
+		while(pngStream.getline(pngName, 128))//loop on the file
+		{
+			if(pngName[0]=='\0')
+				break;
+			init_decode(pngName);
+			for(int i=0;i<252;i++)//read the png image
+			{
+				for(int x=0;x<252;x++)
+				{
+					if(pixelFiring(i,x)==1)
+						initViewer.AddFiring(timeStep,i*252 + x,1);
+				}
+			}
+			timeStep++;//will go to the end of the file
+		}
+		
+	}
+	
 	//start the osg viewer
 	initViewer.StartViewer();
 }
