@@ -305,7 +305,7 @@ int main(int argc, char* argv[])
 				for(int ti=baseI;ti<maxI;ti++)
 					for(int tx=baseX;tx<maxX;tx++)
 					{
-						if(tx==0 || ti ==0)//cannot connect a soma to itself
+						if(tx==0 && ti ==0)//cannot connect a soma to itself
 							continue;
 						
 						initViewer.AddSynapse(i*252+x,(i+ti)*252 + (x+tx),i,x,-1);
